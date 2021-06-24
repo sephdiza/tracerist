@@ -51,6 +51,32 @@
       "empstatus": "Tambay",
       "employer": "Jala",
       "id": 2
+    },
+    {
+      "firstname": "Antonio",
+      "middlename": "Mercado",
+      "lastname": "Luna",
+      "address": [
+        {
+          "housestreet": "001 Malapit St.",
+          "bgy": "Carupian",
+          "city": "BAGGAO",
+          "province": "CAGAYAN",
+          "region": "REGION II (CAGAYAN VALLEY)"
+        }
+      ],
+      "contactno": "09123451111",
+      "email": "aluna@email.com",
+      "username": "aluna1",
+      "gender": "",
+      "bdate": "",
+      "pobirth": "",
+      "nationality": "",
+      "civilstatus": "",
+      "mothermaiden": "",
+      "empstatus": "",
+      "employer": "",
+      "id": 3
     }
   ]
 }

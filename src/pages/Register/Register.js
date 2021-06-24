@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-import {Link, Route, useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 import { RegisterBtn } from '../../components/Button'
 

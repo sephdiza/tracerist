@@ -13,13 +13,17 @@ import Register from './pages/Register/Register';
 import RegIndividual from './pages/RegIndividual/RegIndividual';
 import RegEstab from './pages/RegEstab/RegEstab';
 import Login from './pages/Login/Login';
+import { formatDiagnosticsWithColorAndContext } from 'typescript';
 
 function App() {
-  
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [route, setRoute] = useState('signin');
   const [user, setUser] = useState(null);
 
   const url = 'http://localhost:8000/user/';
 
+
+  // LOAD USER
   useEffect(() => {
       fetch(url)
           .then(res =>res.json())
@@ -31,6 +35,28 @@ function App() {
   return (
     <> 
       <Router>
+        { isSignedIn ? 
+        (
+          <div>
+            <GlobalStyle />
+              <Nav />
+                <Switch>
+                  <Route exact path="/">
+                    <Profile user={user}/>
+                  </Route>
+                  <Route path="/qrscan">
+                    <QrScanner />
+                  </Route>
+                  <Route path="/qrgenerate">
+                    <QRGenerate/>
+                  </Route> 
+                  <Route path="/profile/editdetails">
+                    {user && <EditDetails user={user} url={url}/>}
+                  </Route>
+                </Switch>
+          </div>
+        ) : 
+        (
           <Switch>
             <Route exact path="/register">
               <Register />
@@ -45,24 +71,11 @@ function App() {
                 <Login />
             </Route>
           </Switch>
+        )
+        }
+        </Router> 
           
-        <GlobalStyle />
-        <Nav />
-          <Switch>
-            <Route exact path="/">
-              <Profile user={user}/>
-            </Route>
-            <Route path="/qrscan">
-              <QrScanner />
-            </Route>
-            <Route path="/qrgenerate">
-              <QRGenerate/>
-            </Route> 
-            <Route path="/profile/editdetails">
-              {user && <EditDetails user={user} url={url}/>}
-            </Route>
-          </Switch>
-      </Router>  
+       
     </>
   );
 }
