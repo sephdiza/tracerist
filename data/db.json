@@ -1,0 +1,56 @@
+{
+  "user": [
+    {
+      "firstname": "Pepito",
+      "middlename": "Pepits",
+      "lastname": "Manaloto",
+      "address": [
+        {
+          "housestreet": "456 Dimakita st",
+          "bgy": "Bgy. 111",
+          "city": "Quiapo",
+          "province": "Metro Manila",
+          "region": "NCR"
+        }
+      ],
+      "contactno": "09111111111",
+      "email": "jdcruz1@gmail.com",
+      "username": "jigo",
+      "gender": "Di sure",
+      "bdate": "Jan 1, 1990",
+      "pobirth": "Mandaluyong City",
+      "nationality": "Filipino",
+      "civilstatus": "Married",
+      "mothermaiden": " Pepita Mataloto",
+      "empstatus": "Employed",
+      "employer": "Self employed",
+      "id": 1
+    },
+    {
+      "firstname": "Juan",
+      "middlename": "labatiba",
+      "lastname": "dela cruz",
+      "address": [
+        {
+          "housestreet": "1231 Malayo Layo St.",
+          "bgy": "Barangobong",
+          "city": "NUEVA ERA",
+          "province": "ILOCOS NORTE",
+          "region": "REGION I (ILOCOS REGION)"
+        }
+      ],
+      "contactno": "09771234123",
+      "email": "jdcruz@gmail.com",
+      "username": "jtamad",
+      "gender": "",
+      "bdate": "1993-12-25",
+      "pobirth": "Muntinlupa",
+      "nationality": "Filipino",
+      "civilstatus": "Single",
+      "mothermaiden": "Juana Delabatiba",
+      "empstatus": "Tambay",
+      "employer": "Jala",
+      "id": 2
+    }
+  ]
+}
