@@ -127,6 +127,7 @@ const RegIndividual = () => {
                   "contactno": values.contactno,
                   "email": values.email,
                   "username": values.username,
+                  "password": values.password,
                   "gender": "",
                   "bdate": "",
                   "pobirth": "",

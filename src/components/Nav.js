@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import  { Link } from 'react-router-dom';
+import  { Link, useHistory } from 'react-router-dom';
 
 import { StyledLink,
         Navbar,
@@ -11,7 +11,8 @@ import { StyledLink,
         HamburgerLinks,
         CloseBtn,
         FirstLine,
-        SecondLine
+        SecondLine,
+        LogoutBtn
     } from './NavStyle'
 import { ReactComponent as Logo} from '../assets/images/logo.svg'
 
@@ -26,6 +27,13 @@ function Nav() {
         setShow(showSideBar)
         setHamBtnFirst('rotate(45deg) translateY(1.1rem)')   
         setHamBtnSecond('rotate(-45deg) translateY(-1.1rem)')   
+    }
+
+    const history = useHistory();
+    const handleLogout = () => {
+        localStorage.clear();
+        history.push('/login')
+        window.location.reload()
     }
 
     const handleCloseSideBar = () => {
@@ -54,7 +62,7 @@ function Nav() {
             </NavLogo>
             <LinkWrapper>
                 <NavLink>
-                    <StyledLink exact to="/">Profile</StyledLink>
+                    <StyledLink exact to="/profile">Profile</StyledLink>
                 </NavLink>
                 <NavLink>
                     <StyledLink to="/qrscan">Travel History</StyledLink>
@@ -62,6 +70,7 @@ function Nav() {
                 <NavLink>
                     <StyledLink to="/qrgenerate">Notification</StyledLink>
                 </NavLink>
+                <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
             </LinkWrapper>
             <HamburgerBtn onClick={handleDisplay}>
                 <FirstLine style={{transform: hamBtnFirst}}/>

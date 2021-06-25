@@ -159,3 +159,21 @@ export const CloseBtn = styled.span`
     cursor: pointer;
   }
 `;
+
+export const LogoutBtn = styled.button`
+ display: inline-block;
+  text-decoration: none;
+  font-size: 2rem;
+  color: #02353B;
+  margin-right: 3rem;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  background: none;
+  font-weight: 600;
+  color: var(--text-primary);
+  
+  &:hover {
+    opacity: 0.7;
+  }
+`;

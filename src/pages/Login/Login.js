@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
-import {Link, useHistory} from 'react-router-dom'
+import {Link, Route, useHistory} from 'react-router-dom'
 
 import { LoginWrapper,
         LeftWrapper,
@@ -16,7 +16,20 @@ import { LoginWrapper,
 import { RegisterBtn } from '../../components/Button'
 import titleImg from '../../assets/images/login-banner.png'
 
-function Login() {
+function Login({route, loadUser}) {
+    const [signinEmail, setSigninEmail] = useState('')
+    const [signinPassword, setSigninPassword] = useState('')
+    
+    const onChangeEmail = e => setSigninEmail(e.target.value)
+    const onChangePass = e => setSigninPassword(e.target.value)
+
+    const history = useHistory();
+    const handleLogin = e => {
+        loadUser(signinEmail, signinPassword)
+    }
+
+    
+   
     return (
         <>
             <LoginWrapper>
@@ -35,19 +48,20 @@ function Login() {
                             <p>Help us fight covid-19.</p>
                         </Title>
                         <InputGroup >
-                                <input type="text" placeholder="email"></input>
-                                <input type="text" placeholder="password"></input>  
+                                <input type="text" placeholder="email" onChange={onChangeEmail}/>
+                                <input type="password" placeholder="password" onChange={onChangePass}/>
+                                 
                         </InputGroup>
                         <LoginLinkText>
                             <CheckboxLabel>
-                                <input type="checkbox"></input>
+                                <input type="checkbox"/>
                                 <p>Remember me</p>
                             </CheckboxLabel>
-                            <Link to="/login">Forgot Password?</Link>
+                            <Link to="#">Forgot Password?</Link>
                         </LoginLinkText>
-                        <RegisterBtn style={{margin: '0 auto'}}>Sign in</RegisterBtn>
+                        <RegisterBtn style={{margin: '0 auto'}} onClick={handleLogin}>Sign in</RegisterBtn>
                         <LoginLinkText>
-                            Don't have an account yet? <Link to="/login">Register now.</Link>
+                            Don't have an account yet? <Link to="/register">Register now.</Link>
                         </LoginLinkText>
                     </RightContent>        
                 </RightWrapper>

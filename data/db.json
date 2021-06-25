@@ -16,6 +16,7 @@
       "contactno": "09111111111",
       "email": "jdcruz1@gmail.com",
       "username": "jigo",
+      "password": "123456",
       "gender": "Di sure",
       "bdate": "Jan 1, 1990",
       "pobirth": "Mandaluyong City",
@@ -32,16 +33,18 @@
       "lastname": "dela cruz",
       "address": [
         {
-          "housestreet": "1231 Malayo Layo St.",
-          "bgy": "Barangobong",
-          "city": "NUEVA ERA",
-          "province": "ILOCOS NORTE",
-          "region": "REGION I (ILOCOS REGION)"
+          "housestreet": "123 Malapit St.",
+          "bgy": "Carupian",
+          "city": "BAGGAO",
+          "province": "CAGAYAN",
+          "region": "REGION II (CAGAYAN VALLEY)"
         }
       ],
       "contactno": "09771234123",
       "email": "jdcruz@gmail.com",
-      "username": "jtamad",
+      "username": "test1234",
+      "password": "123456",
+      "confirmpassword": "test1234",
       "gender": "",
       "bdate": "1993-12-25",
       "pobirth": "Muntinlupa",
@@ -68,14 +71,16 @@
       "contactno": "09123451111",
       "email": "aluna@email.com",
       "username": "aluna1",
+      "password": "123456",
+      "confirmpassword": "aluna1",
       "gender": "",
-      "bdate": "",
-      "pobirth": "",
-      "nationality": "",
-      "civilstatus": "",
-      "mothermaiden": "",
-      "empstatus": "",
-      "employer": "",
+      "bdate": "1990-01-01",
+      "pobirth": "Manila",
+      "nationality": "Pinoy",
+      "civilstatus": "Married",
+      "mothermaiden": "Antonyita Punyita",
+      "empstatus": "Employed",
+      "employer": "Self employed",
       "id": 3
     }
   ]

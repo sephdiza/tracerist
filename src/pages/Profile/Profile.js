@@ -16,7 +16,7 @@ import { ProfileWrapper,
         ProfileBtnGrp
     } from './ProfileStyle'
 
-function Profile({ user }) {
+function Profile({ user, setUser }) {
 
     return (
         <>  

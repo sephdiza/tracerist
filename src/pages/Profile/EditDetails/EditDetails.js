@@ -17,6 +17,7 @@ function EditDetails({ user, url }) {
     const [middlename, setMiddlename] = useState(user.middlename);
     const [lastname, setLastname] = useState(user.lastname);
     const [username, setUsername] = useState(user.username);
+    const [password, setPassword] = useState(user.password);
     const [housestreet, setHousestreet] = useState(user.address[0].housestreet);
     const [bgy, setBgy] = useState(user.address[0].bgy);
     const [city, setCity] = useState(user.address[0].city);
@@ -63,17 +64,19 @@ function EditDetails({ user, url }) {
       const formik = useFormik({
         initialValues: {
             username: username,
-            firstName: firstname,
-            middleName: middlename, 
-            lastName: lastname, 
+            password: password,
+            confirmpassword: password,
+            firstname: firstname,
+            middlename: middlename, 
+            lastname: lastname, 
             email: email, 
             contactno: contactno,
+            housestreet: housestreet,
             region: region,
             province: province,
             city: city,
-            bgy: bgy,
-            housestreet: housestreet,
-            birthdate: bdate,
+            bgy: bgy,              
+            bdate: bdate,
             pobirth: pobirth,
             nationality: nationality,
             civilstatus: civilstatus,
@@ -85,15 +88,21 @@ function EditDetails({ user, url }) {
             username: Yup.string()
             .min(6, '*Must be 6 characters or more')
             .required('*Required'),
-            firstName: Yup.string()
+            password: Yup.string()
+            .min(6, '*Must be 6 characters or more')
+            .required('*Required'),
+            confirmpassword: Yup.string()
+            .required('*Required')
+            .oneOf([Yup.ref('password'), null], "*Password doesn't match"),
+            firstname: Yup.string()
             .max(15, '*Must be 15 characters or less')
             .required('*Required')
             .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            middleName: Yup.string()
+            middlename: Yup.string()
             .max(15, '*Must be 15 characters or less')
             .required('*Required')
             .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            lastName: Yup.string()
+            lastname: Yup.string()
             .max(20, '*Must be 20 characters or less')
             .required('Required')
             .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
@@ -120,9 +129,9 @@ function EditDetails({ user, url }) {
                   "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                  "firstname": values.firstName,
-                  "middlename": values.middleName,
-                  "lastname": values.lastName,
+                  "firstname": values.firstname,
+                  "middlename": values.middlename,
+                  "lastname": values.lastname,
                   "address": [
                       {
                       "housestreet": values.housestreet,
@@ -135,8 +144,10 @@ function EditDetails({ user, url }) {
                   "contactno": values.contactno,
                   "email": values.email,
                   "username": values.username,
+                  "password": values.password,
+                  "confirmpassword": values.username,
                   "gender": "",
-                  "bdate": values.birthdate,
+                  "bdate": values.bdate,
                   "pobirth": values.pobirth,
                   "nationality": values.nationality,
                   "civilstatus": values.civilstatus,
@@ -146,6 +157,34 @@ function EditDetails({ user, url }) {
                 })
             })
             alert('Your changes have been saved!');
+            localStorage.setItem('user', JSON.stringify({
+                "firstname": values.firstname,
+                "middlename": values.middlename,
+                "lastname": values.lastname,
+                "address": [
+                    {
+                    "housestreet": values.housestreet,
+                    "bgy": values.bgy,
+                    "city": values.city,
+                    "province": values.province,
+                    "region": values.region
+                    }
+                ],
+                "contactno": values.contactno,
+                "email": values.email,
+                "username": values.username,
+                "password": values.password,
+                "confirmpassword": values.username,
+                "gender": "",
+                "bdate": values.bdate,
+                "pobirth": values.pobirth,
+                "nationality": values.nationality,
+                "civilstatus": values.civilstatus,
+                "mothermaiden": values.mothermaiden,
+                "empstatus": values.empstatus,
+                "employer": values.employer,
+              }))
+            console.log(values)
             window.location.reload();
         }
     })
@@ -167,31 +206,51 @@ function EditDetails({ user, url }) {
                         <Error>{formik.errors.username}</Error>
                     ) : null}
 
-                    <Label htmlFor="firstName">First Name</Label>
+                    <Label htmlFor="password" >Password</Label>
                     <EditInput
-                        id="firstName"
+                        id="password"
+                        type="password"
+                        {...formik.getFieldProps('password')}
+                    />
+                    {formik.touched.password && formik.errors.password ? (
+                        <Error>{formik.errors.password}</Error>
+                    ) : null}
+
+                    <Label htmlFor="confirmpassword" >Confirm Password</Label>
+                    <EditInput
+                        id="confirmpassword"
+                        type="password"
+                        {...formik.getFieldProps('confirmpassword')}
+                    />
+                    {formik.touched.confirmpassword && formik.errors.confirmpassword ? (
+                        <Error>{formik.errors.confirmpassword}</Error>
+                    ) : null}
+
+                    <Label htmlFor="firstname">First Name</Label>
+                    <EditInput
+                        id="firstname"
                         type="text"
-                        {...formik.getFieldProps('firstName')}
+                        {...formik.getFieldProps('firstname')}
                     />
                     {formik.touched.firstName && formik.errors.firstName ? (
                         <Error>{formik.errors.firstName}</Error>
                     ) : null}
 
-                    <Label htmlFor="middleName">Middle Name</Label>
+                    <Label htmlFor="middlename">Middle Name</Label>
                     <EditInput
-                        id="middleName"
+                        id="middlename"
                         type="text"
-                        {...formik.getFieldProps('middleName')}
+                        {...formik.getFieldProps('middlename')}
                     />
-                    {formik.touched.middleName && formik.errors.middleName ? (
-                        <Error>{formik.errors.middleName}</Error>
+                    {formik.touched.middlename && formik.errors.middlename ? (
+                        <Error>{formik.errors.middlename}</Error>
                     ) : null}
 
-                    <Label htmlFor="lastName">Last Name</Label>
+                    <Label htmlFor="lastname">Last Name</Label>
                     <EditInput
-                        id="lastName"
+                        id="lastname"
                         type="text"
-                        {...formik.getFieldProps('lastName')}
+                        {...formik.getFieldProps('lastname')}
                     />
                     {formik.touched.lastName && formik.errors.lastName ? (
                         <Error>{formik.errors.lastName}</Error>
@@ -292,11 +351,11 @@ function EditDetails({ user, url }) {
                     {/* ----------OTHER DETAILS---------- */}
                     <h3 style={{marginTop: '3rem'}}>Other Details</h3>
                     
-                    <Label htmlFor="birthdate">BirthDate</Label>
+                    <Label htmlFor="bdate">Birth Date (MM/DD/YYYY)</Label>
                     <EditInput
-                        id="birthdate"
+                        id="bdate"
                         type="date"
-                        {...formik.getFieldProps('birthdate')}
+                        {...formik.getFieldProps('bdate')}
                     />
 
                     <Label htmlFor="pobirth">Place of Birth</Label>
