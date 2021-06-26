@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { regions, getProvincesByRegion, getCityMunByProvince, getBarangayByMun } from 'phil-reg-prov-mun-brgy'
 import { useFormik } from 'formik';
 import *  as Yup from 'yup'
+import { useHistory } from 'react-router-dom'
 
 import { Form, StyledSelect, SelectLabel, Input, CheckboxLabel, BtnWrap, Error } from './RegIndividualStyle';
 import { Button } from '../../components/Button'
@@ -15,12 +16,14 @@ const RegIndividual = () => {
     const [province, setProvince] = useState("")
     const [city, setCity] = useState("")
     const [barangay, setBarangay] = useState("")
+    const history = useHistory()
 
     useEffect(() => {
         setRegion(regions)
     }, [])
 
-    
+    console.log(history)
+
     const selectRegion = e => {
         setProvince(getProvincesByRegion(`${e.target.value}`))
         formik.values.region = e.target.selectedOptions[0].text
@@ -104,7 +107,8 @@ const RegIndividual = () => {
         }),
         onSubmit: values => {
             // console.log(values.acceptedTerms)
-            alert(JSON.stringify(values, null, 2));
+            alert("Successfuly Registered! You can now login 😁")
+            history.push('login')
             
             fetch("http://localhost:8000/user/", {
                 method: "POST",

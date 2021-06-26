@@ -42,9 +42,9 @@
       ],
       "contactno": "09771234123",
       "email": "jdcruz@gmail.com",
-      "username": "test1234",
+      "username": "jdcruz1",
       "password": "123456",
-      "confirmpassword": "test1234",
+      "confirmpassword": "jdcruz1",
       "gender": "",
       "bdate": "1993-12-25",
       "pobirth": "Muntinlupa",
@@ -82,6 +82,115 @@
       "empstatus": "Employed",
       "employer": "Self employed",
       "id": 3
+    },
+    {
+      "firstname": "seph",
+      "middlename": "cadorna",
+      "lastname": "diza",
+      "address": [
+        {
+          "housestreet": "202 Bonanza St. Phase 3",
+          "bgy": "Fortune",
+          "city": "CITY OF MARIKINA",
+          "province": "NCR, SECOND DISTRICT",
+          "region": "NATIONAL CAPITAL REGION (NCR)"
+        }
+      ],
+      "contactno": "09770450432",
+      "email": "seph@email.com",
+      "username": "sephdiza",
+      "password": "123456",
+      "gender": "",
+      "bdate": "",
+      "pobirth": "",
+      "nationality": "",
+      "civilstatus": "",
+      "mothermaiden": "",
+      "empstatus": "",
+      "employer": "",
+      "id": 4
+    },
+    {
+      "firstname": "igo",
+      "middlename": "mapula",
+      "lastname": "diza",
+      "address": [
+        {
+          "housestreet": "123 Test St",
+          "bgy": "Barangay 296",
+          "city": "BINONDO",
+          "province": "NCR, CITY OF MANILA, FIRST DISTRICT",
+          "region": "NATIONAL CAPITAL REGION (NCR)"
+        }
+      ],
+      "contactno": "09111111111",
+      "email": "igo@test.com",
+      "username": "igodiza",
+      "password": "123456",
+      "confirmpassword": "igodiza",
+      "gender": "",
+      "bdate": "2014-10-29",
+      "pobirth": "marikina",
+      "nationality": "filipino",
+      "civilstatus": "single",
+      "mothermaiden": "rodit mpl",
+      "empstatus": "student pa lang",
+      "employer": "jala",
+      "id": 5
+    },
+    {
+      "firstname": "test",
+      "middlename": "test",
+      "lastname": "test",
+      "address": [
+        {
+          "housestreet": "123 Test st.",
+          "bgy": "Maysantol",
+          "city": "BULACAN",
+          "province": "BULACAN",
+          "region": "REGION III (CENTRAL LUZON)"
+        }
+      ],
+      "contactno": "09123123123",
+      "email": "test@test.com",
+      "username": "tset123",
+      "password": "123456",
+      "gender": "",
+      "bdate": "",
+      "pobirth": "",
+      "nationality": "",
+      "civilstatus": "",
+      "mothermaiden": "",
+      "empstatus": "",
+      "employer": "",
+      "id": 6
+    },
+    {
+      "firstname": "testtest",
+      "middlename": "testtest",
+      "lastname": "testtest",
+      "address": [
+        {
+          "housestreet": "123 testest st",
+          "bgy": "Apad Lutao",
+          "city": "CALAUAG",
+          "province": "QUEZON",
+          "region": "REGION IV-A (CALABARZON)"
+        }
+      ],
+      "contactno": "09123451232",
+      "email": "testtest@test.com",
+      "username": "test123",
+      "password": "123456",
+      "gender": "",
+      "bdate": "",
+      "pobirth": "",
+      "nationality": "",
+      "civilstatus": "",
+      "mothermaiden": "",
+      "empstatus": "",
+      "employer": "",
+      "id": 7
     }
   ]
 }

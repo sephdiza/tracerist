@@ -17,14 +17,12 @@ import { ProfileWrapper,
     } from './ProfileStyle'
 
 function Profile({ user, setUser }) {
-
-    return (
+    return (    
         <>  
             <h2>User's Profile</h2>
             { user && (
             <ProfileWrapper>
-                <RightContainer>
-                
+                <RightContainer>               
                     <ProfileMain>
                         <ProfilePicture>
                             <ProfileImgBorder>

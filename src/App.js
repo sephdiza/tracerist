@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 
 import GlobalStyle from './theme/GlobalStyle';
 
@@ -22,26 +22,7 @@ function App() {
   const url = 'http://localhost:8000/user/'
   
 
-  // LOAD USER
-  const loadUser = (userEmail, userPass) => {
-    fetch(url)
-      .then(res => res.json())  
-      .then(data => {
-          let userData = data.filter(user => (
-            user.email === userEmail 
-            && user.password === userPass
-          ))
-          if(userData && userData.length === 0) {
-            alert('Incorrect email or password!')
-            setRoute('login')
-          } else {
-            setUser(userData[0])
-            localStorage.setItem('user', JSON.stringify(userData[0]))
-            setRoute('profile')
-          }   
-    })
-    
-  }
+
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
@@ -66,7 +47,7 @@ function App() {
               <Nav />
                 <Switch>
                   <Route exact path="/profile">
-                    <Profile user={user} setUser={setUser}/>
+                    {user ? <Profile user={user} setUser={setUser}/> : <Redirect to="/login" />}
                   </Route>
                   <Route path="/qrscan">
                     <QrScanner />
@@ -79,27 +60,28 @@ function App() {
                   </Route>
                 </Switch>
           </div>
-        ) : 
-        (
-          <Switch>
-            <Route exact path="/register">
-              <Register />
-            </Route>
-            <Route path="/register/individual">
-                <RegIndividual />
-            </Route>
-            <Route path="/register/establishment">
-                <RegEstab />
-            </Route>
-            <Route path="/login">
-                <Login user={user} setUser={setUser} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} loadUser={loadUser} onRouteChange={onRouteChange} route={route}/>
-            </Route>
-          </Switch>
+        ) : (
+          <div>
+            <Switch>
+                <Route exact path="/register">
+                  <Register />
+                </Route>
+                <Route path="/register/individual">
+                    <RegIndividual />
+                </Route>
+                <Route path="/register/establishment">
+                    <RegEstab />
+                </Route>
+                <Route path="/login">
+                    <Login user={user} setUser={setUser} route={route} url={url}/>
+                </Route>
+              </Switch>
+          </div>
         )
-        }
-        </Router> 
           
-       
+        }
+             
+        </Router> 
     </>
   );
 }

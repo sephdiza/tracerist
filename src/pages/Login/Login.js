@@ -16,14 +16,34 @@ import { LoginWrapper,
 import { RegisterBtn } from '../../components/Button'
 import titleImg from '../../assets/images/login-banner.png'
 
-function Login({route, loadUser}) {
+function Login({route, setUser, url}) {
     const [signinEmail, setSigninEmail] = useState('')
     const [signinPassword, setSigninPassword] = useState('')
+    const history = useHistory();
     
+    // LOAD USER
+    const loadUser = (userEmail, userPass) => {
+        fetch(url)
+        .then(res => res.json())  
+        .then(data => {
+            let userData = data.filter(user => (
+                user.email === userEmail 
+                && user.password === userPass
+            ))
+            if(userData && userData.length === 0) {
+                alert('Incorrect email or password!')
+            } else {
+                setUser(userData[0])
+                localStorage.setItem('user', JSON.stringify(userData[0]))
+                history.push('profile')   
+            }   
+        }) 
+    }
+
     const onChangeEmail = e => setSigninEmail(e.target.value)
     const onChangePass = e => setSigninPassword(e.target.value)
 
-    const history = useHistory();
+    
     const handleLogin = e => {
         loadUser(signinEmail, signinPassword)
     }
