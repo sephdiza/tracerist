@@ -83,7 +83,7 @@ export const Banner = styled.div`
 
     p {
         font-size: 1.4rem;
-        margin-left: 5px;
+        margin-left: 4px;
         font-family: 'Montserrat', sans-serif;
         position: relative;
         transform: translateY(-1.5rem);
@@ -103,18 +103,27 @@ export const Banner = styled.div`
             position: absolute;
             margin-top: 3px;
             height: 6px;
+            border-radius: .5rem;
             background: linear-gradient(to right, #EC8F5B, #EDF063);
             opacity: 0.6;
-            width: 12rem;
+            width: 25%;
         }
     }
 `;
 
 export const Title = styled.div`
     display: flex;
+    justify-content: center;
     flex-direction: column;
     margin-bottom: 1rem;
     gap: 1rem;
+
+    svg {
+        fill: var(--text-primary);
+        width: 2rem;
+        height: 2rem;
+        padding-right: 1rem;
+    }
 
     @media screen and (max-width: 400px) {
         margin-bottom: 1.5rem;

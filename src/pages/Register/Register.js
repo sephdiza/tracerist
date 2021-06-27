@@ -6,6 +6,7 @@ import { RegisterBtn } from '../../components/Button'
 
 import {RegisterWrapper, LeftWrapper, RightWrapper, RightContent, BgImg, Banner, Title, SubTitle, SelectGrp, LoginLinkText} from './RegisterStyle'
 import titleImg from '../../assets/images/login-banner.png'
+import { FaPen } from 'react-icons/fa'
 
 function Register() {
     const [indivLabelBg, setIndivLabelBg] = useState('#fff');
@@ -48,7 +49,7 @@ function Register() {
                             <p>Unified Contact Tracing App</p>
                         </Banner>
                         <Title>
-                            <h1>Register</h1>
+                            <h1><FaPen/> Register</h1>
                             <p>Step 1 of 3 - Select type</p>
                         </Title>
                         <SubTitle>

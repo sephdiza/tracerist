@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: inherit;
         margin: 0 20vw;
 
-        @media only screen and (max-width: 1150px) {
+        @media only screen and (max-width: 1240px) {
             margin: 0 10vw;
         }
     }

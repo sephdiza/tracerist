@@ -5,10 +5,11 @@ import { useFormik } from 'formik';
 import *  as Yup from 'yup'
 import { useHistory } from 'react-router-dom'
 
-import { Form, StyledSelect, SelectLabel, Input, CheckboxLabel, BtnWrap, Error } from './RegIndividualStyle';
+import { Title, Form, StyledSelect, SelectLabel, Input, CheckboxLabel, BtnWrap, Error } from './RegIndividualStyle';
 import { Button } from '../../components/Button'
 import HalfBg from '../../components/HalfBg'
 import { MainWrapper, RightWrapper } from '../../components/HalfBgStyle'
+import { ImUser } from 'react-icons/im'
 
 
 const RegIndividual = () => {
@@ -108,7 +109,7 @@ const RegIndividual = () => {
         onSubmit: values => {
             // console.log(values.acceptedTerms)
             alert("Successfuly Registered! You can now login 😁")
-            history.push('login')
+            history.push('health-declaration')
             
             fetch("http://localhost:8000/user/", {
                 method: "POST",
@@ -150,8 +151,14 @@ const RegIndividual = () => {
             <MainWrapper>
                 <HalfBg />
                 <RightWrapper style={{alignItems: 'flex-start'}}>
-                    <Form onSubmit={formik.handleSubmit}>
 
+                    
+                    <Form onSubmit={formik.handleSubmit}>
+                        <Title>
+                            <h1><ImUser /> Register as Individual</h1>
+                            <p>Step 2 of 3 - Personal Information</p>
+                            <p>Please fill in your details below.</p>
+                        </Title>
                         <SelectLabel htmlFor="username" >Username</SelectLabel>
                         <Input
                             id="username"
@@ -230,7 +237,7 @@ const RegIndividual = () => {
                             <Error>{formik.errors.email}</Error>
                         ) : null}
 
-                    <SelectLabel htmlFor="email">Contact No.</SelectLabel>
+                    <SelectLabel htmlFor="email">Contact No. </SelectLabel>
                         <Input
                             id="contactno"
                             type="text"
@@ -247,7 +254,7 @@ const RegIndividual = () => {
                             name="region" 
                             onChange={selectRegion}
                             onBlur={formik.handleBlur}>
-                                <option hidden>Select Region</option>
+                                <option hidden>- Select -</option>
                                 {region && region.map(reg => (
                                 <option key={reg.reg_code}
                                 value={reg.reg_code}>{reg.name}</option>
@@ -263,7 +270,7 @@ const RegIndividual = () => {
                             name="province" 
                             onChange={selectCity}
                             onBlur={formik.handleBlur}>
-                                <option hidden>Select Municipality / Province</option>
+                                <option hidden>- Select -</option>
                                 {province && province.map(prov => (
                                     <option key={prov.prov_code} value={prov.prov_code}>{prov.name}</option>
                                 ))}
@@ -278,7 +285,7 @@ const RegIndividual = () => {
                             name="city"
                             onChange={selectBgy}
                             onBlur={formik.handleBlur}>
-                                <option hidden>Select City</option>
+                                <option hidden>- Select -</option>
                                 {city && city.map(mun => (
                                     <option key={mun.mun_code} value={mun.mun_code}>{mun.name}</option>
                                 ))}
@@ -293,7 +300,7 @@ const RegIndividual = () => {
                             name="bgy"
                             onChange={selectedBgy}
                             onBlur={formik.handleBlur}>
-                                <option hidden>Select Barangay</option>
+                                <option hidden>- Select -</option>
                                 {barangay && barangay.map(bgy => (
                                     <option key={bgy.name}>{bgy.name}</option>
                                 ))}

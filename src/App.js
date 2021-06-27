@@ -13,6 +13,7 @@ import Register from './pages/Register/Register';
 import RegIndividual from './pages/RegIndividual/RegIndividual';
 import RegEstab from './pages/RegEstab/RegEstab';
 import Login from './pages/Login/Login';
+import HDIndividual from './pages/HDIndividual/HDIndividual';
 
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -21,9 +22,6 @@ function App() {
 
   const url = 'http://localhost:8000/user/'
   
-
-
-
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
@@ -31,11 +29,6 @@ function App() {
       setUser(foundUser);
     }
   }, []);
-
-  const onRouteChange = (route) => {
-    if (route === 'profile') {
-    }
-  }
 
   return (
     <> 
@@ -47,7 +40,7 @@ function App() {
               <Nav />
                 <Switch>
                   <Route exact path="/profile">
-                    {user ? <Profile user={user} setUser={setUser}/> : <Redirect to="/login" />}
+                    <Profile user={user} setUser={setUser}/>
                   </Route>
                   <Route path="/qrscan">
                     <QrScanner />
@@ -68,6 +61,9 @@ function App() {
                 </Route>
                 <Route path="/register/individual">
                     <RegIndividual />
+                </Route>
+                <Route path="/register/health-declaration">
+                    <HDIndividual />
                 </Route>
                 <Route path="/register/establishment">
                     <RegEstab />

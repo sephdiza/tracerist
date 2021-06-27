@@ -105,6 +105,7 @@ export const ProfileTable = styled.table`
     width: 100%;
     text-align: left;
     border: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 3rem;
 
     tbody,
         td,

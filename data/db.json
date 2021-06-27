@@ -42,9 +42,9 @@
       ],
       "contactno": "09771234123",
       "email": "jdcruz@gmail.com",
-      "username": "jdcruz1",
+      "username": "jdcruz",
       "password": "123456",
-      "confirmpassword": "jdcruz1",
+      "confirmpassword": "jdcruz",
       "gender": "",
       "bdate": "1993-12-25",
       "pobirth": "Muntinlupa",
@@ -139,47 +139,48 @@
       "id": 5
     },
     {
+      "firstname": "Rodeth",
+      "middlename": "De Jesus",
+      "lastname": "Mapula",
+      "address": [
+        {
+          "housestreet": "202 Bonanza St. Phase 3",
+          "bgy": "Fortune",
+          "city": "CITY OF MARIKINA",
+          "province": "NCR, SECOND DISTRICT",
+          "region": "NATIONAL CAPITAL REGION (NCR)"
+        }
+      ],
+      "contactno": "09123456781",
+      "email": "rmapula@gmail.com",
+      "username": "rodethred",
+      "password": "rodeth",
+      "confirmpassword": "rodethred",
+      "gender": "",
+      "bdate": "1994-10-29",
+      "pobirth": "Tondo, Manila",
+      "nationality": "Filipino",
+      "civilstatus": "Single",
+      "mothermaiden": "Beneth De Jesus",
+      "empstatus": "Employed",
+      "employer": "Security Bank Corporation",
+      "id": 8
+    },
+    {
       "firstname": "test",
       "middlename": "test",
       "lastname": "test",
       "address": [
         {
-          "housestreet": "123 Test st.",
-          "bgy": "Maysantol",
-          "city": "BULACAN",
-          "province": "BULACAN",
+          "housestreet": "123 test st",
+          "bgy": "Ferdinand E. Marcos Pob. (District II)",
+          "city": "SAN JOSE CITY",
+          "province": "NUEVA ECIJA",
           "region": "REGION III (CENTRAL LUZON)"
         }
       ],
-      "contactno": "09123123123",
+      "contactno": "09123456789",
       "email": "test@test.com",
-      "username": "tset123",
-      "password": "123456",
-      "gender": "",
-      "bdate": "",
-      "pobirth": "",
-      "nationality": "",
-      "civilstatus": "",
-      "mothermaiden": "",
-      "empstatus": "",
-      "employer": "",
-      "id": 6
-    },
-    {
-      "firstname": "testtest",
-      "middlename": "testtest",
-      "lastname": "testtest",
-      "address": [
-        {
-          "housestreet": "123 testest st",
-          "bgy": "Apad Lutao",
-          "city": "CALAUAG",
-          "province": "QUEZON",
-          "region": "REGION IV-A (CALABARZON)"
-        }
-      ],
-      "contactno": "09123451232",
-      "email": "testtest@test.com",
       "username": "test123",
       "password": "123456",
       "gender": "",
@@ -190,7 +191,34 @@
       "mothermaiden": "",
       "empstatus": "",
       "employer": "",
-      "id": 7
+      "id": 9
+    },
+    {
+      "firstname": "testq",
+      "middlename": "testq",
+      "lastname": "testq",
+      "address": [
+        {
+          "housestreet": "123 test set",
+          "bgy": "Santo Tomas",
+          "city": "SASMUAN (Sexmoan)",
+          "province": "PAMPANGA",
+          "region": "REGION III (CENTRAL LUZON)"
+        }
+      ],
+      "contactno": "12341231231",
+      "email": "test@tsert.com",
+      "username": "test123",
+      "password": "test123",
+      "gender": "",
+      "bdate": "",
+      "pobirth": "",
+      "nationality": "",
+      "civilstatus": "",
+      "mothermaiden": "",
+      "empstatus": "",
+      "employer": "",
+      "id": 10
     }
   ]
 }

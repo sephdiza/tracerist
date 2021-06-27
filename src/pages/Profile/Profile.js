@@ -18,7 +18,7 @@ import { ProfileWrapper,
 
 function Profile({ user, setUser }) {
     return (    
-        <>  
+        <>
             <h2>User's Profile</h2>
             { user && (
             <ProfileWrapper>

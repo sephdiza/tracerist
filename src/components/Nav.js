@@ -12,21 +12,22 @@ import { StyledLink,
         CloseBtn,
         FirstLine,
         SecondLine,
-        LogoutBtn
+        LogoutBtn,
+        HamLogoutBtn
     } from './NavStyle'
 import { ReactComponent as Logo} from '../assets/images/logo.svg'
 
 function Nav() {
     const [show, setShow] = useState({
         opacity: 0,
-        transform: 'translateX(-100%)'})
+        transform: 'translateY(-100%)'})
     const [hamBtnFirst, setHamBtnFirst] = useState('')
     const [hamBtnSecond, setHamBtnSecond] = useState('')
     
     const handleDisplay = () => {
         setShow(showSideBar)
         setHamBtnFirst('rotate(45deg) translateY(1.1rem)')   
-        setHamBtnSecond('rotate(-45deg) translateY(-1.1rem)')   
+        setHamBtnSecond('rotate(-48deg) translateY(-1.1rem)')   
     }
 
     const history = useHistory();
@@ -44,18 +45,18 @@ function Nav() {
 
     const showSideBar = {
         opacity: 1,
-        transform: 'translateX(0)'
+        transform: 'translateY(0)'
     }
 
     const hideSideBar = {
         opacity: 0,
-        transform: 'translateX(-100%)'
+        transform: 'translateY(-100%)'
     }
 
     return (
         <Navbar>
             <NavLogo>
-                <Link exact to="/">
+                <Link exact to="/profile">
                     <Logo style={{ height:'28px', width:'auto'}}/>
                     <h1>Tracerist</h1>
                 </Link>  
@@ -81,7 +82,7 @@ function Nav() {
                     <span>✖</span>
                 </CloseBtn>
                 <NavLink onClick={handleCloseSideBar}>
-                    <StyledLink exact to="/">Profile</StyledLink>
+                    <StyledLink exact to="/profile">Profile</StyledLink>
                 </NavLink>
                 <NavLink onClick={handleCloseSideBar}>
                     <StyledLink to="/qrscan">Travel History</StyledLink>
@@ -89,6 +90,7 @@ function Nav() {
                 <NavLink onClick={handleCloseSideBar}>
                     <StyledLink to="/qrgenerate">Notification</StyledLink>
                 </NavLink>
+                <HamLogoutBtn onClick={handleLogout}>Logout</HamLogoutBtn>
             </HamburgerLinks>
         </Navbar>
     )

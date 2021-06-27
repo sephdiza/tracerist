@@ -1,5 +1,71 @@
 import styled from 'styled-components';
 
+export const Title = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    gap: 1rem;
+
+    @media screen and (max-width: 400px) {
+        margin-bottom: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2.8rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        svg {
+            fill: #02353B;
+        }
+
+        @media screen and (max-width: 1000px) {
+        font-size: 2.4rem;
+        }
+
+        @media screen and (max-width: 400px) {
+            font-size: 2rem;
+        }
+    }
+
+    p {
+        margin-top: -2rem;
+        font-size: 1.8rem;
+        position: relative;
+        font-weight: 500;
+
+        &:not(:last-child) {
+            padding-bottom: 3rem;
+
+            &:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    margin-top: 1rem;
+                    height: .6rem;
+                    border-radius: 5px;
+                    background: linear-gradient(to right, #EC8F5B, #EDF063);
+                    opacity: 0.75;
+                    width: 40%;
+            }
+        }
+
+        &:last-child {
+            
+        }
+       
+
+        @media screen and (max-width: 1000px) {
+        font-size: 1.6rem;
+        }
+
+        @media screen and (max-width: 400px) {
+        font-size: 1.4rem;
+        }
+    }
+`;
+
 export const Form = styled.form`
     display: block;
     margin-top: 2rem;
@@ -18,6 +84,11 @@ export const Input = styled.input`
     -moz-appearance: none;
     appearance: none;
 
+    &::placeholder {
+        font-size: 1.6rem;
+        opacity: 0.8;
+    }
+
     &:focus {
         outline: none;
         box-shadow: 0 0 0 4px rgba(236, 143, 91, 0.6);
@@ -25,7 +96,7 @@ export const Input = styled.input`
 `;
 
 export const StyledSelect = styled.select`
-    width: 30rem;
+    width: 33.3rem;
     margin: 0;
     -webkit-appearance: none;
     box-sizing: border-box;
@@ -63,8 +134,8 @@ export const CheckboxLabel = styled.label`
 
     input[type="checkbox"] {
         display: inline-block;
-        height: 2.5rem;
-        width: 2.5rem;
+        height: 2.4rem;
+        width: 2.4rem;
         /* font-size: 5rem; */
         border-radius: 5px;
         -webkit-appearance: none;
@@ -75,7 +146,6 @@ export const CheckboxLabel = styled.label`
         /* align-items: center; */
         /* justify-content: center; */
         margin-right: 0.6rem;
-        margin-top: 1rem;
 
         &:focus {
         outline: none;
@@ -134,4 +204,8 @@ export const BtnSubmit = styled.button`
 export const BtnWrap = styled.div`
     margin: 1.5rem auto;
     display: flex;
+
+    button {
+        font-weight: 600;
+    }
 `;
