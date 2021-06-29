@@ -4,13 +4,16 @@ import styled from 'styled-components'
 // mobile = 320
 
 export const ProfileWrapper = styled.section`
+    margin-left: 20vw;
+    margin-right: 20vw;
+
     display: flex;
     justify-content: space-between;
     font-size: var(--font-size-default);
     color: var(--text-primary);
     overflow-x: hidden;
 
-    @media screen and (max-width: 850px) {
+    @media screen and (max-width: 1120px) {
         flex-direction: column-reverse;
         align-items: center;
     }

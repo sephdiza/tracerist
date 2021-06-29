@@ -1,13 +1,13 @@
 import React from 'react'
 
-function QRGenerate() {
+function Notification() {
     
     return (
         <>
-            <h2 style={{marginBottom: '6rem'}}>Notifcation</h2>
+            <h2 style={{marginBottom: '6rem'}}>Notification</h2>
             <p>Nothing's here 🤷‍♂️</p>
         </>
     )
 }
 
-export default QRGenerate
+export default Notification

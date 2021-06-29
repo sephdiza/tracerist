@@ -7,7 +7,7 @@ import GlobalStyle from './theme/GlobalStyle';
 import Nav from './components/Nav';
 import Profile from './pages/Profile/Profile';
 import QrScanner from './pages/qrscanner/QrScanner';
-import QRGenerate from './pages/QRGenerate/QRGenerate';
+import Notification from './pages/Notification/Notification';
 import EditDetails from './pages/Profile/EditDetails/EditDetails'
 import Register from './pages/Register/Register';
 import RegIndividual from './pages/RegIndividual/RegIndividual';
@@ -33,10 +33,11 @@ function App() {
   return (
     <> 
       <Router>
+        <GlobalStyle />
         { user ?
         (
           <div>
-            <GlobalStyle />
+            
               <Nav />
                 <Switch>
                   <Route exact path="/profile">
@@ -45,8 +46,8 @@ function App() {
                   <Route path="/qrscan">
                     <QrScanner />
                   </Route>
-                  <Route path="/qrgenerate">
-                    <QRGenerate/>
+                  <Route path="/notification">
+                    <Notification/>
                   </Route> 
                   <Route path="/profile/editdetails">
                     {user && <EditDetails user={user} url={url}/>}
@@ -71,7 +72,7 @@ function App() {
                 <Route path="/login">
                     <Login user={user} setUser={setUser} route={route} url={url}/>
                 </Route>
-              </Switch>
+            </Switch>
           </div>
         )
           

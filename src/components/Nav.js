@@ -45,7 +45,7 @@ function Nav() {
 
     const showSideBar = {
         opacity: 1,
-        transform: 'translateY(0)'
+        transform: 'translateY(-1rem)'
     }
 
     const hideSideBar = {
@@ -69,7 +69,7 @@ function Nav() {
                     <StyledLink to="/qrscan">Travel History</StyledLink>
                 </NavLink>
                 <NavLink>
-                    <StyledLink to="/qrgenerate">Notification</StyledLink>
+                    <StyledLink to="/notification">Notification</StyledLink>
                 </NavLink>
                 <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
             </LinkWrapper>

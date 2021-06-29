@@ -2,13 +2,19 @@ import styled from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 
 export const Navbar = styled.nav`
+
     height: 10vh;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 3rem;
-    overflow-x: hidden;
+    margin-right: 20vw;
+    margin-left: 20vw;
+
+    @media only screen and (max-width: 1240px) {
+        margin-left: 10vw;
+        margin-right: 10vw;
+    }
 `;
 
 export const NavLogo = styled.div`

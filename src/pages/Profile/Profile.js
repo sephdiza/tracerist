@@ -19,7 +19,7 @@ import { ProfileWrapper,
 function Profile({ user, setUser }) {
     return (    
         <>
-            <h2>User's Profile</h2>
+            <h2 style={{marginLeft: '20vw'}}>User's Profile</h2>
             { user && (
             <ProfileWrapper>
                 <RightContainer>               

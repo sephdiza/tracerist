@@ -1,7 +1,11 @@
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  box-sizing: inherit;
 }
 
 @import url("https://rsms.me/inter/inter.css");

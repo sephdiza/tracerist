@@ -3,19 +3,12 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
     /* #02353B */
 
-    * { 
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
     body {
-        box-sizing: inherit;
-        margin: 0 20vw;
+        /* margin: 0 20vw;
 
         @media only screen and (max-width: 1240px) {
             margin: 0 10vw;
-        }
+        } */
     }
 
     html {
