@@ -155,7 +155,7 @@ const RegIndividual = () => {
                     
                     <Form onSubmit={formik.handleSubmit}>
                         <Title>
-                            <h1><ImUser /> Register as Individual</h1>
+                            <h1><ImUser/> Register as individual</h1>
                             <p>Step 2 of 3 - Personal Information</p>
                             <p>Please fill in your details below.</p>
                         </Title>

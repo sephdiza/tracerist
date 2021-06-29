@@ -3,25 +3,24 @@ import styled from 'styled-components';
 export const Title = styled.div`
     display: flex;
     flex-direction: column;
-    margin-bottom: 1rem;
-    gap: 1rem;
+    margin-bottom: 3rem;
 
     @media screen and (max-width: 400px) {
         margin-bottom: 1.5rem;
     }
 
     h1 {
-        font-size: 2.8rem;
+        font-size: 2.4rem;
         display: flex;
         align-items: center;
-        gap: 1rem;
 
         svg {
             fill: #02353B;
+            margin-right: 1rem;
         }
 
         @media screen and (max-width: 1000px) {
-        font-size: 2.4rem;
+            font-size: 2rem;
         }
 
         @media screen and (max-width: 400px) {
@@ -30,32 +29,25 @@ export const Title = styled.div`
     }
 
     p {
-        margin-top: -2rem;
         font-size: 1.8rem;
         position: relative;
-        font-weight: 500;
 
         &:not(:last-child) {
-            padding-bottom: 3rem;
+            padding-bottom: 4.5rem;
 
             &:after {
                     content: '';
                     display: block;
                     position: absolute;
-                    margin-top: 1rem;
+                    margin-top: .5rem;
                     height: .6rem;
                     border-radius: 5px;
                     background: linear-gradient(to right, #EC8F5B, #EDF063);
                     opacity: 0.75;
-                    width: 40%;
+                    width: 12rem;
             }
         }
-
-        &:last-child {
-            
-        }
        
-
         @media screen and (max-width: 1000px) {
         font-size: 1.6rem;
         }
@@ -67,8 +59,12 @@ export const Title = styled.div`
 `;
 
 export const Form = styled.form`
-    display: block;
-    margin-top: 2rem;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+    max-width: 36rem;
+    margin: 3rem 0;
 `;
 
 export const Input = styled.input`
@@ -96,7 +92,7 @@ export const Input = styled.input`
 `;
 
 export const StyledSelect = styled.select`
-    width: 33.3rem;
+    width: 30rem;
     margin: 0;
     -webkit-appearance: none;
     box-sizing: border-box;
@@ -129,6 +125,7 @@ export const SelectLabel = styled.label`
 `;
 
 export const CheckboxLabel = styled.label`
+    margin-top: 1.5rem;
     display: flex;
     align-items: center;
 
@@ -143,8 +140,6 @@ export const CheckboxLabel = styled.label`
         appearance: none;
         border: 1px solid var(--text-primary);
         background-color: white;
-        /* align-items: center; */
-        /* justify-content: center; */
         margin-right: 0.6rem;
 
         &:focus {
@@ -185,24 +180,9 @@ export const Error = styled.div`
     margin-top: 0.25rem;
 `;
 
-export const BtnSubmit = styled.button`
-    display: block;
-    width: 15rem;
-    margin: 0;
-    -webkit-appearance: none;
-    box-sizing: border-box;
-    padding: 1rem 1.5rem;
-    font-size: 1.8rem;
-    border: 1px solid var(--text-primary);
-    border-radius: 0.5rem;
-    color: var(--text-primary);
-    height: auto;
-    background-color: #fff;
-    cursor: pointer;
-`;
 
 export const BtnWrap = styled.div`
-    margin: 1.5rem auto;
+    margin: 3rem auto;
     display: flex;
 
     button {

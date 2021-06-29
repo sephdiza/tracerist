@@ -27,7 +27,6 @@ const GlobalStyle = createGlobalStyle`
         font-family: "Montserrat", sans-serif;
         font-weight: 700;
         text-transform: uppercase;
-        margin-left: 1rem;
         color: var(--text-primary);
     }
 

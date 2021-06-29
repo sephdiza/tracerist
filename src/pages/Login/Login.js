@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 
-import {Link, Route, useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 import { LoginWrapper,
         LeftWrapper,
@@ -9,7 +9,6 @@ import { LoginWrapper,
         RightContent,
         Banner,
         Title,
-        CheckboxLabel,
         InputGroup,
         LoginLinkText      
         } from './LoginStyles';
@@ -73,10 +72,6 @@ function Login({route, setUser, url}) {
                                  
                         </InputGroup>
                         <LoginLinkText>
-                            <CheckboxLabel>
-                                <input type="checkbox"/>
-                                <p>Remember me</p>
-                            </CheckboxLabel>
                             <Link to="#">Forgot Password?</Link>
                         </LoginLinkText>
                         <RegisterBtn style={{margin: '0 auto'}} onClick={handleLogin}>Sign in</RegisterBtn>

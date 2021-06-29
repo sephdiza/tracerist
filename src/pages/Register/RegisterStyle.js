@@ -46,28 +46,15 @@ export const RightContent = styled.div`
     flex-direction: column;
     width: 32rem;
 
-    @media screen and (max-width: 1160px) {
-        padding: 0 8rem;
-    }
-
-    @media screen and (max-width: 400px) {
-        padding: 0 1rem;
-        margin-left: 1.2rem;
+     @media screen and (max-width: 1160px) {
+        padding: 0 3rem;
     }
 `;
 
 export const Banner = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 6rem 0 1rem 0;
-
-    @media screen and (max-width: 542px) {
-        margin: 6rem 0 3rem 0;
-    }
-
-    @media screen and (max-width: 400px){ 
-        margin: 3.5rem 0 0.5rem 0;
-    }
+    margin: 6rem 0 6rem 0;
 
     img {
         width: 24rem;
@@ -86,7 +73,6 @@ export const Banner = styled.div`
         margin-left: 4px;
         font-family: 'Montserrat', sans-serif;
         position: relative;
-        transform: translateY(-1.5rem);
 
         @media screen and (max-width: 1002px) {
             font-size: 1.2rem;
@@ -106,7 +92,7 @@ export const Banner = styled.div`
             border-radius: .5rem;
             background: linear-gradient(to right, #EC8F5B, #EDF063);
             opacity: 0.6;
-            width: 25%;
+            width: 12rem;
         }
     }
 `;
@@ -115,8 +101,7 @@ export const Title = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-bottom: 1rem;
-    gap: 1rem;
+    margin-bottom: 3rem;
 
     svg {
         fill: var(--text-primary);
@@ -142,32 +127,36 @@ export const Title = styled.div`
     }
 
     p {
-        margin-top: -2rem;
         font-size: 1.8rem;
 
         @media screen and (max-width: 1000px) {
-        font-size: 1.6rem;
+            font-size: 1.6rem;
         }
 
         @media screen and (max-width: 400px) {
-        font-size: 1.4rem;
+            font-size: 1.4rem;
         }
     }
 `;
 
 export const SubTitle = styled.div`
     display: flex;
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    
+    margin-bottom: 3rem;
+
+    p {
+        font-size: 1.8rem;
 
     @media screen and (max-width: 1000px) {
         font-size: 1.6rem;
     }
 
     @media screen and (max-width: 400px) {
-        margin-bottom: 1.5rem;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
+
+    }
+
 `;
 
 export const SelectGrp = styled.div`  
@@ -222,7 +211,7 @@ export const SelectGrp = styled.div`
             cursor: pointer;
         }
 
-        margin-bottom: 4rem;
+        margin-bottom: 3rem;
     }
 
     input {
