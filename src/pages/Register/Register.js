@@ -57,10 +57,10 @@ function Register() {
                         </SubTitle>
                         <SelectGrp >
                                 <label htmlFor="individual" onClick={selectIndividual} style={{backgroundColor: indivLabelBg}}>
-                                    <input type="radio" name="type" id="individual" value="/register/individual" />
+                                    <input type="radio" name="type" id="individual" value="/register-individual" />
                                 </label>
                                 <label htmlFor="establishment" onClick={selectEstab} style={{backgroundColor: estabLabelBg}}>
-                                    <input type="radio" name="type" id="establishment" value="/register/establishment" />   
+                                    <input type="radio" name="type" id="establishment" value="/register-establishment" />   
                                 </label>
                         </SelectGrp>
                         <RegisterBtn onClick={nextRoute}>Next <span>&rarr;</span></RegisterBtn>

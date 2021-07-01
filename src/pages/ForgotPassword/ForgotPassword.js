@@ -12,24 +12,23 @@ import { LoginWrapper,
         Title,
         InputGroup,
         LoginLinkText      
-        } from './LoginStyles';
+        } from '../Login/LoginStyles';
 import { RegisterBtn } from '../../components/Button'
 import titleImg from '../../assets/images/login-banner.png'
 
-function Login({route, setUser, url}) {
+export default function ForgotPassword() {
     const emailRef = useRef()
-    const passwordRef = useRef()
     const [loading, setLoading] = useState(false)
     const history = useHistory();
-    const { login } = useAuth();
+    const { resetPassword } = useAuth();
  
-    async function handleLogin(e){
+    async function handleResetPassword(e){
         try {
             setLoading(true)
-            await login(emailRef.current.value, passwordRef.current.value)
-            history.push("/profile")
+            await resetPassword(emailRef.current.value)
+            alert("Check your inbox for further instructions")
         } catch {
-            alert('Incorrect email or password!')
+            alert('Failed to reset password!')
         }
        setLoading(false)
     }
@@ -48,19 +47,18 @@ function Login({route, setUser, url}) {
                             <p>Unified Contact Tracing App</p>
                         </Banner>
                         <Title>
-                            <h1>Login</h1>
-                            <p>Help us fight covid-19.</p>
+                            <h1>Password Reset</h1>
+                            <p>We will send your password reset link.</p>
                         </Title>
                         <InputGroup >
-                                <input type="text" placeholder="email" ref={emailRef}/>
-                                <input type="password" placeholder="password" ref={passwordRef}/>     
+                                <input type="text" placeholder="email" ref={emailRef}/>   
                         </InputGroup>
-                        <LoginLinkText>
-                            <Link to="/forgot-password">Forgot Password?</Link>
+                        <RegisterBtn style={{margin: '0 auto', marginTop: '2rem'}} onClick={handleResetPassword} disabled={loading}>Reset Password</RegisterBtn>
+                        <LoginLinkText style={{margin: '0 auto', marginTop: '1rem'}}>
+                            <Link to="/login">Login</Link>
                         </LoginLinkText>
-                        <RegisterBtn style={{margin: '0 auto'}} onClick={handleLogin} disabled={loading}>Sign in</RegisterBtn>
                         <LoginLinkText>
-                            Don't have an account yet? <Link to="/register">Register now.</Link>
+                            Don't have an account? <Link to="/register">Register now.</Link>
                         </LoginLinkText>
                     </RightContent>        
                 </RightWrapper>
@@ -68,5 +66,3 @@ function Login({route, setUser, url}) {
         </>
     )
 }
-
-export default Login

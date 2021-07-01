@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { useAuth } from '../../contexts/AuthContext'
 
 import { regions, getProvincesByRegion, getCityMunByProvince, getBarangayByMun } from 'phil-reg-prov-mun-brgy'
 import { useFormik } from 'formik';
@@ -13,11 +14,16 @@ import { ImUser } from 'react-icons/im'
 
 
 const RegIndividual = () => {
+    const emailRef = useRef()
+    const passwordRef = useRef()
+    const [error, setError] = useState()
+    const [loading, setLoading] = useState(false)
     const [region, setRegion] = useState("")
     const [province, setProvince] = useState("")
     const [city, setCity] = useState("")
     const [barangay, setBarangay] = useState("")
     const history = useHistory()
+    const { signup } = useAuth()
 
     useEffect(() => {
         setRegion(regions)
@@ -50,99 +56,102 @@ const RegIndividual = () => {
 
     const formik = useFormik({
         initialValues: {
-            username: '',
+            email: '',
             password: '',
             confirmpassword: '', 
-            firstName: '',
-            middleName: '', 
-            lastName: '', 
-            email: '', 
-            contactno: '',
-            acceptedTerms: false,
-            region: '',
-            province: '',
-            city: '',
-            bgy: '',
-            housestreet: ''
+            // firstName: '',
+            // middleName: '', 
+            // lastName: '',  
+            // contactno: '',
+            // acceptedTerms: false,
+            // region: '',
+            // province: '',
+            // city: '',
+            // bgy: '',
+            // housestreet: ''
         },
         validationSchema: Yup.object().shape({
-            username: Yup.string()
-            .min(6, '*Must be 6 characters or more')
-            .required('*Required'),
+            email: Yup.string().email('*Invalid email address').required('*Required'),
             password: Yup.string()
             .min(6, '*Must be 6 characters or more')
             .required('*Required'),
             confirmpassword: Yup.string()
             .required('*Required')
             .oneOf([Yup.ref('password'), null], "*Password doesn't match"),
-            firstName: Yup.string()
-            .max(15, '*Must be 15 characters or less')
-            .required('*Required')
-            .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            middleName: Yup.string()
-            .max(15, '*Must be 15 characters or less')
-            .required('*Required')
-            .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            lastName: Yup.string()
-            .max(20, '*Must be 20 characters or less')
-            .required('Required')
-            .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            contactno: Yup.string()
-            .min(11, "Must be 11 characters")
-            .max(11, "Must be 11 characters")
-            .required('*Required'),
-            email: Yup.string().email('*Invalid email address').required('*Required'),
-            acceptedTerms: Yup.boolean()
-                .required('*Required')
-                .oneOf([true], '*You must accept the terms and conditions.'),
-            region: Yup.string()
-                .required('*Required'),
-            province: Yup.string()
-                .required('*Required'),
-            city: Yup.string()
-                .required('*Required'),
-            bgy: Yup.string()
-                .required('*Required'),
-            housestreet: Yup.string()
-                .required('*Required') 
+            // firstName: Yup.string()
+            // .max(15, '*Must be 15 characters or less')
+            // .required('*Required')
+            // .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
+            // middleName: Yup.string()
+            // .max(15, '*Must be 15 characters or less')
+            // .required('*Required')
+            // .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
+            // lastName: Yup.string()
+            // .max(20, '*Must be 20 characters or less')
+            // .required('Required')
+            // .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
+            // contactno: Yup.string()
+            // .min(11, "Must be 11 characters")
+            // .max(11, "Must be 11 characters")
+            // .required('*Required'),
+            // email: Yup.string().email('*Invalid email address').required('*Required'),
+            // acceptedTerms: Yup.boolean()
+            //     .required('*Required')
+            //     .oneOf([true], '*You must accept the terms and conditions.'),
+            // region: Yup.string()
+            //     .required('*Required'),
+            // province: Yup.string()
+            //     .required('*Required'),
+            // city: Yup.string()
+            //     .required('*Required'),
+            // bgy: Yup.string()
+            //     .required('*Required'),
+            // housestreet: Yup.string()
+            //     .required('*Required') 
         }),
         onSubmit: values => {
-            // console.log(values.acceptedTerms)
+            try {
+                setLoading(true)
+                signup(emailRef.current.value, passwordRef.current.value)
+            } catch {
+                alert('Failed to signup')
+            }
+            setLoading(false)
             alert("Successfuly Registered! You can now login 😁")
-            history.push('health-declaration')
+            history.push('login')
             
-            fetch("http://localhost:8000/user/", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                  "firstname": values.firstName,
-                  "middlename": values.middleName,
-                  "lastname": values.lastName,
-                  "address": [
-                      {
-                      "housestreet": values.housestreet,
-                      "bgy": values.bgy,
-                      "city": values.city,
-                      "province": values.province,
-                      "region": values.region
-                      }
-                  ],
-                  "contactno": values.contactno,
-                  "email": values.email,
-                  "username": values.username,
-                  "password": values.password,
-                  "gender": "",
-                  "bdate": "",
-                  "pobirth": "",
-                  "nationality": "",
-                  "civilstatus": "",
-                  "mothermaiden": "",
-                  "empstatus": "",
-                  "employer": ""
-                })
-            })
+            // fetch("http://localhost:8000/user/", {
+            //     method: "POST",
+            //     headers: {
+            //       "Content-Type": "application/json"
+            //     },
+            //     body: JSON.stringify({
+            //       "firstname": values.firstName,
+            //       "middlename": values.middleName,
+            //       "lastname": values.lastName,
+            //       "address": [
+            //           {
+            //           "housestreet": values.housestreet,
+            //           "bgy": values.bgy,
+            //           "city": values.city,
+            //           "province": values.province,
+            //           "region": values.region
+            //           }
+            //       ],
+            //       "contactno": values.contactno,
+            //       "email": values.email,
+            //       "username": values.username,
+            //       "password": values.password,
+            //       "gender": "",
+            //       "bdate": "",
+            //       "pobirth": "",
+            //       "nationality": "",
+            //       "civilstatus": "",
+            //       "mothermaiden": "",
+            //       "empstatus": "",
+            //       "employer": ""
+            //     })
+            // })
         }
     })
 
@@ -151,7 +160,6 @@ const RegIndividual = () => {
             <MainWrapper>
                 <HalfBg />
                 <RightWrapper style={{alignItems: 'flex-start'}}>
-
                     
                     <Form onSubmit={formik.handleSubmit}>
                         <Title>
@@ -159,15 +167,16 @@ const RegIndividual = () => {
                             <p>Step 2 of 3 - Personal Information</p>
                             <p>Please fill in your details below.</p>
                         </Title>
-                        <SelectLabel htmlFor="username" >Username</SelectLabel>
+                        <SelectLabel htmlFor="email" >Email</SelectLabel>
                         <Input
-                            id="username"
+                            id="email"
                             type="text"
-                            placeholder="jdcruz"
-                            {...formik.getFieldProps('username')}
+                            placeholder="jdcruz@email.com"
+                            ref={emailRef}
+                            {...formik.getFieldProps('email')}
                         />
-                        {formik.touched.username && formik.errors.username ? (
-                            <Error>{formik.errors.username}</Error>
+                        {formik.touched.email && formik.errors.email ? (
+                            <Error>{formik.errors.email}</Error>
                         ) : null}
 
                         <SelectLabel htmlFor="password">Password</SelectLabel>
@@ -175,6 +184,7 @@ const RegIndividual = () => {
                             id="password"
                             type="password"
                             placeholder="******"
+                            ref={passwordRef}
                             {...formik.getFieldProps('password')}
                         />
                         {formik.touched.password && formik.errors.password ? (
@@ -193,7 +203,7 @@ const RegIndividual = () => {
                         ) : null}
 
 
-                        <SelectLabel htmlFor="firstName">First Name</SelectLabel>
+                        {/* <SelectLabel htmlFor="firstName">First Name</SelectLabel>
                         <Input
                             id="firstName"
                             type="text"
@@ -326,10 +336,10 @@ const RegIndividual = () => {
                         </CheckboxLabel>
                         {formik.touched.acceptedTerms && formik.errors.acceptedTerms ? (
                             <Error>{formik.errors.acceptedTerms}</Error>
-                        ) : null}
+                        ) : null} */}
 
                         <BtnWrap>
-                            <Button primary type="submit">Submit</Button> 
+                            <Button primary type="submit" disabled={loading}>Submit</Button> 
                         </BtnWrap>
                     </Form>
                 </RightWrapper>

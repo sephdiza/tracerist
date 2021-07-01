@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { useAuth } from '../contexts/AuthContext';
 import  { Link, useHistory } from 'react-router-dom';
 
 import { StyledLink,
@@ -23,6 +24,7 @@ function Nav() {
         transform: 'translateY(-100%)'})
     const [hamBtnFirst, setHamBtnFirst] = useState('')
     const [hamBtnSecond, setHamBtnSecond] = useState('')
+    const { logout } = useAuth()
     
     const handleDisplay = () => {
         setShow(showSideBar)
@@ -31,10 +33,13 @@ function Nav() {
     }
 
     const history = useHistory();
-    const handleLogout = () => {
-        localStorage.clear();
-        history.push('/login')
-        window.location.reload()
+    async function handleLogout() {
+        try {
+            await logout()
+            history.push("/login")
+        } catch {
+            alert("Failed to logout")
+        }
     }
 
     const handleCloseSideBar = () => {

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Notification = styled.div`
+export const NotifWrapper = styled.div`
     margin-left: 20vw;
     margin-right: 20vw;
 

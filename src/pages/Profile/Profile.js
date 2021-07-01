@@ -1,7 +1,9 @@
 import React from 'react'
 
+import { useAuth } from '../../contexts/AuthContext'
 import { Link } from 'react-router-dom';
 
+import Nav from '../../components/Nav'
 import { Button } from '../../components/Button'
 import ImgUploader from '../../components/ImgUploader';
 import QrCodeImg from '../../components/QrCodeImg';
@@ -17,10 +19,13 @@ import { ProfileWrapper,
     } from './ProfileStyle'
 
 function Profile({ user, setUser }) {
+    const { currentUser } = useAuth()
+
     return (    
-        <>
+        <>  
+            <Nav />
             <h2 style={{marginLeft: '20vw'}}>User's Profile</h2>
-            { user && (
+             
             <ProfileWrapper>
                 <RightContainer>               
                     <ProfileMain>
@@ -28,21 +33,21 @@ function Profile({ user, setUser }) {
                             <ProfileImgBorder>
                                 <ImgUploader />
                             </ProfileImgBorder>
-                            <h3>{user.username}</h3>
+                            <h3>{currentUser.email}</h3>
                         </ProfilePicture>
                         <ProfileMainDetails>
-                            <p>{user.firstname} {user.lastname}</p>
+                            {/* <p>{user.firstname} {user.lastname}</p>
                             {user.address.map(address => (
                                     <p key={user.id}>{address.housestreet}, {address.bgy}, {address.city}, {address.province}, {address.region}</p>
                                 ))
                             }
                             <p>{user.contactno}</p>
-                            <p>{user.email}</p>
+                            <p>{user.email}</p> */}
                         </ProfileMainDetails>
                     </ProfileMain>              
                     <ProfileBtnGrp>
                             <Button primary>Health Declaration</Button>
-                            <Link to="/profile/editdetails">
+                            <Link to="/update-profile">
                                     <Button>Edit Details</Button>
                             </Link>   
                         </ProfileBtnGrp>
@@ -50,48 +55,48 @@ function Profile({ user, setUser }) {
                         <tbody>
                             <tr>
                                 <th>Gender</th>
-                                <td>{user.gender}</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>BirthDate</th>
-                                <td>{user.bdate}</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>Place of Birth</th>
-                                <td>{user.pobirth}</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>Nationality</th>
-                                <td>{user.nationality}</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>Civil Status</th>
-                                <td>{user.civilstatus}</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>Mother's maiden name</th>
-                                <td>{user.mothermaiden}</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>Employment status</th>
-                                <td>{user.empstatus}</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>Employer / Company</th>
-                                <td>{user.employer}</td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </ProfileTable>
                 </RightContainer>
                 <LeftContainer>
-                    <QrCodeImg value={JSON.stringify({
+                    {/* <QrCodeImg value={JSON.stringify({
                             name: `${user.firstname} ${user.lastname}`,
                             email: user.email,
                             contact: user.contactno
-                    })} download/>   
+                    })} download/>    */}
                 </LeftContainer>
             </ProfileWrapper>
-            )}
+            
         </>
     );
     

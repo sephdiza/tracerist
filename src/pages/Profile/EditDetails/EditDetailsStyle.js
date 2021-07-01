@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 export const EditDetailsWrapper = styled.section`
+    margin-left: 20vw;
+    margin-right: 20vw;
+
     margin: 0 auto;
     display: flex;
     flex-direction: column;

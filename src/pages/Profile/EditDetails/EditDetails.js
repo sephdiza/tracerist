@@ -1,9 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 
+import { useHistory } from 'react-router';
 import { useFormik } from 'formik';
 import *  as Yup from 'yup'
 import { regions, getProvincesByRegion, getCityMunByProvince, getBarangayByMun } from 'phil-reg-prov-mun-brgy'
+import { useAuth } from '../../../contexts/AuthContext';
 
+import Nav from '../../../components/Nav'
 import { Button } from '../../../components/Button'
 import { EditDetailsWrapper, Form, EditInput, StyledSelect, Label, BtnWrap, Error} from './EditDetailsStyle'
 
@@ -12,27 +15,32 @@ function EditDetails({ user, url }) {
     const [provinceApi, setProvinceApi] = useState("")
     const [cityApi, setCityApi] = useState("")
     const [barangayApi, setBarangayApi] = useState("")
+    const [loading, setLoading] = useState("")
+    const emailRef = useRef()
+    const passwordRef = useRef()
+    const { currentUser, updateEmail, updatePassword } = useAuth()
+    const history = useHistory()
 
-    const [firstname, setFirstname] = useState(user.firstname);
-    const [middlename, setMiddlename] = useState(user.middlename);
-    const [lastname, setLastname] = useState(user.lastname);
-    const [username, setUsername] = useState(user.username);
-    const [password, setPassword] = useState(user.password);
-    const [housestreet, setHousestreet] = useState(user.address[0].housestreet);
-    const [bgy, setBgy] = useState(user.address[0].bgy);
-    const [city, setCity] = useState(user.address[0].city);
-    const [province, setProvince] = useState(user.address[0].province);
-    const [region, setRegion] = useState(user.address[0].region);
-    const [contactno, setContactno] = useState(user.contactno);
-    const [email, setEmail] = useState(user.email);
-    const [gender, setGender] = useState(user.gender);
-    const [bdate, setBdate] = useState(user.bdate);
-    const [pobirth, setPobirth] = useState(user.pobirth);
-    const [nationality, setNationality] = useState(user.nationality);
-    const [civilstatus, setCivilstatus] = useState(user.civilstatus);
-    const [mothermaiden, setMothermaiden] = useState(user.mothermaiden);
-    const [empstatus, setEmpstatus] = useState(user.empstatus);
-    const [employer, setEmployer] = useState(user.employer);
+    // const [firstname, setFirstname] = useState(user.firstname);
+    // const [middlename, setMiddlename] = useState(user.middlename);
+    // const [lastname, setLastname] = useState(user.lastname);
+    // const [username, setUsername] = useState(user.username);
+    // const [password, setPassword] = useState(user.password);
+    // const [housestreet, setHousestreet] = useState(user.address[0].housestreet);
+    // const [bgy, setBgy] = useState(user.address[0].bgy);
+    // const [city, setCity] = useState(user.address[0].city);
+    // const [province, setProvince] = useState(user.address[0].province);
+    // const [region, setRegion] = useState(user.address[0].region);
+    // const [contactno, setContactno] = useState(user.contactno);
+    // const [email, setEmail] = useState(user.email);
+    // const [gender, setGender] = useState(user.gender);
+    // const [bdate, setBdate] = useState(user.bdate);
+    // const [pobirth, setPobirth] = useState(user.pobirth);
+    // const [nationality, setNationality] = useState(user.nationality);
+    // const [civilstatus, setCivilstatus] = useState(user.civilstatus);
+    // const [mothermaiden, setMothermaiden] = useState(user.mothermaiden);
+    // const [empstatus, setEmpstatus] = useState(user.empstatus);
+    // const [employer, setEmployer] = useState(user.employer);
     
     useEffect(() => {
         setRegionApi(regions)
@@ -63,153 +71,105 @@ function EditDetails({ user, url }) {
 
       const formik = useFormik({
         initialValues: {
-            username: username,
-            password: password,
-            confirmpassword: password,
-            firstname: firstname,
-            middlename: middlename, 
-            lastname: lastname, 
-            email: email, 
-            contactno: contactno,
-            housestreet: housestreet,
-            region: region,
-            province: province,
-            city: city,
-            bgy: bgy,              
-            bdate: bdate,
-            pobirth: pobirth,
-            nationality: nationality,
-            civilstatus: civilstatus,
-            mothermaiden: mothermaiden,
-            empstatus: empstatus,
-            employer: employer,
+            email: currentUser.email,
+            password: currentUser.password,
+            confirmpassword: currentUser.password,
+            // firstname: firstname,
+            // middlename: middlename, 
+            // lastname: lastname, 
+            // contactno: contactno,
+            // housestreet: housestreet,
+            // region: region,
+            // province: province,
+            // city: city,
+            // bgy: bgy,              
+            // bdate: bdate,
+            // pobirth: pobirth,
+            // nationality: nationality,
+            // civilstatus: civilstatus,
+            // mothermaiden: mothermaiden,
+            // empstatus: empstatus,
+            // employer: employer,
         },
         validationSchema: Yup.object().shape({
-            username: Yup.string()
-            .min(6, '*Must be 6 characters or more')
-            .required('*Required'),
-            password: Yup.string()
-            .min(6, '*Must be 6 characters or more')
-            .required('*Required'),
-            confirmpassword: Yup.string()
-            .required('*Required')
-            .oneOf([Yup.ref('password'), null], "*Password doesn't match"),
-            firstname: Yup.string()
-            .max(15, '*Must be 15 characters or less')
-            .required('*Required')
-            .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            middlename: Yup.string()
-            .max(15, '*Must be 15 characters or less')
-            .required('*Required')
-            .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            lastname: Yup.string()
-            .max(20, '*Must be 20 characters or less')
-            .required('Required')
-            .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            contactno: Yup.string()
-            .min(11, "Must be 11 characters")
-            .max(11, "Must be 11 characters")
-            .required('*Required'),
             email: Yup.string().email('*Invalid email address').required('*Required'),
-            region: Yup.string()
-                .required('*Required'),
-            province: Yup.string()
-                .required('*Required'),
-            city: Yup.string()
-                .required('*Required'),
-            bgy: Yup.string()
-                .required('*Required'),
-            housestreet: Yup.string()
-                .required('*Required') 
+            password: Yup.string()
+            .min(6, '*Must be 6 characters or more'),
+            confirmpassword: Yup.string()
+            .oneOf([Yup.ref('password'), null], "*Password doesn't match"),
+            // firstname: Yup.string()
+            // .max(15, '*Must be 15 characters or less')
+            // .required('*Required')
+            // .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
+            // middlename: Yup.string()
+            // .max(15, '*Must be 15 characters or less')
+            // .required('*Required')
+            // .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
+            // lastname: Yup.string()
+            // .max(20, '*Must be 20 characters or less')
+            // .required('Required')
+            // .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
+            // contactno: Yup.string()
+            // .min(11, "Must be 11 characters")
+            // .max(11, "Must be 11 characters")
+            // .required('*Required'),            
+            // region: Yup.string()
+            //     .required('*Required'),
+            // province: Yup.string()
+            //     .required('*Required'),
+            // city: Yup.string()
+            //     .required('*Required'),
+            // bgy: Yup.string()
+            //     .required('*Required'),
+            // housestreet: Yup.string()
+            //     .required('*Required') 
         }),
         onSubmit: values => { 
-            fetch(`http://localhost:8000/user/${user.id}`, {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                  "firstname": values.firstname,
-                  "middlename": values.middlename,
-                  "lastname": values.lastname,
-                  "address": [
-                      {
-                      "housestreet": values.housestreet,
-                      "bgy": values.bgy,
-                      "city": values.city,
-                      "province": values.province,
-                      "region": values.region
-                      }
-                  ],
-                  "contactno": values.contactno,
-                  "email": values.email,
-                  "username": values.username,
-                  "password": values.password,
-                  "confirmpassword": values.username,
-                  "gender": "",
-                  "bdate": values.bdate,
-                  "pobirth": values.pobirth,
-                  "nationality": values.nationality,
-                  "civilstatus": values.civilstatus,
-                  "mothermaiden": values.mothermaiden,
-                  "empstatus": values.empstatus,
-                  "employer": values.employer,
-                })
+            const promises = []
+            setLoading(true)
+
+            if (emailRef.current.value !== currentUser.email) {
+                promises.push(updateEmail(emailRef.current.value))
+            }
+            if (passwordRef.current.value) {
+                promises.push(updatePassword(passwordRef.current.value))
+            }
+            
+            Promise.all(promises).then(() => {
+                history.push("/profile")
+            }).catch(() => {
+                alert("Failed to udpate profile")
+            }).finally(() => {
+                setLoading(false)
             })
-            alert('Your changes have been saved!');
-            localStorage.setItem('user', JSON.stringify({
-                "firstname": values.firstname,
-                "middlename": values.middlename,
-                "lastname": values.lastname,
-                "address": [
-                    {
-                    "housestreet": values.housestreet,
-                    "bgy": values.bgy,
-                    "city": values.city,
-                    "province": values.province,
-                    "region": values.region
-                    }
-                ],
-                "contactno": values.contactno,
-                "email": values.email,
-                "username": values.username,
-                "password": values.password,
-                "confirmpassword": values.username,
-                "gender": "",
-                "bdate": values.bdate,
-                "pobirth": values.pobirth,
-                "nationality": values.nationality,
-                "civilstatus": values.civilstatus,
-                "mothermaiden": values.mothermaiden,
-                "empstatus": values.empstatus,
-                "employer": values.employer,
-              }))
-            console.log(values)
-            window.location.reload();
         }
     })
 
     return (
-        <>
-            <h2>Edit details</h2>
+        <>  
+            <Nav />
+            <h2 style={{marginLeft:'20vw'}}>Update Profile</h2>
                 <EditDetailsWrapper>
                 <h3 style={{marginTop: '3rem'}}>Main Details</h3>
                 <Form onSubmit={formik.handleSubmit}>
                 
-                    <Label htmlFor="username" >Username</Label>
+                    <Label htmlFor="email">Email Address</Label>
                     <EditInput
-                        id="username"
+                        id="email"
                         type="text"
-                        {...formik.getFieldProps('username')}
+                        ref={emailRef}
+                        {...formik.getFieldProps('email')}
                     />
-                    {formik.touched.username && formik.errors.username ? (
-                        <Error>{formik.errors.username}</Error>
+                    {formik.touched.email && formik.errors.email ? (
+                        <Error>{formik.errors.email}</Error>
                     ) : null}
 
                     <Label htmlFor="password" >Password</Label>
                     <EditInput
                         id="password"
                         type="password"
+                        ref={passwordRef}
+                        placeholder="Leave blank to unchange"
                         {...formik.getFieldProps('password')}
                     />
                     {formik.touched.password && formik.errors.password ? (
@@ -220,13 +180,14 @@ function EditDetails({ user, url }) {
                     <EditInput
                         id="confirmpassword"
                         type="password"
+                        placeholder="Leave blank to unchange"
                         {...formik.getFieldProps('confirmpassword')}
                     />
                     {formik.touched.confirmpassword && formik.errors.confirmpassword ? (
                         <Error>{formik.errors.confirmpassword}</Error>
                     ) : null}
 
-                    <Label htmlFor="firstname">First Name</Label>
+                    {/* <Label htmlFor="firstname">First Name</Label>
                     <EditInput
                         id="firstname"
                         type="text"
@@ -256,15 +217,7 @@ function EditDetails({ user, url }) {
                         <Error>{formik.errors.lastName}</Error>
                     ) : null}
 
-                    <Label htmlFor="email">Email Address</Label>
-                    <EditInput
-                        id="email"
-                        type="text"
-                        {...formik.getFieldProps('email')}
-                    />
-                    {formik.touched.email && formik.errors.email ? (
-                        <Error>{formik.errors.email}</Error>
-                    ) : null}
+                    
 
                     <Label htmlFor="email">Contact No.</Label>
                     <EditInput
@@ -345,13 +298,13 @@ function EditDetails({ user, url }) {
                     />
                     {formik.touched.housestreet && formik.errors.housestreet ? (
                         <Error>{formik.errors.housestreet}</Error>
-                    ) : null}
+                    ) : null} */}
 
 
                     {/* ----------OTHER DETAILS---------- */}
                     <h3 style={{marginTop: '3rem'}}>Other Details</h3>
                     
-                    <Label htmlFor="bdate">Birth Date (MM/DD/YYYY)</Label>
+                    {/* <Label htmlFor="bdate">Birth Date (MM/DD/YYYY)</Label>
                     <EditInput
                         id="bdate"
                         type="date"
@@ -398,10 +351,10 @@ function EditDetails({ user, url }) {
                         id="employer"
                         type="text"
                         {...formik.getFieldProps('employer')}
-                    />                    
+                    />                     */}
 
                     <BtnWrap>
-                        <Button primary type="submit">Update</Button> 
+                        <Button primary type="submit" disabled={loading}>Update</Button> 
                     </BtnWrap>
                     </Form>
                                         
