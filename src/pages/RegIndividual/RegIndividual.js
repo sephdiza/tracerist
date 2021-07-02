@@ -17,7 +17,6 @@ const RegIndividual = () => {
     const emailRef = useRef()
     const passwordRef = useRef()
     const firstNameRef = useRef()
-    const [error, setError] = useState()
     const [loading, setLoading] = useState(false)
     const [region, setRegion] = useState("")
     const [province, setProvince] = useState("")

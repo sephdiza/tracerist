@@ -1,7 +1,7 @@
 import React, { useState, useRef} from 'react'
 
 import { useAuth } from '../../contexts/AuthContext'
-import {Link, useHistory} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 import { LoginWrapper,
         LeftWrapper,

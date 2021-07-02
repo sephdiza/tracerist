@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import avatar from "../../assets/images/profile-pic.png"
 
 // tablet = 768
 // mobile = 320
@@ -65,8 +66,10 @@ export const ProfileImgBorder = styled.div`
     background: var(--bg-gradient);
     position: relative;
 
-    &:hover {
-        opacity: 0.9;
+    img {
+        width: 10.5rem;
+        border: .75rem solid #fff;
+        border-radius: 50%;
     }
 `;
 

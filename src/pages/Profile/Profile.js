@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { useAuth } from '../../contexts/AuthContext'
 import { Link } from 'react-router-dom';
 import QrCodeImg from "../../components/QrCodeImg"
 import Nav from '../../components/Nav'
 import { Button } from '../../components/Button'
-import ImgUploader from '../../components/ImgUploader';
 import { ProfileWrapper,
         RightContainer,
         LeftContainer,
@@ -16,6 +15,7 @@ import { ProfileWrapper,
         ProfileTable,
         ProfileBtnGrp
     } from './ProfileStyle'
+import avatar from "../../assets/images/profile-pic.png"
 
 function Profile() {
     const { currentUser, fetchUser, userData } = useAuth()
@@ -31,7 +31,7 @@ function Profile() {
                    <ProfileMain>
                        <ProfilePicture>
                            <ProfileImgBorder>
-                               <ImgUploader />
+                            <img src={avatar} alt="Avatar"/>
                            </ProfileImgBorder>
                            {/* <h3>{userData.firstName} {userData.lastName}</h3> */}
                        </ProfilePicture>
@@ -43,10 +43,12 @@ function Profile() {
                        </ProfileMainDetails>
                    </ProfileMain>              
                    <ProfileBtnGrp>
-                           <Button primary>Health Declaration</Button>
-                           <Link to="/update-profile">
-                                   <Button>Edit Details</Button>
-                           </Link>   
+                            <Link to="/health-declaration">
+                                <Button primary>Health Declaration</Button>
+                            </Link>
+                            <Link to="/update-profile">
+                                    <Button>Edit Details</Button>
+                            </Link>   
                        </ProfileBtnGrp>
                    <ProfileTable>
                        <tbody>

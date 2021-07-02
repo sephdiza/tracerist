@@ -8,9 +8,9 @@ import { useAuth } from '../../../contexts/AuthContext';
 
 import Nav from '../../../components/Nav'
 import { Button } from '../../../components/Button'
-import { EditDetailsWrapper, Form, EditInput, StyledSelect, Label, BtnWrap, Error} from './EditDetailsStyle'
+import { EditDetailsWrapper, Form, EditInput, Label, BtnWrap, Error} from './EditDetailsStyle'
 
-function EditDetails({ user, url }) {
+function EditDetails() {
     const [regionApi, setRegionApi] = useState("")
     const [provinceApi, setProvinceApi] = useState("")
     const [cityApi, setCityApi] = useState("")
@@ -20,27 +20,6 @@ function EditDetails({ user, url }) {
     const passwordRef = useRef()
     const { currentUser, updateEmail, updatePassword } = useAuth()
     const history = useHistory()
-
-    // const [firstname, setFirstname] = useState(user.firstname);
-    // const [middlename, setMiddlename] = useState(user.middlename);
-    // const [lastname, setLastname] = useState(user.lastname);
-    // const [username, setUsername] = useState(user.username);
-    // const [password, setPassword] = useState(user.password);
-    // const [housestreet, setHousestreet] = useState(user.address[0].housestreet);
-    // const [bgy, setBgy] = useState(user.address[0].bgy);
-    // const [city, setCity] = useState(user.address[0].city);
-    // const [province, setProvince] = useState(user.address[0].province);
-    // const [region, setRegion] = useState(user.address[0].region);
-    // const [contactno, setContactno] = useState(user.contactno);
-    // const [email, setEmail] = useState(user.email);
-    // const [gender, setGender] = useState(user.gender);
-    // const [bdate, setBdate] = useState(user.bdate);
-    // const [pobirth, setPobirth] = useState(user.pobirth);
-    // const [nationality, setNationality] = useState(user.nationality);
-    // const [civilstatus, setCivilstatus] = useState(user.civilstatus);
-    // const [mothermaiden, setMothermaiden] = useState(user.mothermaiden);
-    // const [empstatus, setEmpstatus] = useState(user.empstatus);
-    // const [employer, setEmployer] = useState(user.employer);
     
     useEffect(() => {
         setRegionApi(regions)

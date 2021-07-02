@@ -16,7 +16,7 @@ import { LoginWrapper,
 import { RegisterBtn } from '../../components/Button'
 import titleImg from '../../assets/images/login-banner.png'
 
-function Login({route, setUser, url}) {
+function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const [loading, setLoading] = useState(false)

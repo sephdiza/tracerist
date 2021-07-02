@@ -61,14 +61,14 @@ function Nav() {
     return (
         <Navbar>
             <NavLogo>
-                <Link exact to="/profile">
+                <Link to="/profile">
                     <Logo style={{ height:'28px', width:'auto'}}/>
                     <h1>Tracerist</h1>
                 </Link>  
             </NavLogo>
             <LinkWrapper>
                 <NavLink>
-                    <StyledLink exact to="/profile">Profile</StyledLink>
+                    <StyledLink to="/profile">Profile</StyledLink>
                 </NavLink>
                 <NavLink>
                     <StyledLink to="/qrscan">Travel History</StyledLink>
@@ -87,13 +87,13 @@ function Nav() {
                     <span>✖</span>
                 </CloseBtn>
                 <NavLink onClick={handleCloseSideBar}>
-                    <StyledLink exact to="/profile">Profile</StyledLink>
+                    <StyledLink to="/profile">Profile</StyledLink>
                 </NavLink>
                 <NavLink onClick={handleCloseSideBar}>
                     <StyledLink to="/qrscan">Travel History</StyledLink>
                 </NavLink>
                 <NavLink onClick={handleCloseSideBar}>
-                    <StyledLink to="/qrgenerate">Notification</StyledLink>
+                    <StyledLink to="/notification">Notification</StyledLink>
                 </NavLink>
                 <HamLogoutBtn onClick={handleLogout}>Logout</HamLogoutBtn>
             </HamburgerLinks>
