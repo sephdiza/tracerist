@@ -16,6 +16,7 @@ import { ImUser } from 'react-icons/im'
 const RegIndividual = () => {
     const emailRef = useRef()
     const passwordRef = useRef()
+    const firstNameRef = useRef()
     const [error, setError] = useState()
     const [loading, setLoading] = useState(false)
     const [region, setRegion] = useState("")
@@ -23,13 +24,13 @@ const RegIndividual = () => {
     const [city, setCity] = useState("")
     const [barangay, setBarangay] = useState("")
     const history = useHistory()
-    const { signup } = useAuth()
+    const { signup, currentUser } = useAuth()
+
+    
 
     useEffect(() => {
         setRegion(regions)
     }, [])
-
-    console.log(history)
 
     const selectRegion = e => {
         setProvince(getProvincesByRegion(`${e.target.value}`))
@@ -59,16 +60,16 @@ const RegIndividual = () => {
             email: '',
             password: '',
             confirmpassword: '', 
-            // firstName: '',
-            // middleName: '', 
-            // lastName: '',  
-            // contactno: '',
-            // acceptedTerms: false,
-            // region: '',
-            // province: '',
-            // city: '',
-            // bgy: '',
-            // housestreet: ''
+            firstName: '',
+            middleName: '', 
+            lastName: '',  
+            contactno: '',
+            acceptedTerms: false,
+            region: '',
+            province: '',
+            city: '',
+            bgy: '',
+            housestreet: ''
         },
         validationSchema: Yup.object().shape({
             email: Yup.string().email('*Invalid email address').required('*Required'),
@@ -78,80 +79,58 @@ const RegIndividual = () => {
             confirmpassword: Yup.string()
             .required('*Required')
             .oneOf([Yup.ref('password'), null], "*Password doesn't match"),
-            // firstName: Yup.string()
-            // .max(15, '*Must be 15 characters or less')
-            // .required('*Required')
-            // .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            // middleName: Yup.string()
-            // .max(15, '*Must be 15 characters or less')
-            // .required('*Required')
-            // .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            // lastName: Yup.string()
-            // .max(20, '*Must be 20 characters or less')
-            // .required('Required')
-            // .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            // contactno: Yup.string()
-            // .min(11, "Must be 11 characters")
-            // .max(11, "Must be 11 characters")
-            // .required('*Required'),
-            // email: Yup.string().email('*Invalid email address').required('*Required'),
-            // acceptedTerms: Yup.boolean()
-            //     .required('*Required')
-            //     .oneOf([true], '*You must accept the terms and conditions.'),
-            // region: Yup.string()
-            //     .required('*Required'),
-            // province: Yup.string()
-            //     .required('*Required'),
-            // city: Yup.string()
-            //     .required('*Required'),
-            // bgy: Yup.string()
-            //     .required('*Required'),
-            // housestreet: Yup.string()
-            //     .required('*Required') 
+            firstName: Yup.string()
+            .max(15, '*Must be 15 characters or less')
+            .required('*Required')
+            .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
+            middleName: Yup.string()
+            .max(15, '*Must be 15 characters or less')
+            .required('*Required')
+            .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
+            lastName: Yup.string()
+            .max(20, '*Must be 20 characters or less')
+            .required('Required')
+            .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
+            contactno: Yup.string()
+            .min(11, "Must be 11 characters")
+            .max(11, "Must be 11 characters")
+            .required('*Required'),
+            acceptedTerms: Yup.boolean()
+                .required('*Required')
+                .oneOf([true], '*You must accept the terms and conditions.'),
+            region: Yup.string()
+                .required('*Required'),
+            province: Yup.string()
+                .required('*Required'),
+            city: Yup.string()
+                .required('*Required'),
+            bgy: Yup.string()
+                .required('*Required'),
+            housestreet: Yup.string()
+                .required('*Required') 
         }),
         onSubmit: values => {
             try {
                 setLoading(true)
-                signup(emailRef.current.value, passwordRef.current.value)
+                signup(values.email,
+                    values.password,
+                    values.firstName,
+                    values.middleName,
+                    values.lastName,
+                    values.contactno,
+                    values.region,
+                    values.province,
+                    values.city,
+                    values.bgy,
+                    values.housestreet,
+                    "Individual"
+                    )
             } catch {
                 alert('Failed to signup')
             }
             setLoading(false)
             alert("Successfuly Registered! You can now login 😁")
-            history.push('login')
-            
-            // fetch("http://localhost:8000/user/", {
-            //     method: "POST",
-            //     headers: {
-            //       "Content-Type": "application/json"
-            //     },
-            //     body: JSON.stringify({
-            //       "firstname": values.firstName,
-            //       "middlename": values.middleName,
-            //       "lastname": values.lastName,
-            //       "address": [
-            //           {
-            //           "housestreet": values.housestreet,
-            //           "bgy": values.bgy,
-            //           "city": values.city,
-            //           "province": values.province,
-            //           "region": values.region
-            //           }
-            //       ],
-            //       "contactno": values.contactno,
-            //       "email": values.email,
-            //       "username": values.username,
-            //       "password": values.password,
-            //       "gender": "",
-            //       "bdate": "",
-            //       "pobirth": "",
-            //       "nationality": "",
-            //       "civilstatus": "",
-            //       "mothermaiden": "",
-            //       "empstatus": "",
-            //       "employer": ""
-            //     })
-            // })
+            history.push('login')                             
         }
     })
 
@@ -203,17 +182,18 @@ const RegIndividual = () => {
                         ) : null}
 
 
-                        {/* <SelectLabel htmlFor="firstName">First Name</SelectLabel>
+                        <SelectLabel htmlFor="firstName">First Name</SelectLabel>
                         <Input
                             id="firstName"
                             type="text"
                             placeholder="Juan"
+                            ref={firstNameRef}
                             {...formik.getFieldProps('firstName')}
                         />
                         {formik.touched.firstName && formik.errors.firstName ? (
                             <Error>{formik.errors.firstName}</Error>
                         ) : null}
-
+ 
                         <SelectLabel htmlFor="middleName">Middle Name</SelectLabel>
                         <Input
                             id="middleName"
@@ -234,17 +214,6 @@ const RegIndividual = () => {
                         />
                         {formik.touched.lastName && formik.errors.lastName ? (
                             <Error>{formik.errors.lastName}</Error>
-                        ) : null}
-
-                        <SelectLabel htmlFor="email">Email Address</SelectLabel>
-                        <Input
-                            id="email"
-                            type="text"
-                            placeholder="jdcruz@email.com"
-                            {...formik.getFieldProps('email')}
-                        />
-                        {formik.touched.email && formik.errors.email ? (
-                            <Error>{formik.errors.email}</Error>
                         ) : null}
 
                     <SelectLabel htmlFor="email">Contact No. </SelectLabel>
@@ -336,7 +305,7 @@ const RegIndividual = () => {
                         </CheckboxLabel>
                         {formik.touched.acceptedTerms && formik.errors.acceptedTerms ? (
                             <Error>{formik.errors.acceptedTerms}</Error>
-                        ) : null} */}
+                        ) : null}
 
                         <BtnWrap>
                             <Button primary type="submit" disabled={loading}>Submit</Button> 

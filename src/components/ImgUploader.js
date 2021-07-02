@@ -6,15 +6,15 @@ function ImgUploader() {
     const [src, setSrc] = useState('');
     const [show, setShow] = useState(false)
 
-    const handleChange = e => {
-        setShow(true)
-        setSrc(URL.createObjectURL(e.target.files[0]));
-    };
+    // const handleChange = e => {
+    //     setShow(true)
+    //     setSrc(URL.createObjectURL(e.target.files[0]));
+    // };
 
     return (
         <InputImgWrapper>
             <Label htmlFor="uploadImg">Choose Image</Label>
-            <InputImg type="file" onChange={handleChange} id="uploadImg"/>
+            <InputImg type="file"  id="uploadImg"/>
             <ProfileImg src={src} show={show}/>
         </InputImgWrapper>
         

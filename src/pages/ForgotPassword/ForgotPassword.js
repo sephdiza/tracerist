@@ -19,7 +19,6 @@ import titleImg from '../../assets/images/login-banner.png'
 export default function ForgotPassword() {
     const emailRef = useRef()
     const [loading, setLoading] = useState(false)
-    const history = useHistory();
     const { resetPassword } = useAuth();
  
     async function handleResetPassword(e){
