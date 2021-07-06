@@ -27,10 +27,8 @@ export function AuthProvider({ children }) {
         typ) {
         auth.createUserWithEmailAndPassword(email, password)
         .then(data => {
-            console.log(data.user.email, data.user.uid)
             const createUserDocument = async (user) => {
                 if (!user) return
-            
                 const userRef = firestore.doc(`users/${data.user.uid}`)
             
                 const snapshot = await userRef.get();
@@ -60,7 +58,14 @@ export function AuthProvider({ children }) {
                             bgy,
                             housestreet,
                             type,
-                            createdAt: new Date()
+                            createdAt: new Date(),
+                            bdate: "",
+                            pobirth: "",
+                            nationality: "",
+                            civilstatus: "",
+                            mothermaiden: "",
+                            empstatus: "",
+                            employer: ""
                         })
                     }catch(err){
                         console.error('Error in creating user', err)
@@ -69,8 +74,6 @@ export function AuthProvider({ children }) {
             }
             createUserDocument(data.user)
         })
-        
-        console.log('yes?')
     }
 
     function login(email, password) {
@@ -94,23 +97,27 @@ export function AuthProvider({ children }) {
     }
 
     const fetchUser = async(user) => {
-        const userRef = firestore.collection(`users`)
+        firestore
+            .collection("users")
             .doc(user.uid)
-        const doc = await userRef.get()
-        if (!doc.exists) {
-            console.log('No such document!');
-          } else {
-            setUserData(doc.data())
-          }
+            .onSnapshot((doc) => {
+                setUserData(doc.data())
+            })
+            setLoading(false)
     }
+
+
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
-            setCurrentUser(user)
-            setLoading(false)  
+                setCurrentUser(user)
+                user && fetchUser(user)
         })
-        return unsubscribe
-    }, [])
+        
+        return () => {
+            unsubscribe()
+        }
+    }, [currentUser])
 
     
 

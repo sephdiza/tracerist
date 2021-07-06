@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import avatar from "../../assets/images/profile-pic.png"
 
 // tablet = 768
 // mobile = 320
@@ -13,6 +12,11 @@ export const ProfileWrapper = styled.section`
     font-size: var(--font-size-default);
     color: var(--text-primary);
     overflow-x: hidden;
+
+    @media only screen and (max-width: 1240px) {
+        margin-left: 10vw;
+        margin-right: 10vw;
+    }
 
     @media screen and (max-width: 1120px) {
         flex-direction: column-reverse;
@@ -67,7 +71,7 @@ export const ProfileImgBorder = styled.div`
     position: relative;
 
     img {
-        width: 10.5rem;
+        width: 11rem;
         border: .75rem solid #fff;
         border-radius: 50%;
     }

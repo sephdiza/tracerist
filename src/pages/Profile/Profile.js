@@ -19,7 +19,7 @@ import avatar from "../../assets/images/profile-pic.png"
 
 function Profile() {
     const { currentUser, fetchUser, userData } = useAuth()
-    fetchUser(currentUser)
+    
 
     return (    
         <>  
@@ -27,67 +27,66 @@ function Profile() {
             <h2 style={{marginLeft: '20vw'}}>User's Profile</h2>
             {!userData ? <h3>Loading ...</h3> : (
                 <ProfileWrapper>
-               <RightContainer>               
-                   <ProfileMain>
-                       <ProfilePicture>
-                           <ProfileImgBorder>
-                            <img src={avatar} alt="Avatar"/>
-                           </ProfileImgBorder>
-                           {/* <h3>{userData.firstName} {userData.lastName}</h3> */}
-                       </ProfilePicture>
-                       <ProfileMainDetails>
-                           <p>{userData.firstName} {userData.lastName}</p>            
-                           <p>{userData.housestreet}, {userData.bgy}, {userData.city}, {userData.province}, {userData.region}</p>
-                           <p>{userData.contactno}</p>
-                           <p>{userData.email}</p>
-                       </ProfileMainDetails>
-                   </ProfileMain>              
-                   <ProfileBtnGrp>
-                            <Link to="/health-declaration">
-                                <Button primary>Health Declaration</Button>
-                            </Link>
-                            <Link to="/update-profile">
-                                    <Button>Edit Details</Button>
-                            </Link>   
-                       </ProfileBtnGrp>
-                   <ProfileTable>
-                       <tbody>
-                           <tr>
-                               <th>Gender</th>
-                               <td></td>
-                           </tr>
-                           <tr>
-                               <th>BirthDate</th>
-                               <td></td>
-                           </tr>
-                           <tr>
-                               <th>Place of Birth</th>
-                               <td></td>
-                           </tr>
-                           <tr>
-                               <th>Nationality</th>
-                               <td></td>
-                           </tr>
-                           <tr>
-                               <th>Civil Status</th>
-                               <td></td>
-                           </tr>
-                           <tr>
-                               <th>Mother's maiden name</th>
-                               <td></td>
-                           </tr>
-                           <tr>
-                               <th>Employment status</th>
-                               <td></td>
-                           </tr>
-                           <tr>
-                               <th>Employer / Company</th>
-                               <td></td>
-                           </tr>
-                       </tbody>
-                   </ProfileTable>
-               </RightContainer>
-               <LeftContainer>
+                    <RightContainer>               
+                    <ProfileMain>
+                        <ProfilePicture>
+                            <ProfileImgBorder>
+                                <img src={avatar} alt="Avatar"/>
+                            </ProfileImgBorder>
+                        </ProfilePicture>
+                        <ProfileMainDetails>
+                            <p>{userData.firstName} {userData.lastName}</p>            
+                            <p>{userData.housestreet}, {userData.bgy}, {userData.city}, {userData.province}, {userData.region}</p>
+                            <p>{userData.contactno}</p>
+                            <p>{userData.email}</p>
+                        </ProfileMainDetails>
+                    </ProfileMain>              
+                    <ProfileBtnGrp>
+                                <Link to="/health-declaration">
+                                    <Button primary>Health Declaration</Button>
+                                </Link>
+                                <Link to="/update-profile">
+                                        <Button>Edit Details</Button>
+                                </Link>   
+                        </ProfileBtnGrp>
+                        <ProfileTable>
+                            <tbody>
+                                <tr>
+                                    <th>Gender</th>
+                                    <td>{userData.gender}</td>
+                                </tr>
+                                <tr>
+                                    <th>BirthDate</th>
+                                    <td>{userData.bdate}</td>
+                                </tr>
+                                <tr>
+                                    <th>Place of Birth</th>
+                                    <td>{userData.pobirth}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nationality</th>
+                                    <td>{userData.nationality}</td>
+                                </tr>
+                                <tr>
+                                    <th>Civil Status</th>
+                                    <td>{userData.civilstatus}</td>
+                                </tr>
+                                <tr>
+                                    <th>Mother's maiden name</th>
+                                    <td>{userData.mothermaiden}</td>
+                                </tr>
+                                <tr>
+                                    <th>Employment status</th>
+                                    <td>{userData.empstatus}</td>
+                                </tr>
+                                <tr>
+                                    <th>Employer / Company</th>
+                                    <td>{userData.employer}</td>
+                                </tr>
+                            </tbody>
+                        </ProfileTable>
+                    </RightContainer>
+                <LeftContainer>
                    <QrCodeImg value={JSON.stringify({
                            name: `${userData.firstName} ${userData.lastName}`,
                            email: userData.email,
