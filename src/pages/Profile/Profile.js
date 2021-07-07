@@ -16,7 +16,8 @@ import { Title,
         ProfileTable,
         ProfileBtnGrp,
         EstabWrapper,
-        EstabDetails
+        EstabDetails,
+        EstabBtnGrp
     } from './ProfileStyle'
 import avatar from "../../assets/images/profile-pic.png"
 import { ReactComponent as EstabImg } from '../../assets/images/building.svg'
@@ -52,7 +53,7 @@ function Profile() {
                                 <p>{userData.email}</p>
                             </ProfileMainDetails>
                         </ProfileMain>              
-                    <ProfileBtnGrp>
+                        <ProfileBtnGrp>
                                 <Link to="/update-health">
                                     <Button primary>Health Declaration</Button>
                                 </Link>
@@ -110,11 +111,7 @@ function Profile() {
                 <>
                     <Title>Establishment's Profile</Title>
                     <EstabWrapper>
-                        <div style={{
-                            display:"flex", 
-                            alignItems:"center", flexDirection:"column", 
-                            width:"40rem"}}
-                        >
+                        
                         <EstabImg />
                         <EstabDetails>
                             <p style={{fontWeight:"600"}}>{userData.estabName}</p>
@@ -123,10 +120,16 @@ function Profile() {
                             <p>{userData.contactno}</p>
                             <p>{userData.email}</p>
                         </EstabDetails>
-                        <Link to="update-establishment">
-                            <Button primary>Update Details</Button>
-                        </Link>
-                        </div>   
+                        <EstabBtnGrp>
+                            <Link to="update-establishment">
+                                <Button primary>Update Details</Button>
+                            </Link>
+                            <Link to="scan-qr">
+                                <Button>Scan QR</Button>
+                            </Link>
+                        </EstabBtnGrp>  
+                       
+                         
                     </EstabWrapper>
                 </>
             )}

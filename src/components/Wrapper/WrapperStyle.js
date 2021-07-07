@@ -2,8 +2,6 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.main`
     margin: 0 20vw;
-
-
     display: flex;
     flex-direction: column;
     justify-content: center;

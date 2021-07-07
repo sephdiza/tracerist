@@ -7,7 +7,7 @@ import GlobalStyle from './theme/GlobalStyle';
 
 import PrivateRoute from './PrivateRoute';
 import Profile from './pages/Profile/Profile';
-import QrScanner from './pages/qrscanner/QrScanner';
+import QrScanner from './pages/QrScanner/QrScanner';
 import Notification from './pages/Notification/Notification';
 import EditDetails from './pages/Profile/EditDetails/EditDetails'
 import Register from './pages/Register/Register';
@@ -29,7 +29,7 @@ function App() {
           <Switch>
             <AuthProvider>
               <PrivateRoute path="/profile" component={Profile} />
-              <Route path="/qrscan" component={QrScanner}/>
+              <PrivateRoute path="/scan-qr" component={QrScanner}/>
               <PrivateRoute path="/notification" component={Notification}/>
               <PrivateRoute path="/update-profile" component={EditDetails}/>
               <PrivateRoute path="/update-health" component={UpdateHD} />

@@ -205,10 +205,22 @@ export const EstabDetails = styled.div`
     gap: 1rem;
     margin-top: 3rem;
     margin-bottom: 3rem;
+    max-width: 40rem;
 
     @media only screen and (min-width: 320px) and (max-width: 600px) {
         margin: 0 6rem;
         margin-top: 3rem;
         margin-bottom: 3rem;
+    }
+`;
+
+export const EstabBtnGrp = styled.div`
+    display: flex;
+    gap: 3rem;
+
+    @media screen and (max-width: 600px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
     }
 `;

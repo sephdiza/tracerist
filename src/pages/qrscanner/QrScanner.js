@@ -1,50 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import QrReader from 'react-qr-scanner';
-import styled from 'styled-components';
-import GlobalStyle from '../../theme/GlobalStyle'
-
-const Title = styled.h1`
-  color: black;
-  display: inline-block;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-const QrContainer = styled.div`
-  width: 30rem;
-  height: 30rem;
-  background-color: aliceblue;
-  margin-top: 2rem;
-  border-radius: 3rem;
-  /* overflow: hidden; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-`;
+import {Wrapper,Title,QrContainer, qrCodeStyle, Result} from './QrScannerStyles'
+import Nav from '../../components/Nav';
 
 
-const qrCodeStyle = {
-  width: '100%',
-}
-
-const Result = styled.p`
-  text-align: center;
-  font-size: 1.6rem;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.3);
-  width: 20em;
-  height: 5em;
-`;
 
 function QrScanner() {
     const [delay, setDelay] = useState(5000);
-    const [result, setResult] = useState('...');
+    const [result, setResult] = useState('Hi! Please scan here 💁🏻‍♂️');
 
     let userObj = {}
 
@@ -56,15 +19,13 @@ function QrScanner() {
         }     
     }
 
-    useEffect(() => {
-      if(result !== '...') {
+    if(result !== 'Hi! Please scan here 💁🏻‍♂️') {
         console.log('scanned!')
         setTimeout(() => {
-          setResult('...')
+          setResult('Hi! Please scan here 💁🏻‍♂️')
         }, 5000)
-      }
-      
-    }, [userObj])
+    }
+    
   
     const handleErr = (err) => {
       console.error(err)
@@ -72,11 +33,9 @@ function QrScanner() {
 
     return (
       <>
-        <GlobalStyle/>
+        <Nav />
+          <Title>Scan QR</Title>
           <Wrapper>
-            <Title dark>
-                QR Scanner
-            </Title>
             <QrContainer>
               <QrReader 
                 delay = {delay}
