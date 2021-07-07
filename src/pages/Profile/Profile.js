@@ -42,7 +42,7 @@ function Profile() {
                         </ProfileMainDetails>
                     </ProfileMain>              
                     <ProfileBtnGrp>
-                                <Link to="/health-declaration">
+                                <Link to="/register-hd-individual">
                                     <Button primary>Health Declaration</Button>
                                 </Link>
                                 <Link to="/update-profile">

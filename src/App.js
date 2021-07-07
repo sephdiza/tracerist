@@ -15,6 +15,7 @@ import RegIndividual from './pages/RegIndividual/RegIndividual';
 import RegEstab from './pages/RegEstab/RegEstab';
 import Login from './pages/Login/Login';
 import HDIndividual from './pages/HDIndividual/HDIndividual';
+import RegIndivHD from './pages/RegIndivHD/RegIndivHD';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 
 function App() {
@@ -29,13 +30,13 @@ function App() {
               <Route path="/qrscan" component={QrScanner}/>
               <PrivateRoute path="/notification" component={Notification}/>
               <PrivateRoute path="/update-profile" component={EditDetails}/>
+              <PrivateRoute path="/register-hd-individual" component={RegIndivHD} />
               <Route path="/register" component={Register} />
               <Route path="/register-individual" component={RegIndividual} />
-              <Route path="/register/health-declaration" component={HDIndividual}/>
               <Route path="/register/establishment" component={RegEstab}/>
               <Route path="/login" component={Login}/>
               <Route path="/forgot-password" component={ForgotPassword} />
-          </AuthProvider>       
+              </AuthProvider>       
           </Switch>  
       </Router>    
     </>

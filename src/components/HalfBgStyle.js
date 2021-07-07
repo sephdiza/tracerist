@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import leftSideBg from '../assets/images/left-side.png'
 
 export const MainWrapper = styled.div`
+    box-sizing: border-box;
     display: flex;
     background-color: #fff;
 `;

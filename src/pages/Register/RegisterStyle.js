@@ -182,8 +182,8 @@ export const SelectGrp = styled.div`
         transition: all .2s ease-out;
 
         @media screen and (max-width: 1160px) {
-        width: 6rem;
-        height: 6rem;
+            width: 6rem;
+            height: 6rem;
         }
 
         @media screen and (max-width: 400px) {
