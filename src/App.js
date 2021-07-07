@@ -18,6 +18,7 @@ import HDIndividual from './pages/HDIndividual/HDIndividual';
 import RegIndivHD from './pages/RegIndivHD/RegIndivHD';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import UpdateHD from './pages/Profile/updateHD/UpdateHD';
+import UpdateEstab from './pages/Profile/UpdateEstab/UpdateEstab';
 
 function App() {
 
@@ -32,10 +33,11 @@ function App() {
               <PrivateRoute path="/notification" component={Notification}/>
               <PrivateRoute path="/update-profile" component={EditDetails}/>
               <PrivateRoute path="/update-health" component={UpdateHD} />
+              <PrivateRoute path="/update-establishment" component={UpdateEstab} />
               <Route path="/register-hd-individual" component={RegIndivHD} />
               <Route path="/register" component={Register} />
               <Route path="/register-individual" component={RegIndividual} />
-              <Route path="/register/establishment" component={RegEstab}/>
+              <Route path="/register-establishment" component={RegEstab}/>
               <Route path="/login" component={Login}/>
               <Route path="/forgot-password" component={ForgotPassword} />
               </AuthProvider>       

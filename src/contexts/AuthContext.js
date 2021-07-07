@@ -59,21 +59,6 @@ export function AuthProvider({ children }) {
                             housestreet,
                             type,
                             createdAt: new Date(),
-                            // healthDeclaration: {
-                            //     question1a: "",
-                            //     question1b: "",
-                            //     question1c: "",
-                            //     question1d: "",
-                            //     question1e: "",
-                            //     question1f: "",
-                            //     question1g: "",
-                            //     question2: "",
-                            //     question3: "",
-                            //     question4: "",
-                            //     question5: "",
-                            //     question6: "",
-                            //     question7: "",
-                            // },
                             bdate: "",
                             pobirth: "",
                             nationality: "",
@@ -81,6 +66,60 @@ export function AuthProvider({ children }) {
                             mothermaiden: "",
                             empstatus: "",
                             employer: ""
+                        })
+                    }catch(err){
+                        console.error('Error in creating user', err)
+                    }
+                }
+            }
+            createUserDocument(data.user)
+        })
+    }
+
+    function signupEstab(
+        email, 
+        password, 
+        estabname, 
+        desc, 
+        contact,
+        reg,
+        prov,
+        ct,
+        brgy,
+        hstreet,
+        typ) {
+        auth.createUserWithEmailAndPassword(email, password)
+        .then(data => {
+            const createUserDocument = async (user) => {
+                if (!user) return
+                const userRef = firestore.doc(`users/${data.user.uid}`)
+            
+                const snapshot = await userRef.get();
+                if(!snapshot.exists) {
+                    const {email} = data.user;
+                    const estabName = estabname;
+                    const description = desc;
+                    const contactno = contact;
+                    const region = reg;
+                    const province = prov;
+                    const city = ct;
+                    const bgy = brgy;
+                    const housestreet = hstreet;
+                    const type = typ;
+            
+                    try {
+                        userRef.set({
+                            email,
+                            estabName, 
+                            description,  
+                            contactno,
+                            region,
+                            province,
+                            city,
+                            bgy,
+                            housestreet,
+                            type,
+                            createdAt: new Date(),
                         })
                     }catch(err){
                         console.error('Error in creating user', err)
@@ -141,6 +180,7 @@ export function AuthProvider({ children }) {
         currentUser,
         login,
         signup,
+        signupEstab,
         logout,
         resetPassword,
         updateEmail,

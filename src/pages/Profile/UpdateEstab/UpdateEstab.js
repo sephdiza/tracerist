@@ -9,9 +9,9 @@ import { firestore } from '../../../firebase';
 
 import Nav from '../../../components/Nav'
 import { Button } from '../../../components/Button'
-import { EditDetailsWrapper, Form, EditInput, Label, BtnWrap, Error, StyledSelect} from './EditDetailsStyle'
+import { EditDetailsWrapper, Form, EditInput, Label, BtnWrap, Error, StyledSelect} from '../EditDetails/EditDetailsStyle'
 
-function EditDetails() {
+function UpdateEstab() {
     const [regionApi, setRegionApi] = useState("")
     const [provinceApi, setProvinceApi] = useState("")
     const [cityApi, setCityApi] = useState("")
@@ -48,49 +48,31 @@ function EditDetails() {
     const formik = useFormik({
         initialValues: {
             email: currentUser.email,
-            password: "",
-            confirmpassword: "",
-            firstname: userData.firstName,
-            middlename: userData.middleName, 
-            lastname:  userData.lastName, 
+            password: '',
+            confirmpassword: '', 
+            estabName: userData.estabName,
+            description: userData.description,  
             contactno: userData.contactno,
-            housestreet: userData.housestreet,
             region: userData.region,
             province: userData.province,
             city: userData.city,
-            bgy:userData.bgy,              
-            bdate: userData.bdate,
-            pobirth: userData.pobirth,
-            nationality: userData.nationality,
-            civilstatus: userData.civilstatus,
-            mothermaiden: userData.mothermaiden,
-            empstatus: userData.empstatus,
-            employer: userData.employer,
-            gender: userData.gender,
+            bgy: userData.bgy,
+            housestreet: userData.housestreet
         },
         validationSchema: Yup.object().shape({
             email: Yup.string().email('*Invalid email address').required('*Required'),
             password: Yup.string()
-            .min(6, '*Must be 6 characters or more')
-            .oneOf([Yup.ref('confirmpassword'), null], "*Password doesn't match"),
+            .min(6, '*Must be 6 characters or more'),
             confirmpassword: Yup.string()
             .oneOf([Yup.ref('password'), null], "*Password doesn't match"),
-            firstname: Yup.string()
-            .max(15, '*Must be 15 characters or less')
-            .required('*Required')
-            .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            middlename: Yup.string()
-            .max(15, '*Must be 15 characters or less')
-            .required('*Required')
-            .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
-            lastname: Yup.string()
-            .max(20, '*Must be 20 characters or less')
-            .required('Required')
-            .matches(/^[aA-zZ\s]+$/, '*Invalid format'),
+            estabName: Yup.string()
+            .required('*Required'),
+            description: Yup.string()
+            .required('*Required'),
             contactno: Yup.string()
             .min(11, "Must be 11 characters")
             .max(11, "Must be 11 characters")
-            .required('*Required'),            
+            .required('*Required'),
             region: Yup.string()
                 .required('*Required'),
             province: Yup.string()
@@ -100,7 +82,7 @@ function EditDetails() {
             bgy: Yup.string()
                 .required('*Required'),
             housestreet: Yup.string()
-                .required('*Required') 
+                .required('*Required')
         }),
         onSubmit: values => { 
             const promises = []
@@ -115,25 +97,16 @@ function EditDetails() {
                     console.log('No such document!');
                 } else {
                     try{
-                        userRef.set({
+                        userRef.set({ 
                             email: values.email,
-                            firstName: values.firstname,
-                            middleName: values.middlename, 
-                            lastName: values.lastname,  
+                            estabName: values.estabName,
+                            description: values.description,  
                             contactno: values.contactno,
                             region: values.region,
                             province: values.province,
                             city: values.city,
                             bgy: values.bgy,
-                            housestreet: values.housestreet,
-                            gender: values.gender,
-                            bdate: values.bdate,
-                            pobirth: values.pobirth,
-                            nationality: values.nationality,
-                            civilstatus: values.civilstatus,
-                            mothermaiden: values.mothermaiden,
-                            empstatus: values.empstatus,
-                            employer: values.employer,
+                            housestreet: values.housestreet
                         }, {merge: true})
                     } catch(e) {
                         console.log("Error on updating:", e)
@@ -202,35 +175,26 @@ function EditDetails() {
                          <Error>{formik.errors.confirmpassword}</Error>
                      ) : null}
  
-                     <Label htmlFor="firstname">First Name</Label>
+                     <Label htmlFor="estabName">
+                         Establishment Name</Label>
                      <EditInput
-                         id="firstname"
+                         id="estabName"
                          type="text"
-                         {...formik.getFieldProps('firstname')}
+                         {...formik.getFieldProps('estabName')}
                      />
-                     {formik.touched.firstname && formik.errors.firstname ? (
-                         <Error>{formik.errors.firstname}</Error>
+                     {formik.touched.estabName && formik.errors.estabName ? (
+                         <Error>{formik.errors.estabName}</Error>
                      ) : null}
  
-                     <Label htmlFor="middlename">Middle Name</Label>
+                     <Label htmlFor="description">Description</Label>
                      <EditInput
-                         id="middlename"
+                         id="description"
                          type="text"
-                         {...formik.getFieldProps('middlename')}
+                         {...formik.getFieldProps('description')}
                      />
-                     {formik.touched.middlename && formik.errors.middlename ? (
-                         <Error>{formik.errors.middlename}</Error>
+                     {formik.touched.description && formik.errors.description ? (
+                         <Error>{formik.errors.description}</Error>
                      ) : null}
- 
-                     <Label htmlFor="lastname">Last Name</Label>
-                     <EditInput
-                         id="lastname"
-                         type="text"
-                         {...formik.getFieldProps('lastname')}
-                     />
-                     {formik.touched.lastname && formik.errors.lastname ? (
-                         <Error>{formik.errors.lastname}</Error>
-                     ) : null}  
  
                      <Label htmlFor="email">Contact No.</Label>
                      <EditInput
@@ -312,76 +276,6 @@ function EditDetails() {
                      {formik.touched.housestreet && formik.errors.housestreet ? (
                          <Error>{formik.errors.housestreet}</Error>
                      ) : null}
- 
- 
-                     {/* ----------OTHER DETAILS---------- */}
-                     <h3 style={{marginTop: '3rem'}}>Other Details</h3>
-                     
-                     <Label htmlFor="gender">Gender</Label>
-                     <StyledSelect 
-                         label="gender" 
-                         name="gender"
-                         onChange={formik.handleChange}
-                         onBlur={formik.handleBlur}
-                         {...formik.getFieldProps("gender")}>
-                             <option>--Select Gender--</option>
-                             <option value="Male">Male</option>
-                             <option value="Female">Female</option>
-                     </StyledSelect>
-                     {/* {formik.touched.region && formik.errors.region ? (
-                         <Error>{formik.errors.region}</Error>
-                     ) : null} */}
-
-                     <Label htmlFor="bdate">Birth Date (MM/DD/YYYY)</Label>
-                     <EditInput
-                         id="bdate"
-                         type="date"
-                         {...formik.getFieldProps('bdate')}
-                     />
- 
-                     <Label htmlFor="pobirth">Place of Birth</Label>
-                     <EditInput
-                         id="pobirth"
-                         type="text"
-                         {...formik.getFieldProps('pobirth')}
-                     />
- 
-                     <Label htmlFor="nationality">Nationality</Label>
-                     <EditInput
-                         id="nationality"
-                         type="text"
-                         {...formik.getFieldProps('nationality')}
-                     />
- 
-                     <Label htmlFor="civilstatus">Civil Status</Label>
-                     <EditInput
-                         id="civilstatus"
-                         type="text"
-                         {...formik.getFieldProps('civilstatus')}
-                     />
- 
-                     <Label htmlFor="mothermaiden">Mother's Maiden Name</Label>
-                     <EditInput
-                         id="mothermaiden"
-                         type="text"
-                         {...formik.getFieldProps('mothermaiden')}
-                     /> 
- 
-                     <Label htmlFor="empstatus">Employment Status</Label>
-                     <EditInput
-                         id="empstatus"
-                         type="text"
-                         {...formik.getFieldProps('empstatus')}
-                     />
- 
-                     <Label htmlFor="employer">Company Name</Label>
-                     <EditInput
-                         id="employer"
-                         type="text"
-                         {...formik.getFieldProps('employer')}
-                     />                    
-
-                    {!formik.isValid ? <h3 style={{color:"red"}}>Looks like you have an error on some of the input fields.</h3> : null}
 
                      <BtnWrap>
                          <Button primary type="submit" disabled={formik.isValid === false || loading}>Update</Button> 
@@ -395,4 +289,4 @@ function EditDetails() {
     )
 }
 
-export default EditDetails
+export default UpdateEstab
