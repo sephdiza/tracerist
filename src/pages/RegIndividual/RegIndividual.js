@@ -63,7 +63,6 @@ const RegIndividual = () => {
             middleName: '', 
             lastName: '',  
             contactno: '',
-            acceptedTerms: false,
             region: '',
             province: '',
             city: '',
@@ -94,9 +93,6 @@ const RegIndividual = () => {
             .min(11, "Must be 11 characters")
             .max(11, "Must be 11 characters")
             .required('*Required'),
-            acceptedTerms: Yup.boolean()
-                .required('*Required')
-                .oneOf([true], '*You must accept the terms and conditions.'),
             region: Yup.string()
                 .required('*Required'),
             province: Yup.string()
@@ -297,14 +293,6 @@ const RegIndividual = () => {
                             <Error>{formik.errors.housestreet}</Error>
                         ) : null}
                 
-                        <CheckboxLabel name="acceptedTerms">
-                            <input type="checkbox" {...formik.getFieldProps('acceptedTerms')}/> 
-                            <p style={{display: 'inline-block'}}>I accept the terms and agreement.</p>
-                        </CheckboxLabel>
-                        {formik.touched.acceptedTerms && formik.errors.acceptedTerms ? (
-                            <Error>{formik.errors.acceptedTerms}</Error>
-                        ) : null}
-
                         <BtnWrap>
                             <Button primary type="submit" disabled={loading}>Submit</Button> 
                         </BtnWrap>

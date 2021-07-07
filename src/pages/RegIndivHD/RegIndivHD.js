@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import { firestore } from '../../firebase';
 
-import { Formik, Field } from 'formik';
+import { Formik, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom'
 
 
 import { Title, BtnWrap } from '../RegIndividual/RegIndividualStyle';
-import { StyledForm, RadioLabel, RadioWrapper, QuestionWrapper, Question, SubQuestion } from './RegIndivHDStyles'
+import { StyledForm, RadioLabel, RadioWrapper, QuestionWrapper, Question, SubQuestion, CheckboxLabel, Error } from './RegIndivHDStyles'
 import { Button } from '../../components/Button'
 import HalfBg from '../../components/HalfBg'
 import { MainWrapper, RightWrapper } from '../../components/HalfBgStyle'
@@ -38,7 +39,15 @@ const RegIndivHD = () => {
                             question5: "false",
                             question6: "false",
                             question7: "false",
+                            acceptedTerms: false,
                         }}
+                        validationSchema={
+                            Yup.object().shape({
+                                acceptedTerms: Yup.boolean()
+                                .required('*Required')
+                                .oneOf([true], '*You must accept the terms and conditions.'),
+                            })
+                        }
                           onSubmit={(values, { setSubmitting }) => {
                             
                             const healthDeclare = async(user) => {
@@ -311,6 +320,13 @@ const RegIndivHD = () => {
                                         </RadioLabel>
                                     </RadioWrapper>
                                 </QuestionWrapper>
+
+                                <CheckboxLabel>
+                                    <Field type="checkbox" name="acceptedTerms" />
+                                    <p>I hereby authorize Tracerist to collect and process the data indicated in survey for the purpose of effecting control of the Covid-19 infection. I understand that my personal information is protected by RA 10173, Data Privacy Act of 2012, that I am required by RA 11469, Bayanihan to Heal As One Act, to provide truthful information and that this health declaration is in accordance with memoranda issued by various government institutions, including the Joint Memorandum Circular No. 20-04-A Series 2020 by the Department of Trade and Industry (DTI) and the Department of Labor and Employment (DOLE), Memorandum Circular No. 2020-004 by the Department of Tourism (DoT), and Memorandum Circular No. 2020-077 by the Department of Interior and Local Government (DILG).</p>
+                                </CheckboxLabel>
+                                <Error><ErrorMessage name="acceptedTerms"/></Error>
+                                
                          
                                 <BtnWrap>
                                     <Button primary type="submit">Submit</Button> 
