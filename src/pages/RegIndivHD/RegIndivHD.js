@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import { firestore } from '../../firebase';
 
@@ -331,9 +331,7 @@ const RegIndivHD = () => {
                                 <BtnWrap>
                                     <Button primary type="submit">Submit</Button> 
                                 </BtnWrap>
-                            </StyledForm>
-                        
-                        
+                            </StyledForm>  
                     </Formik>    
                 </RightWrapper>
             </MainWrapper> 
