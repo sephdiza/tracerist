@@ -88,5 +88,10 @@ export const RadioLabel = styled.label`
     
     p {
         margin-left: 1rem;
+
+        
+        @media screen and (max-width: 700px) {
+        font-size: 1.6rem;
+        }
     }
 `;

@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
+import { firestore } from '../../firebase';
 
 import { Formik, Field } from 'formik';
 import { useHistory } from 'react-router-dom'
+
 
 import { Title, BtnWrap } from '../RegIndividual/RegIndividualStyle';
 import { StyledForm, RadioLabel, RadioWrapper, QuestionWrapper, Question, SubQuestion } from './RegIndivHDStyles'
@@ -13,6 +15,8 @@ import { ImUser } from 'react-icons/im'
 
 
 const RegIndivHD = () => {
+    const { currentUser } = useAuth()
+    const history = useHistory()
 
     return (
         <>
@@ -36,10 +40,45 @@ const RegIndivHD = () => {
                             question7: "false",
                         }}
                           onSubmit={(values, { setSubmitting }) => {
-                            setTimeout(() => {
-                              alert(JSON.stringify(values, null, 2));
-                              setSubmitting(false);
-                            }, 400);
+                            
+                            const healthDeclare = async(user) => {
+                                const userRef = firestore
+                                    .collection(`users`)
+                                    .doc(user.uid)
+                                const doc = await userRef.get()
+                                if (!doc.exists) {
+                                    console.log('No such document!');
+                                } else {
+                                    try{
+                                        userRef.set({
+                                            healthDeclaration: {
+                                                question1a: values.question1a,
+                                                question1b: values.question1b,
+                                                question1c: values.question1c,
+                                                question1d: values.question1d,
+                                                question1e: values.question1e,
+                                                question1f: values.question1f,
+                                                question1g: values.question1g,
+                                                question2: values.question2,
+                                                question3: values.question3,
+                                                question4: values.question4,
+                                                question5: values.question5,
+                                                question6: values.question6,
+                                                question7: values.question7,
+                                            }
+                                        }, {merge: true})
+                                    } catch(e) {
+                                        console.log("Error on updating:", e)
+                                    }
+                                    
+                                }
+                            }
+
+                            healthDeclare(currentUser)
+                            setSubmitting(false)
+                            alert("You're all set! You can now login 🚀")
+                            history.push("/login")
+                            
                           }}>
                         
                         
@@ -232,6 +271,24 @@ const RegIndivHD = () => {
                                         </RadioLabel>
                                         <RadioLabel>
                                         <Field type="radio" name="question5" value="false"  />
+                                        <p>No</p>
+                                        </RadioLabel>
+                                    </RadioWrapper>
+                                </QuestionWrapper>
+                                
+                                <QuestionWrapper>
+                                    <Question>
+                                        6. I am person with Disability (PWD)
+                                    </Question>
+                                    <RadioWrapper 
+                                        role="group" aria-labelledby="question6"
+                                    >
+                                        <RadioLabel >
+                                        <Field type="radio" name="question6" value="true" />
+                                        <p>Yes</p>
+                                        </RadioLabel>
+                                        <RadioLabel>
+                                        <Field type="radio" name="question6" value="false"  />
                                         <p>No</p>
                                         </RadioLabel>
                                     </RadioWrapper>

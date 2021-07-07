@@ -128,8 +128,7 @@ const RegIndividual = () => {
                 alert('Failed to signup')
             }
             setLoading(false)
-            alert("Successfuly Registered! You can now login 😁")
-            history.push('login')                             
+            history.push('register-hd-individual')                             
         }
     })
 

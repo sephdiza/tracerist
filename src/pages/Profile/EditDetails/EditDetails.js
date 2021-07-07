@@ -133,7 +133,7 @@ function EditDetails() {
                             mothermaiden: values.mothermaiden,
                             empstatus: values.empstatus,
                             employer: values.employer,
-                        })
+                        }, {merge: true})
                     } catch(e) {
                         console.log("Error on updating:", e)
                     }

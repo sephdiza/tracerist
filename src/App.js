@@ -30,7 +30,7 @@ function App() {
               <Route path="/qrscan" component={QrScanner}/>
               <PrivateRoute path="/notification" component={Notification}/>
               <PrivateRoute path="/update-profile" component={EditDetails}/>
-              <PrivateRoute path="/register-hd-individual" component={RegIndivHD} />
+              <Route path="/register-hd-individual" component={RegIndivHD} />
               <Route path="/register" component={Register} />
               <Route path="/register-individual" component={RegIndividual} />
               <Route path="/register/establishment" component={RegEstab}/>
