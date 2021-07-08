@@ -10,14 +10,17 @@ import Nav from '../../components/Nav';
 
 
 function QrScanner() {
-    const [delay, setDelay] = useState(500);
+    const [delay, setDelay] = useState(3000);
     const [result, setResult] = useState('Hi! Please scan here 💁🏻‍♂️');
     const res = useRef()
+    const { userData } = useAuth()
     
     const scanVisitor = (user, id) => {
       firestore.collection("visitors").doc(id).set({
+        estabUid: userData.uid,
         name: user.name,
         email: user.email,
+        contactno: user.contact,
         healthDeclaration: user.healthDeclaration,
         visitDate: new Date().toLocaleDateString(),
         visitTime: new Date().toLocaleTimeString()

@@ -35,6 +35,7 @@ export function AuthProvider({ children }) {
                 const snapshot = await userRef.get();
                 if(!snapshot.exists) {
                     const {email} = data.user;
+                    const {uid} = data.user;
                     const firstName = fname;
                     const middleName = mname;
                     const lastName = lname;
@@ -48,6 +49,7 @@ export function AuthProvider({ children }) {
             
                     try {
                         userRef.set({
+                            uid,
                             firstName,
                             email,
                             middleName, 
@@ -97,6 +99,7 @@ export function AuthProvider({ children }) {
             
                 const snapshot = await userRef.get();
                 if(!snapshot.exists) {
+                    const {uid} = data.user;
                     const {email} = data.user;
                     const estabName = estabname;
                     const description = desc;
@@ -110,6 +113,7 @@ export function AuthProvider({ children }) {
             
                     try {
                         userRef.set({
+                            uid,
                             email,
                             estabName, 
                             description,  
@@ -162,11 +166,12 @@ export function AuthProvider({ children }) {
     }
 
     
-    const fetchVisitors = async() => {
+    const fetchVisitors = async(user) => {
         let newArr = []
       firestore
-          .collection("visitors")
-          .get().then((querySnapshot) => {
+          .collection("visitors").where("estabUid", "==", user.uid)
+          .get()
+          .then((querySnapshot) => {
             querySnapshot.forEach(doc => {
               newArr.push(doc.data())
             })
@@ -180,17 +185,13 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
                 setCurrentUser(user)
-                setLoading(false)
-                user && fetchUser(user)
-                
+                currentUser && fetchUser(currentUser)
+                setLoading(false)     
         })
-        
         return () => {
             unsubscribe()
         }
     }, [currentUser])
-
-    
 
     const value = {
         currentUser,
