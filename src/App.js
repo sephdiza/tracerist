@@ -19,6 +19,7 @@ import RegIndivHD from './pages/RegIndivHD/RegIndivHD';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import UpdateHD from './pages/Profile/updateHD/UpdateHD';
 import UpdateEstab from './pages/Profile/UpdateEstab/UpdateEstab';
+import Visitors from './pages/Visitors/Visitors';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
               <PrivateRoute path="/update-profile" component={EditDetails}/>
               <PrivateRoute path="/update-health" component={UpdateHD} />
               <PrivateRoute path="/update-establishment" component={UpdateEstab} />
+              <PrivateRoute path="/visitors" component={Visitors} />
               <Route path="/register-hd-individual" component={RegIndivHD} />
               <Route path="/register" component={Register} />
               <Route path="/register-individual" component={RegIndividual} />

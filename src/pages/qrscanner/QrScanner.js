@@ -1,7 +1,8 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 
 import { firestore } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
+import { uid } from 'uid'
 
 import QrReader from 'react-qr-scanner';
 import {Wrapper,Title,QrContainer, qrCodeStyle, ResultContainer,Result} from './QrScannerStyles'
@@ -9,43 +10,23 @@ import Nav from '../../components/Nav';
 
 
 function QrScanner() {
-    const [delay, setDelay] = useState(5000);
+    const [delay, setDelay] = useState(500);
     const [result, setResult] = useState('Hi! Please scan here 💁🏻‍♂️');
-    const { userData } = useAuth()
     const res = useRef()
-
-    let userObj = {}
-
-    // const scannedUser = async(user) => {
-    //   const userRef = firestore
-    //       .collection(`users`)
-    //       .doc(user.uid)
-    //   const doc = await userRef.get()
-    //   if (!doc.exists) {
-    //       console.log('No such document!');
-    //   } else {
-    //     console.log(user)
-    //   }
-    // }
-
-    // if(!userData){
-
-    // } else {
-    //   scannedUser(userData)
-    // }
-
     
-    
+    const scanVisitor = (user, id) => {
+      firestore.collection("visitors").doc(id).set({
+        name: user.name,
+        email: user.email,
+        healthDeclaration: user.healthDeclaration,
+        visitDate: new Date().toLocaleDateString(),
+        visitTime: new Date().toLocaleTimeString()
+      })
+    }
 
     const handleScan = (data) => {
-      
         if(data){
-          let date = new Date()
-          const [month, day, year]       = [date.getMonth(), date.getDate(), date.getFullYear()];
-          const [hour, minutes,] = [date.getHours(), date.getMinutes()];
-          let dateNow = `${month+1}-${day}-${year}, ${hour}:${minutes}`
-
-          userObj = JSON.parse(data.text)
+          const userObj = JSON.parse(data.text)
           
           // filter health declaration with values === true
           const filterTruthy = Object.fromEntries(
@@ -61,10 +42,8 @@ function QrScanner() {
             res.current.style.backgroundColor = "green";
             res.current.children[0].style.color = "#fff"
             setResult(`Hello ${userObj.name}! Thanks for scanning 😊`)
+            scanVisitor(userObj, uid())
           }
-          
-          
-          // console.log(userObj)
         }     
     }
 
@@ -74,7 +53,7 @@ function QrScanner() {
           setResult('Hi! Please scan here 💁🏻‍♂️')
           res.current.children[0].style.color = "var(--text-primary)"
           res.current.style.backgroundColor = "#ccc";
-        }, 5000)
+        }, 3000)
     }
 
     const handleErr = (err) => {
@@ -87,17 +66,16 @@ function QrScanner() {
           <Title>Scan QR</Title>
           <Wrapper>
             <QrContainer>
-              <QrReader 
+                <QrReader 
                 delay = {delay}
                 style = {qrCodeStyle}
                 onError = {handleErr}
                 onScan = {handleScan}            
-              />    
+              />  
             </QrContainer>
             <ResultContainer ref={res}>
               <Result>{result}</Result>
-            </ResultContainer> 
-            
+            </ResultContainer>
           </Wrapper>
       </>
     )

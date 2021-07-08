@@ -10,6 +10,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [userData, setUserData] = useState()
+    const [visitors, setVisitors] = useState([])
     const [loading, setLoading] = useState(true)
 
     function signup(
@@ -160,6 +161,20 @@ export function AuthProvider({ children }) {
             setLoading(false)
     }
 
+    
+    const fetchVisitors = async() => {
+        let newArr = []
+      firestore
+          .collection("visitors")
+          .get().then((querySnapshot) => {
+            querySnapshot.forEach(doc => {
+              newArr.push(doc.data())
+            })
+            setVisitors(newArr)
+          })
+    }
+    
+
 
 
     useEffect(() => {
@@ -167,6 +182,7 @@ export function AuthProvider({ children }) {
                 setCurrentUser(user)
                 setLoading(false)
                 user && fetchUser(user)
+                
         })
         
         return () => {
@@ -186,7 +202,9 @@ export function AuthProvider({ children }) {
         updateEmail,
         updatePassword,
         fetchUser,
-        userData
+        userData,
+        fetchVisitors,
+        visitors
     }
     
     return (

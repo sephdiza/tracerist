@@ -24,7 +24,7 @@ function Nav() {
         transform: 'translateY(-100%)'})
     const [hamBtnFirst, setHamBtnFirst] = useState('')
     const [hamBtnSecond, setHamBtnSecond] = useState('')
-    const { logout } = useAuth()
+    const { logout, userData } = useAuth()
     
     const handleDisplay = () => {
         setShow(showSideBar)
@@ -71,7 +71,10 @@ function Nav() {
                     <StyledLink to="/profile">Profile</StyledLink>
                 </NavLink>
                 <NavLink>
-                    <StyledLink to="/qrscan">Travel History</StyledLink>
+                    { userData && userData.type === "Establishment" ? 
+                    <StyledLink to="/visitors">Visitors</StyledLink> :
+                    <StyledLink to="/travel-history">Travel History</StyledLink>
+                    }  
                 </NavLink>
                 <NavLink>
                     <StyledLink to="/notification">Notification</StyledLink>
@@ -90,7 +93,10 @@ function Nav() {
                     <StyledLink to="/profile">Profile</StyledLink>
                 </NavLink>
                 <NavLink onClick={handleCloseSideBar}>
-                    <StyledLink to="/qrscan">Travel History</StyledLink>
+                    { userData && userData.type === "Establishment" ? 
+                    <StyledLink to="/visitors">Visitors</StyledLink> :
+                    <StyledLink to="/travel-history">Travel History</StyledLink>
+                    }
                 </NavLink>
                 <NavLink onClick={handleCloseSideBar}>
                     <StyledLink to="/notification">Notification</StyledLink>
