@@ -24,7 +24,6 @@ export const Wrapper = styled.main`
 export const QrContainer = styled.div`
   width: 30rem;
   height: 30rem;
-  background-color: aliceblue;
   margin-top: 2rem;
   border-radius: 3rem;
   /* overflow: hidden; */
@@ -39,10 +38,14 @@ export const qrCodeStyle = {
 }
 
 export const Result = styled.p`
-  text-align: center;
-  font-size: 1.6rem;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.3);
-  width: 20em;
-  height: 5em;
+  font-size: 1.8rem;
+  color: var(--text-primary);
+`;
+
+export const ResultContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #ccc;
 `;

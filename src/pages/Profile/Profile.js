@@ -102,7 +102,22 @@ function Profile() {
                         <QrCodeImg value={JSON.stringify({
                                 name: `${userData.firstName} ${userData.lastName}`,
                                 email: userData.email,
-                                contact: userData.contactno
+                                contact: userData.contactno,
+                                healthDeclaration:  {   
+                                    q1a: userData.healthDeclaration.question1a,
+                                    q1b: userData.healthDeclaration.question1b,
+                                    q1c: userData.healthDeclaration.question1c,
+                                    q1d: userData.healthDeclaration.question1d,
+                                    q1e: userData.healthDeclaration.question1e,
+                                    q1f: userData.healthDeclaration.question1f,
+                                    q1g: userData.healthDeclaration.question1g,
+                                    q2: userData.healthDeclaration.question2,
+                                    q3: userData.healthDeclaration.question3,
+                                    q4: userData.healthDeclaration.question4,
+                                    q5: userData.healthDeclaration.question5,
+                                    q6: userData.healthDeclaration.question6,
+                                    q7: userData.healthDeclaration.question7,
+                                }
                         })}/>   
                     </LeftContainer>
                 </ProfileWrapper>
