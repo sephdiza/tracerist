@@ -5,15 +5,16 @@ import { useAuth } from '../../contexts/AuthContext';
 import { uid } from 'uid'
 
 import QrReader from 'react-qr-scanner';
-import {Wrapper,Title,QrContainer, qrCodeStyle, ResultContainer,Result} from './QrScannerStyles'
+import {Wrapper,Title,QrContainer, qrCodeStyle, ResultContainer,Result, Subtitle} from './QrScannerStyles'
 import Nav from '../../components/Nav';
 
 
 function QrScanner() {
-    const [delay, setDelay] = useState(3000);
-    const [result, setResult] = useState('Hi! Please scan here 💁🏻‍♂️');
+    const [delay, setDelay] = useState(500);
+    const [result, setResult] = useState(null);
+    const [loading, setLoading] = useState(false)
     const res = useRef()
-    const { userData } = useAuth()
+    const { userData, pushVisited } = useAuth()
     
     const scanVisitor = (user, id) => {
       firestore.collection("visitors").doc(id).set({
@@ -28,7 +29,7 @@ function QrScanner() {
     }
 
     const handleScan = (data) => {
-        if(data){
+        if(!loading && data){
           const userObj = JSON.parse(data.text)
           
           // filter health declaration with values === true
@@ -41,23 +42,25 @@ function QrScanner() {
             setResult("Oops looks like you have a symptom base on your health declaration 😷")
             res.current.style.backgroundColor = "red";
             res.current.children[0].style.color = "#fff"
+            setLoading(true)
           } else {
             res.current.style.backgroundColor = "green";
             res.current.children[0].style.color = "#fff"
             setResult(`Hello ${userObj.name}! Thanks for scanning 😊`)
-            scanVisitor(userObj, uid())
-          }
-        }     
-    }
+            console.log("scanned")
+            setLoading(true)
 
-    if(result !== 'Hi! Please scan here 💁🏻‍♂️') {
-        console.log('scanned!')
-        setTimeout(() => {
-          setResult('Hi! Please scan here 💁🏻‍♂️')
-          res.current.children[0].style.color = "var(--text-primary)"
-          res.current.style.backgroundColor = "#ccc";
-        }, 3000)
-    }
+            // reset scanner
+            scanVisitor(userObj, uid())
+            pushVisited(userObj, userData)
+            setTimeout(() => {
+              setResult(null)
+              res.current.style.backgroundColor = "transparent";
+              setLoading(false)
+            }, 2500)
+          }
+        }
+      }
 
     const handleErr = (err) => {
       console.error(err)
@@ -68,13 +71,18 @@ function QrScanner() {
         <Nav />
           <Title>Scan QR</Title>
           <Wrapper>
+            <Subtitle>
+              {loading ? <p>Please wait</p> : <p>Scan here <span>👇</span></p>}
+            </Subtitle>
             <QrContainer>
+              {loading ? <h2>loading...</h2> : (
                 <QrReader 
                 delay = {delay}
                 style = {qrCodeStyle}
                 onError = {handleErr}
-                onScan = {handleScan}            
-              />  
+                onScan = {handleScan}           
+                /> 
+              )}  
             </QrContainer>
             <ResultContainer ref={res}>
               <Result>{result}</Result>

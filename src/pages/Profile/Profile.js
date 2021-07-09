@@ -101,6 +101,7 @@ function Profile() {
                     <LeftContainer>
                         <QrCodeImg value={JSON.stringify({
                                 name: `${userData.firstName} ${userData.lastName}`,
+                                uid: userData.uid,
                                 email: userData.email,
                                 contact: userData.contactno,
                                 healthDeclaration:  {   

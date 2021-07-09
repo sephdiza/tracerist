@@ -165,23 +165,36 @@ export function AuthProvider({ children }) {
             setLoading(false)
     }
 
-    
     const fetchVisitors = async(user) => {
         let newArr = []
       firestore
           .collection("visitors").where("estabUid", "==", user.uid)
-          .get()
-          .then((querySnapshot) => {
+          .get().then((querySnapshot) => {
             querySnapshot.forEach(doc => {
               newArr.push(doc.data())
             })
             setVisitors(newArr)
           })
     }
-    
 
-
-
+    const pushVisited = (user, estab) => {
+        firestore
+            .collection("users")
+            .doc(user.uid)
+            .set({
+                visited: {
+                    estabname: estab.estabName,
+                    region: estab.region,
+                    province: estab.province,
+                    city: estab.city,
+                    bgy: estab.bgy,
+                    housestreet: estab.housestreet,
+                    contactno: estab.contactno 
+                }
+            }, {merge: true})
+            .catch("Error in inserting user's visited")
+    }
+ 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
                 setCurrentUser(user)
@@ -205,7 +218,8 @@ export function AuthProvider({ children }) {
         fetchUser,
         userData,
         fetchVisitors,
-        visitors
+        visitors,
+        pushVisited
     }
     
     return (
