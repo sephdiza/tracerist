@@ -1,50 +1,44 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
+import { ReactComponent as Banner } from "../../assets/images/landing-banner.svg"
+import { Home, Left, Subtitle, Heading, Subheading, BtnGrp } from './LandingStyles'
+import {Button, RegisterBtn} from '../../components/Button'
+
 
 function Landing() {
     return (
         <>
-            <section id="home">
-                <div class="left">
-            
-                    <image src="media/home-banner.png" class="logo-img"></image>
-                    <p class="tagline">Unified Contact Tracing App</p>
+            <Home>
+                <Left>
+                    <Banner />
+                    <Subtitle>Unified Contact Tracing App</Subtitle>
 
-                    <h2>Welcome.</h2>
-                    <p class="after-welcome">Join the community in ending the spread of covid-19 in three simple steps:</p>
+                    <Heading>Welcome! <span>✋</span></Heading>
+                    <Subheading>Join the community in ending the spread of covid-19 in three simple steps:</Subheading>
+
                     <ul>
-                        <li>Create an account</li>
-                        <li>Generate your QR code</li>
-                        <li>Update your location wherever you go</li>
+                        <li><span>📝</span> Create an account</li>
+                        <li><span>📱</span> Generate your QR code</li>
+                        <li><span>📌</span>Update your location wherever you go</li>
                     </ul>
 
-                    <div class="button-frame">
-                        <div class="buttons margin-right-space">
-                            <label>Request to join</label>
-                            <a href="#" target="_blank">
-                                <button class="register">Register</button>
-                            </a>
-                        </div>
+                    <BtnGrp>
+                        <Link to="/register">
+                            <RegisterBtn primary style={{fontSize: "1.8rem"}}>
+                                Join now  
+                            </RegisterBtn>
+                        </Link>
+                        <Link to="/register">
+                            <Button>
+                              Login
+                            </Button>
+                        </Link>
+                    </BtnGrp>
+                </Left>
+            </Home>
 
-
-                        <div class="buttons vertical-line ">
-                        </div>
-
-                        <div class="buttons margin-left-space">
-                            <label>Already have an account?</label>
-                            <a href="#" target="_blank">
-                                <button class="login">Login</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="right">
-                    <image src="media/hand-img.png" class="hand-img" ></image>
-                </div>
-
-            </section>
-
-            <section id="why">
+            {/* <section id="why">
                 <h2>Why Tracerist?</h2>
                 <p class="tag-2">For individuals and establishments</p>
 
@@ -71,11 +65,11 @@ function Landing() {
                 </div>
 
                 <p class="tag-2 margin">Help Us Fight covid-19. <a href="#" class="register-now">Register Now!</a></p>
-            </section>
+            </section> */}
 
-            <footer>
+            {/* <footer>
                 <p>&copy 2021 Tracerist All Rights Reserved.</p>
-            </footer>
+            </footer> */}
         </>
     )
 }

@@ -31,7 +31,7 @@ export const Button = styled.button`
 
 export const RegisterBtn = styled.button`
     height: 4rem;
-    width: 22rem;
+    width: 20rem;
     border: none;
     font-family: Inter;
     font-size: 1.4rem;
