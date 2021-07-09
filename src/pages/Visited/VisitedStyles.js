@@ -46,7 +46,7 @@ export const VisitedTable = styled.table`
         td {
             font-size: 1.6rem;
             width: 100%;
-            text-align: center;  
+            text-align: center;
         }
 
         @media screen and (max-width: 760px) {
@@ -58,9 +58,9 @@ export const VisitedTable = styled.table`
             padding-bottom: 1rem;       
 
             td {
-                width: 80%;
+                width: 90%;
                 position: relative;
-                padding-left: 20%;
+                padding-left: 30%;
                 text-align: left;
                 white-space: normal;
                 overflow-wrap: break-word;
@@ -76,7 +76,7 @@ export const VisitedTable = styled.table`
                 font-weight: 500;
 	        }   
 
-            td:nth-of-type(1):before { content: "Name"; }
+            td:nth-of-type(1):before { content: "Establishment"; }
             td:nth-of-type(2):before { content: "Location"; }
             td:nth-of-type(3):before { content: "Date"; }
             td:nth-of-type(4):before { content: "Time"; }
@@ -85,7 +85,8 @@ export const VisitedTable = styled.table`
 
         @media screen and (max-width: 640px) {
             td {
-                padding-left: 8.5rem;
+                width: auto;
+                padding-left: 40%;
 
                 &:before {
                     padding-left: 1rem;

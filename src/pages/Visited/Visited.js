@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 
 import Nav from '../../components/Nav'
@@ -7,10 +7,11 @@ import { VisitedTable, Loading } from './VisitedStyles'
 
 function Visited() {
     const { fetchVisited, visited, currentUser } = useAuth()
+    const [visitState, setVisitState] = useState([])
     
-    useEffect(() => {
-        fetchVisited(currentUser)
-      }, [])
+    // useEffect(() => {
+    //     fetchVisited(currentUser)
+    //   }, [])
 
     return (
         <>

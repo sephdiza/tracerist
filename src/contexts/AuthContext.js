@@ -181,11 +181,10 @@ export function AuthProvider({ children }) {
 
     const fetchVisited = async(user) => {
         let newArr = []
-        firestore
-          .collection("visited").where("userEmail", "==", user.email)
-          .get().then((querySnapshot) => {
+        firestore.collection("visited").where("userEmail", "==", user.email)
+          .onSnapshot((querySnapshot) => {
             querySnapshot.forEach(doc => {
-              newArr.push(doc.data())
+            newArr.push(doc.data())
             })
             setVisited(newArr)
           })
@@ -195,6 +194,7 @@ export function AuthProvider({ children }) {
         const unsubscribe = auth.onAuthStateChanged(user => {
                 setCurrentUser(user)
                 currentUser && fetchUser(currentUser)
+                currentUser && fetchVisited(currentUser)
                 setLoading(false)     
         })
         return () => {

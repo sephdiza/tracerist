@@ -14,7 +14,6 @@ import Register from './pages/Register/Register';
 import RegIndividual from './pages/RegIndividual/RegIndividual';
 import RegEstab from './pages/RegEstab/RegEstab';
 import Login from './pages/Login/Login';
-import HDIndividual from './pages/HDIndividual/HDIndividual';
 import RegIndivHD from './pages/RegIndivHD/RegIndivHD';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import UpdateHD from './pages/Profile/updateHD/UpdateHD';
