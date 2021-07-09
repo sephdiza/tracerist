@@ -73,7 +73,7 @@ function Nav() {
                 <NavLink>
                     { userData && userData.type === "Establishment" ? 
                     <StyledLink to="/visitors">Visitors</StyledLink> :
-                    <StyledLink to="/travel-history">Travel History</StyledLink>
+                    <StyledLink to="/visited">Travel History</StyledLink>
                     }  
                 </NavLink>
                 <NavLink>
@@ -95,7 +95,7 @@ function Nav() {
                 <NavLink onClick={handleCloseSideBar}>
                     { userData && userData.type === "Establishment" ? 
                     <StyledLink to="/visitors">Visitors</StyledLink> :
-                    <StyledLink to="/travel-history">Travel History</StyledLink>
+                    <StyledLink to="/visited">Travel History</StyledLink>
                     }
                 </NavLink>
                 <NavLink onClick={handleCloseSideBar}>

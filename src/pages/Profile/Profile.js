@@ -21,6 +21,7 @@ import { Title,
     } from './ProfileStyle'
 import avatar from "../../assets/images/profile-pic.png"
 import { ReactComponent as EstabImg } from '../../assets/images/building.svg'
+import { Loading } from '../Visited/VisitedStyles'
 
 function Profile() {
     const { userData } = useAuth()
@@ -34,7 +35,7 @@ function Profile() {
     return (    
         <>  
             <Nav />
-            {!userData ? <Title>Loading...</Title> :
+            {!userData ? <Loading>fetching your data<span>⏳</span></Loading> :
             userData.type === "Individual" ?
             <>
                 <Title>User's Profile</Title>

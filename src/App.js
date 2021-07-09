@@ -20,6 +20,8 @@ import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import UpdateHD from './pages/Profile/updateHD/UpdateHD';
 import UpdateEstab from './pages/Profile/UpdateEstab/UpdateEstab';
 import Visitors from './pages/Visitors/Visitors';
+import Visited from './pages/Visited/Visited';
+import Landing from './pages/Landing/Landing';
 
 function App() {
 
@@ -29,6 +31,7 @@ function App() {
         <GlobalStyle />         
           <Switch>
             <AuthProvider>
+              <Route exact path = "/" component={Landing} />
               <PrivateRoute path="/profile" component={Profile} />
               <PrivateRoute path="/scan-qr" component={QrScanner}/>
               <PrivateRoute path="/notification" component={Notification}/>
@@ -36,6 +39,7 @@ function App() {
               <PrivateRoute path="/update-health" component={UpdateHD} />
               <PrivateRoute path="/update-establishment" component={UpdateEstab} />
               <PrivateRoute path="/visitors" component={Visitors} />
+              <PrivateRoute path="/visited" component={Visited} />
               <Route path="/register-hd-individual" component={RegIndivHD} />
               <Route path="/register" component={Register} />
               <Route path="/register-individual" component={RegIndividual} />

@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { auth, firestore } from "../firebase"
+import { uid } from 'uid'
 
 const AuthContext = React.createContext()
 
@@ -11,6 +12,7 @@ export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [userData, setUserData] = useState()
     const [visitors, setVisitors] = useState([])
+    const [visited, setVisited] = useState([])
     const [loading, setLoading] = useState(true)
 
     function signup(
@@ -167,7 +169,7 @@ export function AuthProvider({ children }) {
 
     const fetchVisitors = async(user) => {
         let newArr = []
-      firestore
+        firestore
           .collection("visitors").where("estabUid", "==", user.uid)
           .get().then((querySnapshot) => {
             querySnapshot.forEach(doc => {
@@ -177,22 +179,16 @@ export function AuthProvider({ children }) {
           })
     }
 
-    const pushVisited = (user, estab) => {
+    const fetchVisited = async(user) => {
+        let newArr = []
         firestore
-            .collection("users")
-            .doc(user.uid)
-            .set({
-                visited: {
-                    estabname: estab.estabName,
-                    region: estab.region,
-                    province: estab.province,
-                    city: estab.city,
-                    bgy: estab.bgy,
-                    housestreet: estab.housestreet,
-                    contactno: estab.contactno 
-                }
-            }, {merge: true})
-            .catch("Error in inserting user's visited")
+          .collection("visited").where("userEmail", "==", user.email)
+          .get().then((querySnapshot) => {
+            querySnapshot.forEach(doc => {
+              newArr.push(doc.data())
+            })
+            setVisited(newArr)
+          })
     }
  
     useEffect(() => {
@@ -218,8 +214,9 @@ export function AuthProvider({ children }) {
         fetchUser,
         userData,
         fetchVisitors,
+        fetchVisited,
         visitors,
-        pushVisited
+        visited
     }
     
     return (

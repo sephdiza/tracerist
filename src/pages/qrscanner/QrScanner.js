@@ -7,6 +7,7 @@ import { uid } from 'uid'
 import QrReader from 'react-qr-scanner';
 import {Wrapper,Title,QrContainer, qrCodeStyle, ResultContainer,Result, Subtitle} from './QrScannerStyles'
 import Nav from '../../components/Nav';
+import { Loading} from '../Visited/VisitedStyles'
 
 
 function QrScanner() {
@@ -14,7 +15,7 @@ function QrScanner() {
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false)
     const res = useRef()
-    const { userData, pushVisited } = useAuth()
+    const { userData } = useAuth()
     
     const scanVisitor = (user, id) => {
       firestore.collection("visitors").doc(id).set({
@@ -23,6 +24,20 @@ function QrScanner() {
         email: user.email,
         contactno: user.contact,
         healthDeclaration: user.healthDeclaration,
+        visitDate: new Date().toLocaleDateString(),
+        visitTime: new Date().toLocaleTimeString()
+      })
+    }
+
+    const pushVisited = (user, estab) => {
+      firestore.collection("visited").doc(uid()).set({
+        userEmail: user.email,
+        estabname: estab.estabName,
+        province: estab.province,
+        city: estab.city,
+        bgy: estab.bgy,
+        housestreet: estab.housestreet,
+        contactno: estab.contactno,
         visitDate: new Date().toLocaleDateString(),
         visitTime: new Date().toLocaleTimeString()
       })
@@ -51,8 +66,8 @@ function QrScanner() {
             setLoading(true)
 
             // reset scanner
-            scanVisitor(userObj, uid())
             pushVisited(userObj, userData)
+            scanVisitor(userObj, uid())
             setTimeout(() => {
               setResult(null)
               res.current.style.backgroundColor = "transparent";
@@ -75,7 +90,7 @@ function QrScanner() {
               {loading ? <p>Please wait</p> : <p>Scan here <span>👇</span></p>}
             </Subtitle>
             <QrContainer>
-              {loading ? <h2>loading...</h2> : (
+              {loading ? <Loading><span>⏳</span></Loading> : (
                 <QrReader 
                 delay = {delay}
                 style = {qrCodeStyle}

@@ -3,7 +3,8 @@ import { useAuth } from '../../contexts/AuthContext'
 
 import Nav from '../../components/Nav'
 import { Wrapper } from '../../components/Wrapper/WrapperStyle'
-import { VisitorsTable, TrHead } from './VisitorsStyles'
+import { VisitorsTable } from './VisitorsStyles'
+import { Loading } from '../Visited/VisitedStyles'
 
 function Visitors() {
     const { fetchVisitors, visitors, currentUser } = useAuth()
@@ -17,6 +18,7 @@ function Visitors() {
             <Nav />
             <Wrapper>
                 <h2>Visitors</h2>
+                {visitors.length === 0 ? <Loading>loading <span>⏳</span></Loading> :
                 <VisitorsTable>
                     <thead>
                         <tr style={{
@@ -31,19 +33,18 @@ function Visitors() {
                         </tr>
                     </thead>
                     <tbody>
-                        {!visitors ? null : (
-                            visitors.map(visitor => (
-                            <tr key={visitor.visitTime}>
-                                <td>{visitor.name}</td>
-                                <td>{visitor.email}</td>
-                                <td>{visitor.visitDate}</td>
-                                <td>{visitor.visitTime}</td>
-                                <td>{visitor.contactno}</td>
-                            </tr>
-                            ))
-                        )}
+                        {visitors.map(visitor => (
+                        <tr key={visitor.visitTime}>
+                            <td>{visitor.name}</td>
+                            <td>{visitor.email}</td>
+                            <td>{visitor.visitDate}</td>
+                            <td>{visitor.visitTime}</td>
+                            <td>{visitor.contactno}</td>
+                        </tr>
+                        ))}
                     </tbody>
                 </VisitorsTable>
+                }
             </Wrapper>
             
             

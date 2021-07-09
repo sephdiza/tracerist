@@ -17,6 +17,7 @@ export const Subtitle = styled.div`
   /* animation: bounce 1s infinite; */
 
   span {
+    margin-left: 1rem;
     display: inline-block;
     animation: bounce 1s infinite;
   }
