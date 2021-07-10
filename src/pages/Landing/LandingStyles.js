@@ -2,17 +2,11 @@ import styled from 'styled-components'
 import bg from '../../assets/images/bg-image.png'
 
 export const Home = styled.section`
-    margin: auto;
-    max-width:1440px;
     display: flex;
-    flex-direction: row;
     height: 100vh;
     position: relative;
     color: var(--text-primary);
-    
-    @media screen and (max-width: 849px) {
-        height: auto;
-    }
+    align-items: center;
 
     @media screen and (max-width: 490px) {
         justify-content: center;
@@ -30,29 +24,10 @@ export const Home = styled.section`
         }
     }
 
-    &:before {
-        content: ""; 
-        background-image: url(${bg});
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        opacity: 0.6;
-        z-index: -1;
-
-        @media screen and (max-width: 780px) {
-            display: none;
-        }
-    }
-
 
     ul {
         margin-top: 1.5rem;
-        font-size: 2rem;
+        font-size: 2.2rem;
         padding-top:5px;
         padding-bottom:10px;
         display: flex;
@@ -60,26 +35,18 @@ export const Home = styled.section`
         gap: 1rem;
 
         @media screen and (max-width: 490px) {
-            font-size: 1.8rem;
+        font-size: 2rem;
+        max-width: 35rem;
         }
 
         @media screen and (max-width: 379px) {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
         }
 
         li {
             list-style: none;
             display: flex;
             max-width: 50rem;
-
-            @media screen and (max-width: 490px) {
-                font-size: 2rem;
-                max-width: 35rem;
-            }
-
-            @media screen and (max-width: 379px) {
-                font-size: 1.8rem;
-            }
 
             span {
                 width: 3rem;
@@ -94,53 +61,73 @@ export const Section = styled.div`
     display: flex;
     flex-direction: column;
     align-items: left;
-    margin-left: 10vw;
-    margin-right: 10vw;
-    padding-top:5%;
-    padding-bottom:5%;
+    width: 100%;
+    padding-left: 10vw;
+    padding-right: 10vw;
 
     @media screen and (max-width: 490px) {
-        margin-left: 5vw;
-        margin-right: 5vw;
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+
+    &:before {
+        content: ""; 
+        background-image: url(${bg});
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.6;
+        z-index: -1;
+
+        @media screen and (max-width: 780px) {
+            display: none;
+        }
     }
 `;
 
 export const Subtitle = styled.h1`
-        font-size: 2rem;
+        font-size: 5.4rem;
         font-weight: 500;
-        margin-left: 5px;
         font-family: 'Montserrat', sans-serif;
         position: relative;
-        transform: translateY(-1rem);
+        max-width: 50rem;
+        margin-bottom: 6rem;
 
-        @media screen and (max-width: 490px) {
-            font-size: 1.8rem;
-            transform: translateY(-2rem);   
+        @media screen and (max-width: 571px) {
+            font-size: 4.8rem;
         }
 
-        @media screen and (max-width: 379px) {
-            font-size: 1.6rem;
-            transform: translateY(-2.5rem); 
+        @media screen and (max-width: 571px) {
+            font-size: 4rem;
+        }
+
+        @media screen and (max-width: 387px) {
+            font-size: 3rem;
         }
 
         &::after {
             content: '';
             display: block;
             position: absolute;
-            margin-top: 3px;
-            height: 6px;
+            height: 20%;
             background: linear-gradient(to right, #EC8F5B, #EDF063);
             opacity: 0.6;
-            width: 12rem;
-            border-radius: 1rem;
+            width: 50%;
+            border-radius: .5rem;
+            transform: translateY(-100%);
+            z-index: -1;
         }
 `;
 
-export const Heading = styled.h3`
-    margin-top: 11rem;
-    font-size: 4rem;
+export const HeadTitle = styled.h3`
+    font-size: 3.2rem;
     padding-top:10px;
-    padding-bottom:5px;
+    font-weight: 400;
 
     span {
         font-size: 3.2rem;
@@ -159,7 +146,6 @@ export const Heading = styled.h3`
 `;
 
 export const Subheading = styled.p`
-    margin-top: 4rem;
     font-size: 2.4rem;
     max-width: 50rem;
 
@@ -172,6 +158,7 @@ export const Subheading = styled.p`
         font-size: 1.8rem;
     }
 `;
+
 
 export const BtnGrp = styled.div`
     margin-top: 6rem;
@@ -195,11 +182,21 @@ export const BtnGrp = styled.div`
 export const About = styled.section`
     display: flex;
     flex-direction: column;
-    padding-top: 6rem;
+    gap: 6rem;
     height:auto;
     width:100%;
     height: 100vh;
     text-align: center;  
+    justify-content: center;
+
+    @media screen and (max-width: 735px) {
+        height: auto;
+    }
+`;
+
+export const Heading = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 
 export const CardWrapper = styled.div`
@@ -208,8 +205,7 @@ export const CardWrapper = styled.div`
     align-items:center;
     justify-content:center;
     max-width:1440px;
-    margin: 20px auto 0;
-    margin-top: 6rem;
+    margin: 0 auto;
 `;
 
 export const Card = styled.div`
@@ -245,7 +241,7 @@ export const Cta = styled.div`
     flex-direction: column;
     justify-content: center;
     gap: 1.5rem;
-    margin-top: 6rem;
+    /* margin-top: 6rem; */
 
     h4 {
         font-size: 2.4rem;

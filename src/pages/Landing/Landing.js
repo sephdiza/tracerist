@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { ReactComponent as Banner } from "../../assets/images/landing-banner.svg"
-import { Home, Section, Subtitle, Heading, Subheading, BtnGrp, About, CardWrapper, Card, Cta } from './LandingStyles'
+import Nav from '../../components/Nav'
+
+import { Home, Section, Subtitle, Heading, Subheading, BtnGrp, About, CardWrapper, Card, Cta, HeadTitle } from './LandingStyles'
 import {Button, RegisterBtn} from '../../components/Button'
 import individual from '../../assets/images/individual.png'
 import lovedones from '../../assets/images/lovedones.png'
@@ -11,13 +12,13 @@ import community from '../../assets/images/community.png'
 
 function Landing() {
     return (
-        <>
-            <Home>
+        <>  
+            <Nav />
+            <Home id="home">
                 <Section>
-                    <Banner />
                     <Subtitle>Unified Contact Tracing App</Subtitle>
 
-                    <Heading>Welcome! <span>✋</span></Heading>
+                    <HeadTitle>Welcome! <span>✋</span></HeadTitle>
                     <Subheading>Join the community in ending the spread of covid-19 in three simple steps:</Subheading>
 
                     <ul>
@@ -41,9 +42,12 @@ function Landing() {
                 </Section>
             </Home>
 
-            <About>
-                <Heading>Why Tracerist? <span>🧏‍♂️</span></Heading>
-                <p style={{fontSize:"2rem"}}>For individuals and establishments</p>
+            <About id="about">
+                <Heading>
+                    <HeadTitle>Why Tracerist? <span>🧏‍♂️</span></HeadTitle>
+                    <p style={{fontSize:"2rem"}}>For individuals and establishments</p>
+                </Heading>
+                
 
                 <CardWrapper>
 

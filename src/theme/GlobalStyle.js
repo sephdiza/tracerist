@@ -3,14 +3,6 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
     /* #02353B */
 
-    body {
-        /* margin: 0 20vw;
-
-        @media only screen and (max-width: 1240px) {
-            margin: 0 10vw;
-        } */
-    }
-
     html {
         --font-size-default: 1.8rem;
         --font-size-mobile: 1.6rem;

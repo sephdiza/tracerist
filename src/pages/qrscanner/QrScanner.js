@@ -17,7 +17,7 @@ function QrScanner() {
     const res = useRef()
     const { userData } = useAuth()
     
-    const scanVisitor = (user, id) => {
+    const pushVisitor = (user, id) => {
       firestore.collection("visitors").doc(id).set({
         estabUid: userData.uid,
         name: user.name,
@@ -43,6 +43,14 @@ function QrScanner() {
       })
     }
 
+    const resetScan = () => {
+      setTimeout(() => {
+        setResult(null)
+        res.current.style.backgroundColor = "transparent";
+        setLoading(false)
+      }, 2500)
+    }
+
     const handleScan = (data) => {
         if(!loading && data){
           const userObj = JSON.parse(data.text)
@@ -58,21 +66,15 @@ function QrScanner() {
             res.current.style.backgroundColor = "red";
             res.current.children[0].style.color = "#fff"
             setLoading(true)
+            resetScan()
           } else {
             res.current.style.backgroundColor = "green";
             res.current.children[0].style.color = "#fff"
             setResult(`Hello ${userObj.name}! Thanks for scanning 😊`)
-            console.log("scanned")
             setLoading(true)
-
-            // reset scanner
             pushVisited(userObj, userData)
-            scanVisitor(userObj, uid())
-            setTimeout(() => {
-              setResult(null)
-              res.current.style.backgroundColor = "transparent";
-              setLoading(false)
-            }, 2500)
+            pushVisitor(userObj, uid())
+            resetScan()
           }
         }
       }
