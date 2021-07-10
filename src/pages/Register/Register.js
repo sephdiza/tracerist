@@ -44,10 +44,12 @@ function Register() {
                 </LeftWrapper>
                 <RightWrapper>
                     <RightContent>
-                        <Banner>
-                            <img src={titleImg} alt="title"/>
-                            <p>Unified Contact Tracing App</p>
-                        </Banner>
+                        <Link to="/">
+                            <Banner>
+                                <img src={titleImg} alt="title"/>
+                                <p>Unified Contact Tracing App</p>
+                            </Banner>
+                        </Link>
                         <Title>
                             <h1><FaPen/> Register</h1>
                             <p>Step 1 of 3 - Select type</p>

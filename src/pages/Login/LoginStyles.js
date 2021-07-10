@@ -37,6 +37,11 @@ export const RightWrapper = styled.div`
     @media screen and (max-width: 787px){
         width: 100vw;
     }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 `;
 
 export const RightContent = styled.div`
@@ -49,7 +54,7 @@ export const RightContent = styled.div`
     }
 
     @media screen and (max-width: 400px) {
-        padding: 0 1rem;
+        padding: 0 6rem;
         margin-left: 1.2rem;
     }
 `;
@@ -137,8 +142,6 @@ export const InputGroup = styled.div`
     flex-direction: column;
     gap: 3rem;
     
-    
-
     @media screen and (max-width: 400px) {
         gap: 1.5rem;
     }

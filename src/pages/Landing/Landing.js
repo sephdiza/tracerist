@@ -2,15 +2,18 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { ReactComponent as Banner } from "../../assets/images/landing-banner.svg"
-import { Home, Left, Subtitle, Heading, Subheading, BtnGrp } from './LandingStyles'
+import { Home, Section, Subtitle, Heading, Subheading, BtnGrp, About, CardWrapper, Card, Cta } from './LandingStyles'
 import {Button, RegisterBtn} from '../../components/Button'
+import individual from '../../assets/images/individual.png'
+import lovedones from '../../assets/images/lovedones.png'
+import community from '../../assets/images/community.png'
 
 
 function Landing() {
     return (
         <>
             <Home>
-                <Left>
+                <Section>
                     <Banner />
                     <Subtitle>Unified Contact Tracing App</Subtitle>
 
@@ -18,55 +21,63 @@ function Landing() {
                     <Subheading>Join the community in ending the spread of covid-19 in three simple steps:</Subheading>
 
                     <ul>
-                        <li><span>📝</span> Create an account</li>
-                        <li><span>📱</span> Generate your QR code</li>
-                        <li><span>📌</span>Update your location wherever you go</li>
+                        <li><span>✅</span> Create an account</li>
+                        <li><span>✅</span> Generate your QR code</li>
+                        <li><span>✅</span>Update your location wherever you go</li>
                     </ul>
 
                     <BtnGrp>
                         <Link to="/register">
-                            <RegisterBtn primary style={{fontSize: "1.8rem"}}>
-                                Join now  
+                            <RegisterBtn>
+                                <p>Join now </p><p>&rarr;</p>
                             </RegisterBtn>
                         </Link>
-                        <Link to="/register">
+                        <Link to="/login">
                             <Button>
                               Login
                             </Button>
                         </Link>
                     </BtnGrp>
-                </Left>
+                </Section>
             </Home>
 
-            {/* <section id="why">
-                <h2>Why Tracerist?</h2>
-                <p class="tag-2">For individuals and establishments</p>
+            <About>
+                <Heading>Why Tracerist? <span>🧏‍♂️</span></Heading>
+                <p style={{fontSize:"2rem"}}>For individuals and establishments</p>
 
-                <div class="tile-container">
+                <CardWrapper>
 
-                    <div class="tile">
-                        <image src="media/yourself.png" class="image-icon"></image>
-                        <h5>Love Yourself</h5>
+                    <Card>
+                        <img src={individual} alt="individual"></img>
+                        <h4>Love Yourself</h4>
                         <p>Use Tracerist to track your travel history. Be notified when you have been exposed to a covid-19 case.</p>
-                    </div>
+                    </Card>
 
-                    <div class="tile">
-                        <image src="media/lovedones.png" class="image-icon"></image>
-                        <h5>Love Your Loved Ones</h5>
+                    <Card>
+                        <img src={lovedones} alt="loved ones"></img>
+                        <h4>Love Your Loved Ones</h4>
                         <p>Share Tracerist to your family, friends, and colleagues. Let us protect each other. </p>
-                    </div>
+                    </Card>
 
-                    <div class="tile">
-                        <image src="media/community.png" class="image-icon"></image>
-                        <h5>Love Your Community</h5>
+                    <Card>
+                        <img src={community} alt="community"></img>
+                        <h4>Love Your Community</h4>
                         <p>Use Tracerist to log who visited your establishment. This helps the authority to easily trace covid-19 cases. </p>
-                    </div>
+                    </Card>
 
-                </div>
+                </CardWrapper>
 
-                <p class="tag-2 margin">Help Us Fight covid-19. <a href="#" class="register-now">Register Now!</a></p>
-            </section> */}
-
+                <Cta>
+                    <h4>Help us fight covid-19.</h4> 
+                    <Link to="/register">
+                        <RegisterBtn>
+                        <p>Register now</p><p>&rarr;</p>
+                        </RegisterBtn>
+                    </Link>
+                </Cta>
+                
+            </About>
+s
             {/* <footer>
                 <p>&copy 2021 Tracerist All Rights Reserved.</p>
             </footer> */}

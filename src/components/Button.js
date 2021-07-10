@@ -41,6 +41,16 @@ export const RegisterBtn = styled.button`
     border-radius: 0.5rem;
     position: relative;
 
+    p {
+        display: inline-block;
+        font-weight: 300;
+
+        &:last-child {
+            transition: all .15s ease-in;
+            margin-left: 1rem;
+        }
+    }
+
     span {
         position: absolute;
         display: flex;
@@ -60,6 +70,10 @@ export const RegisterBtn = styled.button`
         transform: translateY(-3px);
         box-shadow: 0 1rem 1.5rem rgba(0,0,0,0.2);
 
+        p:last-child {
+            transform: translateX(3rem);
+        }
+
         span {
             transform: translateX(40%);
         }
@@ -71,6 +85,10 @@ export const RegisterBtn = styled.button`
 
         span {
             transform: translateX(60%);
+        }
+
+        p:last-child {
+            transform: translateX(6rem);
         }
     }
 `;

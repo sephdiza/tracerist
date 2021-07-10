@@ -43,10 +43,13 @@ function Login() {
                 </LeftWrapper>
                 <RightWrapper>
                     <RightContent>
-                        <Banner>
-                            <img src={titleImg} alt="title"/>
-                            <p>Unified Contact Tracing App</p>
-                        </Banner>
+                        <Link to="/">
+                            <Banner>
+                                <img src={titleImg} alt="title"/>
+                                <p>Unified Contact Tracing App</p>
+                            </Banner>
+                        </Link>
+                        
                         <Title>
                             <h1>Login</h1>
                             <p>Help us fight covid-19.</p>

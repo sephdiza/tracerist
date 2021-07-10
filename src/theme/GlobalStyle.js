@@ -22,13 +22,12 @@ const GlobalStyle = createGlobalStyle`
         color: var(--text-primary);
     }
 
-    /* h1 {
+    h1 {
         font-size: 2.8rem;
         font-family: "Montserrat", sans-serif;
         font-weight: 700;
-        text-transform: uppercase;
         color: var(--text-primary);
-    } */
+    }
 
     h2 {
         font-size: 2rem;

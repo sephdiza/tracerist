@@ -23,6 +23,11 @@ export const NavLogo = styled.div`
     display: flex;
     align-items: center;
     text-decoration: none;
+
+    h1 {
+      text-transform: uppercase;
+      margin-left: 1rem;
+    }
   }
     
 `;

@@ -2,14 +2,17 @@ import styled from 'styled-components'
 import bg from '../../assets/images/bg-image.png'
 
 export const Home = styled.section`
-    /* margin: auto; */
-    width: 100%;
+    margin: auto;
+    max-width:1440px;
     display: flex;
     flex-direction: row;
     height: 100vh;
     position: relative;
     color: var(--text-primary);
     
+    @media screen and (max-width: 849px) {
+        height: auto;
+    }
 
     @media screen and (max-width: 490px) {
         justify-content: center;
@@ -28,7 +31,7 @@ export const Home = styled.section`
     }
 
     &:before {
-        content: "";
+        content: ""; 
         background-image: url(${bg});
         background-position: center;
         background-repeat: no-repeat;
@@ -87,7 +90,7 @@ export const Home = styled.section`
     }
 `;
 
-export const Left = styled.div`
+export const Section = styled.div`
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -134,7 +137,7 @@ export const Subtitle = styled.h1`
 `;
 
 export const Heading = styled.h3`
-    margin-top: 6vh;
+    margin-top: 11rem;
     font-size: 4rem;
     padding-top:10px;
     padding-bottom:5px;
@@ -156,7 +159,7 @@ export const Heading = styled.h3`
 `;
 
 export const Subheading = styled.p`
-    margin-top: 3rem;
+    margin-top: 4rem;
     font-size: 2.4rem;
     max-width: 50rem;
 
@@ -171,7 +174,7 @@ export const Subheading = styled.p`
 `;
 
 export const BtnGrp = styled.div`
-    margin-top: 3rem;
+    margin-top: 6rem;
     width:auto;
     display: flex;
     flex-direction: row;
@@ -187,4 +190,66 @@ export const BtnGrp = styled.div`
         text-decoration: none;
         color: inherit;
     }
+`;
+
+export const About = styled.section`
+    display: flex;
+    flex-direction: column;
+    padding-top: 6rem;
+    height:auto;
+    width:100%;
+    height: 100vh;
+    text-align: center;  
+`;
+
+export const CardWrapper = styled.div`
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    max-width:1440px;
+    margin: 20px auto 0;
+    margin-top: 6rem;
+`;
+
+export const Card = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:2rem;
+    justify-content: space-space-evenly;
+    max-width:32rem;
+    height: 40rem;
+    background-color:white;
+    transition: transform 0.3s ease;
+    box-shadow: 1px 1px 6px #b4b4b4;
+    
+    border-radius: 1rem;
+
+    h4 {
+        font-size: 2.4rem;
+        margin-bottom: 1.5rem;
+    }
+
+    img {
+        width: 20rem;
+    }
+
+    p {
+        width: 90%;
+    }
+`;
+
+export const Cta = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 6rem;
+
+    h4 {
+        font-size: 2.4rem;
+        font-weight: 500;
+    }
+    
 `;

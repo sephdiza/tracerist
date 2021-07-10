@@ -49,6 +49,11 @@ export const RightContent = styled.div`
      @media screen and (max-width: 1160px) {
         padding: 0 3rem;
     }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 `;
 
 export const Banner = styled.div`
