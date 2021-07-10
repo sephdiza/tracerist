@@ -14,6 +14,7 @@ export const Title = styled.h2`
 export const ProfileWrapper = styled.section`
     margin-left: 20vw;
     margin-right: 20vw;
+    margin-top: 10vh;
 
     display: flex;
     justify-content: space-between;

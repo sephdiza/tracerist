@@ -69,7 +69,8 @@ function Nav() {
             </NavLogo>
             <LinkWrapper>
                 <NavLink>
-                    {userData && <StyledLink to="/profile">Profile</StyledLink>}
+                    {userData && <StyledLink to="/profile">Profile</StyledLink>
+                    }
                 </NavLink>
                 <NavLink>
                     { userData ? ( userData.type === "Establishment" ? 

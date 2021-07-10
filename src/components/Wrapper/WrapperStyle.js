@@ -5,9 +5,11 @@ export const Wrapper = styled.main`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 18vh;
 
     @media screen and (max-width: 1240px) {
         margin-left: 10vw;
         margin-right: 10vw;
     }
 `;
+

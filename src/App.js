@@ -21,6 +21,7 @@ import UpdateEstab from './pages/Profile/UpdateEstab/UpdateEstab';
 import Visitors from './pages/Visitors/Visitors';
 import Visited from './pages/Visited/Visited';
 import Landing from './pages/Landing/Landing';
+import AdminDB from './pages/Admin/AdminDB/AdminDB';
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
               <PrivateRoute path="/update-establishment" component={UpdateEstab} />
               <PrivateRoute path="/visitors" component={Visitors} />
               <PrivateRoute path="/visited" component={Visited} />
+              <Route path="/admin-db" component={AdminDB} />
               <Route path="/register-hd-individual" component={RegIndivHD} />
               <Route path="/register" component={Register} />
               <Route path="/register-individual" component={RegIndividual} />
