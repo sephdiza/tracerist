@@ -43,6 +43,12 @@ function QrScanner() {
       })
     }
 
+    const addVisitorSize = () => {
+      firestore.collection("users").doc(userData.uid).set({
+        visitors: userData.visitors + 1
+      }, {merge: true})
+    }
+
     const resetScan = () => {
       setTimeout(() => {
         setResult(null)
@@ -74,6 +80,7 @@ function QrScanner() {
             setLoading(true)
             pushVisited(userObj, userData)
             pushVisitor(userObj, uid())
+            addVisitorSize()
             resetScan()
           }
         }

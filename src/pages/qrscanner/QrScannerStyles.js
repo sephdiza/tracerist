@@ -41,6 +41,7 @@ export const Wrapper = styled.main`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 20rem;
 
     @media screen and (max-width: 1240px) {
         margin-left: 10vw;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../../contexts/AuthContext'
 import { firestore } from '../../../firebase';
+import { uid } from "uid";
 
 import { Wrapper } from "../../../components/Wrapper/WrapperStyle"
 import { DbWrapper, Heading, TotalContainer, TotalSection, TopVisitors, TotalDetails, ImgBorder, Title, Top5 } from './AdminDBStyles'
@@ -12,14 +13,21 @@ function AdminDB() {
     const { userData } = useAuth()
     const [userSize, setUserSize] = useState()
     const [estabSize, setEstabSize] = useState()
+    const [estabs, setEstabs] = useState([])
     
     useEffect(() => {
-        firestore.collection("users").where("type", "==", "Individual").onSnapshot(snapshot => (
-            setUserSize(snapshot.size)
-        ))
-        firestore.collection("users").where("type", "==", "Establishment").onSnapshot(snapshot => (
-            setEstabSize(snapshot.size)
-        ))
+        try {
+            firestore.collection("users").where("type", "==", "Individual").onSnapshot(snapshot => (
+                setUserSize(snapshot.size)
+            ))
+            firestore.collection("users").where("type", "==", "Establishment").orderBy("visitors", "desc").onSnapshot(snapshot => {
+                setEstabSize(snapshot.size)
+                setEstabs(snapshot.docs.map(doc => doc.data()))
+            })
+        } catch(err) {
+            console.log(err)
+        }
+        
     }, [])
 
     return (
@@ -28,6 +36,7 @@ function AdminDB() {
             <Wrapper>
                 <Heading>Hi Admin! 🤵</Heading>
                 <p>Here's the number of registrant as of now.</p>
+
                 <DbWrapper>
                     <TotalContainer>
                         <TotalSection>
@@ -56,21 +65,11 @@ function AdminDB() {
                             <p>with highest numbers of visitors</p>
                         </Title>
                         <Top5>
-                            <p>
-                                <span>1</span> 7 eleven  <span>40</span>
-                            </p>
-                            <p>
-                                <span>1</span> 7 eleven  <span>40</span>
-                            </p>
-                            <p>
-                                <span>1</span> 7 eleven  <span>40</span>
-                            </p>
-                            <p>
-                                <span>1</span> 7 eleven  <span>40</span>
-                            </p>
-                            <p>
-                                <span>1</span> 7 eleven  <span>40</span>
-                            </p>
+                        {estabs.map(({estabName, visitors}) => (
+                            <p key={uid()}>
+                                {estabName}
+                                <span>{visitors}</span></p>
+                        ))}
                         </Top5>
                     </TopVisitors>
                 </DbWrapper>            
