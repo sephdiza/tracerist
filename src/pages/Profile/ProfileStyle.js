@@ -184,7 +184,7 @@ export const ProfileTable = styled.table`
 export const EstabWrapper = styled.section`
     margin-left: 20vw;
     margin-right: 20vw;
-    margin-top: 3rem;
+    margin-top: 15rem;
 
     display: flex;
     flex-direction: column;

@@ -69,13 +69,20 @@ function Nav() {
             </NavLogo>
             <LinkWrapper>
                 <NavLink>
-                    {userData && <StyledLink to="/profile">Profile</StyledLink>
+                    { userData &&
+                    (userData.type === "admin" ) ?
+                    <StyledLink to="/admin-db">Dashboard</StyledLink> :
+                    <StyledLink to="/profile">Profile</StyledLink>
                     }
                 </NavLink>
                 <NavLink>
-                    { userData ? ( userData.type === "Establishment" ? 
-                    <StyledLink to="/visitors">Visitors</StyledLink> :
-                    <StyledLink to="/visited">Travel History</StyledLink>) : 
+                    { userData ? (
+                        (userData.type === "admin") ?
+                            <StyledLink to="/trace">Trace</StyledLink> :
+                         (userData.type === "Establishment") ?
+                            <StyledLink to="/visitors">Visitors</StyledLink> :
+                            <StyledLink to="/visited">Travel History</StyledLink>
+                    ) :
                     <StyledScroll 
                         to="home"
                         smooth={true} 
@@ -84,7 +91,7 @@ function Nav() {
                     >
                         Home
                     </StyledScroll>
-                    }  
+                    }
                 </NavLink>
                 <NavLink>
                     {userData ? <StyledLink to="/notification">Notification</StyledLink> :
@@ -112,18 +119,25 @@ function Nav() {
         
         <HamburgerLinks ref={hamLink}>
             <NavLink>
-                {userData && <StyledLink to="/profile">Profile</StyledLink>}
+                { userData &&
+                    (userData.type === "admin" ) ?
+                    <StyledLink to="/admin-db">Dashboard</StyledLink> :
+                    <StyledLink to="/profile">Profile</StyledLink>
+                }
             </NavLink>
             <NavLink>
-                { userData ? ( userData.type === "Establishment" ? 
-                <StyledLink to="/visitors">Visitors</StyledLink> :
-                <StyledLink to="/visited">Travel History</StyledLink>) : 
+                { userData ? (
+                    (userData.type === "admin") ?
+                        <StyledLink to="/trace">Trace</StyledLink> :
+                        (userData.type === "Establishment") ?
+                        <StyledLink to="/visitors">Visitors</StyledLink> :
+                        <StyledLink to="/visited">Travel History</StyledLink>
+                ) :
                 <StyledScroll 
                     to="home"
                     smooth={true} 
                     spy={true}
                     duration={500}
-                    onClick={handleDisplay}
                 >
                     Home
                 </StyledScroll>

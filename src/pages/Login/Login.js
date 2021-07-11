@@ -11,9 +11,9 @@ import { LoginWrapper,
         Banner,
         Title,
         InputGroup,
-        LoginLinkText      
+        LoginLinkText,
+        LoginBtn      
         } from './LoginStyles';
-import { RegisterBtn } from '../../components/Button'
 import titleImg from '../../assets/images/login-banner.png'
 
 function Login() {
@@ -24,6 +24,7 @@ function Login() {
     const { login } = useAuth();
  
     async function handleLogin(e){
+        e.preventDefault()
         try {
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value)
@@ -54,14 +55,21 @@ function Login() {
                             <h1>Login</h1>
                             <p>Help us fight covid-19.</p>
                         </Title>
-                        <InputGroup >
+                        <InputGroup onSubmit={handleLogin}>
                                 <input type="text" placeholder="email" ref={emailRef}/>
-                                <input type="password" placeholder="password" ref={passwordRef}/>     
+                                <input type="password" placeholder="password" ref={passwordRef}/>
+
+                                <LoginLinkText>
+                                    <Link to="/forgot-password">Forgot Password?</Link>
+                                </LoginLinkText>
+                                <LoginBtn 
+                                    style={{margin: '0 auto'}} 
+                                    type="submit"
+                                    value="Log in" 
+                                    disabled={loading}
+                                />  
                         </InputGroup>
-                        <LoginLinkText>
-                            <Link to="/forgot-password">Forgot Password?</Link>
-                        </LoginLinkText>
-                        <RegisterBtn style={{margin: '0 auto'}} onClick={handleLogin} disabled={loading}>Sign in</RegisterBtn>
+                        
                         <LoginLinkText>
                             Don't have an account yet? <Link to="/register">Register now.</Link>
                         </LoginLinkText>

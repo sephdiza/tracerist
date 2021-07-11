@@ -137,16 +137,17 @@ export const Title = styled.div`
     }
 `;
 
-export const InputGroup = styled.div`
+export const InputGroup = styled.form`
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    margin-bottom: 3rem;
     
     @media screen and (max-width: 400px) {
         gap: 1.5rem;
     }
 
-    input {
+    input:not(:last-child) {
         box-sizing: border-box;
         width: 100%;
         height: 4rem;
@@ -171,7 +172,7 @@ export const InputGroup = styled.div`
 export const LoginLinkText = styled.div`
     color: var(--text-primary);
     font-size: 1.4rem;
-    margin: 3rem 0;
+    /* margin: 3rem 0; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -188,3 +189,26 @@ export const LoginLinkText = styled.div`
     }
 `;
 
+export const LoginBtn = styled.input`
+    height: 4rem;
+    width: 20rem;
+    border: none;
+    font-family: Inter;
+    font-size: 1.4rem;
+    color: #fff;
+    background: var(--text-primary);
+    transition: all .2s;
+    border-radius: 0.5rem;
+    position: relative;
+
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 1.5rem rgba(0,0,0,0.2);
+    }
+
+    &:active {
+        transform: translateY(-2px);
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
+    }
+`;

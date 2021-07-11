@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useAuth } from '../../contexts/AuthContext'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import QrCodeImg from "../../components/QrCodeImg"
 import Nav from '../../components/Nav'
 import { Button } from '../../components/Button'
@@ -22,9 +22,12 @@ import { Title,
 import avatar from "../../assets/images/profile-pic.png"
 import { ReactComponent as EstabImg } from '../../assets/images/building.svg'
 import { Loading } from '../Visited/VisitedStyles'
+import AdminDB from '../Admin/AdminDB/AdminDB';
 
 function Profile() {
     const { userData } = useAuth()
+    const history = useHistory()
+
     if(!userData) {
 
     } else {
@@ -124,7 +127,7 @@ function Profile() {
                     </LeftContainer>
                 </ProfileWrapper>
             </> 
-            : (
+            : userData.type === "Establishment" ? (
                 <>
                     <Title>Establishment's Profile</Title>
                     <EstabWrapper>
@@ -149,8 +152,8 @@ function Profile() {
                          
                     </EstabWrapper>
                 </>
-            )}
-                                
+            ) : <AdminDB />
+            }                       
         </>
     );
     
