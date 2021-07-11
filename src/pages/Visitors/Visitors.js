@@ -10,7 +10,7 @@ function Visitors() {
     const { fetchVisitors, visitors, currentUser } = useAuth()
     
     useEffect(() => {
-        fetchVisitors(currentUser)
+        currentUser && fetchVisitors(currentUser)
       }, [])
 
     return (

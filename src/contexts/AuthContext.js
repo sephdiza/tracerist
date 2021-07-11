@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
     const [userData, setUserData] = useState()
     const [visitors, setVisitors] = useState([])
     const [visited, setVisited] = useState([])
+    const [traceVisited, setTraceVisited] = useState([])
     const [loading, setLoading] = useState(true)
 
     function signup(
@@ -125,6 +126,7 @@ export function AuthProvider({ children }) {
                             bgy,
                             housestreet,
                             type,
+                            visitors: 0,
                             createdAt: new Date(),
                         })
                     }catch(err){
@@ -167,26 +169,31 @@ export function AuthProvider({ children }) {
     }
 
     const fetchVisitors = async(user) => {
-        let newArr = []
         firestore
-          .collection("visitors").where("estabUid", "==", user.uid)
-          .get().then((querySnapshot) => {
-            querySnapshot.forEach(doc => {
-              newArr.push(doc.data())
-            })
-            setVisitors(newArr)
-          })
+        .collection("visitors")
+        .where("estabUid", "==", user.uid)
+        .orderBy("date", "desc")
+        .onSnapshot(snapshot => {
+            setVisitors(snapshot.docs.map(doc => doc.data()))
+        })
     }
 
     const fetchVisited = async(user) => {
-        let newArr = []
-        firestore.collection("visited").where("userEmail", "==", user.email)
-          .onSnapshot((querySnapshot) => {
-            querySnapshot.forEach(doc => {
-            newArr.push(doc.data())
-            })
-            setVisited(newArr)
-          })
+        firestore.collection("visited")
+        .where("userEmail", "==", user.email)
+        .orderBy("date", "desc")
+        .onSnapshot(snapshot => {
+            setVisited(snapshot.docs.map(doc => doc.data()))
+        })
+    }
+
+    const trackVisited = (email) => {
+        firestore.collection("visited")
+        .where("userEmail", "==", email)
+        .orderBy("date","desc")
+        .onSnapshot(snapshot => {
+            setTraceVisited(snapshot.docs.map(doc => doc.data()))
+        })
     }
  
     useEffect(() => {
@@ -215,7 +222,9 @@ export function AuthProvider({ children }) {
         fetchVisitors,
         fetchVisited,
         visitors,
-        visited
+        visited,
+        traceVisited,
+        trackVisited
     }
     
     return (

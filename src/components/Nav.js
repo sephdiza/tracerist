@@ -71,7 +71,7 @@ function Nav() {
                 <NavLink>
                     { userData &&
                     (userData.type === "admin" ) ?
-                    <StyledLink to="/admin-db">Dashboard</StyledLink> :
+                    <StyledLink to="/profile">Dashboard</StyledLink> :
                     <StyledLink to="/profile">Profile</StyledLink>
                     }
                 </NavLink>
@@ -121,7 +121,7 @@ function Nav() {
             <NavLink>
                 { userData &&
                     (userData.type === "admin" ) ?
-                    <StyledLink to="/admin-db">Dashboard</StyledLink> :
+                    <StyledLink to="/profile">Dashboard</StyledLink> :
                     <StyledLink to="/profile">Profile</StyledLink>
                 }
             </NavLink>

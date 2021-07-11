@@ -8,6 +8,7 @@ import QrReader from 'react-qr-scanner';
 import {Wrapper,Title,QrContainer, qrCodeStyle, ResultContainer,Result, Subtitle} from './QrScannerStyles'
 import Nav from '../../components/Nav';
 import { Loading} from '../Visited/VisitedStyles'
+import { date } from 'yup';
 
 
 function QrScanner() {
@@ -25,7 +26,8 @@ function QrScanner() {
         contactno: user.contact,
         healthDeclaration: user.healthDeclaration,
         visitDate: new Date().toLocaleDateString(),
-        visitTime: new Date().toLocaleTimeString()
+        visitTime: new Date().toLocaleTimeString(),
+        date: Date.now()
       })
     }
 
@@ -39,7 +41,8 @@ function QrScanner() {
         housestreet: estab.housestreet,
         contactno: estab.contactno,
         visitDate: new Date().toLocaleDateString(),
-        visitTime: new Date().toLocaleTimeString()
+        visitTime: new Date().toLocaleTimeString(),
+        date: Date.now()
       })
     }
 

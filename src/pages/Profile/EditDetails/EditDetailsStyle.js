@@ -6,6 +6,7 @@ export const EditDetailsWrapper = styled.section`
     margin-right: 20vw;
 
     margin: 0 auto;
+    margin-top: 10vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

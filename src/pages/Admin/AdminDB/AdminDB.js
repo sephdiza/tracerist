@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useAuth } from '../../../contexts/AuthContext'
 import { firestore } from '../../../firebase';
 import { uid } from "uid";
 
@@ -10,19 +9,21 @@ import individual from '../../../assets/images/individual.png'
 import establishment from '../../../assets/images/establishment.png'
 
 function AdminDB() {
-    const { userData } = useAuth()
     const [userSize, setUserSize] = useState()
     const [estabSize, setEstabSize] = useState()
     const [estabs, setEstabs] = useState([])
+
     
     useEffect(() => {
         try {
             firestore.collection("users").where("type", "==", "Individual").onSnapshot(snapshot => (
                 setUserSize(snapshot.size)
             ))
-            firestore.collection("users").where("type", "==", "Establishment").orderBy("visitors", "desc").onSnapshot(snapshot => {
-                setEstabSize(snapshot.size)
+            firestore.collection("users").where("type", "==", "Establishment").orderBy("visitors", "desc").limit(5).onSnapshot(snapshot => {
                 setEstabs(snapshot.docs.map(doc => doc.data()))
+            })
+            firestore.collection("users").where("type", "==", "Establishment").onSnapshot(snapshot => {
+                setEstabSize(snapshot.size)
             })
         } catch(err) {
             console.log(err)

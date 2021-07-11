@@ -188,8 +188,9 @@ export const About = styled.section`
     height: 100vh;
     text-align: center;  
     justify-content: center;
+    margin-bottom: 12rem;
 
-    @media screen and (max-width: 735px) {
+    @media screen and (max-width: 1100px) {
         height: auto;
     }
 `;
