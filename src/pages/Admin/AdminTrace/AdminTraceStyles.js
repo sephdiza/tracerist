@@ -90,6 +90,11 @@ export const VisitedTable = styled.table`
         /* height: 3.2rem; */
         color: var(--text-primary);
         width: 100%;
+        cursor: pointer;
+
+        &:hover {
+            color: gray;
+        }
 
         &:nth-child(even):not(:first-child) {
             background: linear-gradient(to top right, rgba(236, 143, 91, 0.3), rgba(237, 240, 99, 0.2));
@@ -359,7 +364,8 @@ export const Modal = styled.div`
     left: 50%;
     transform: translate(-50%, 100%);
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     box-shadow: 0 0 0 80rem rgba(0,0,0,0.5);
     visibility: hidden;
     opacity: 0;
@@ -393,6 +399,7 @@ export const Modal = styled.div`
         margin-left: 10%;
         font-weight: 500;
         margin-top: 3rem;
+        height: fit-content;
 
         h4 {
             font-size: 1.4rem;
@@ -400,6 +407,32 @@ export const Modal = styled.div`
         }
     }
     
+    form {
+        display: flex;
+        margin-top: 9rem;
+        justify-content: center;
+        height: fit-content;
+    }
+`;
+
+export const FilterInputGrp = styled.section`
+    display: flex;
+    gap: 1rem;
+    min-width: 60rem;
+
+    input {
+        transition: all 200ms ease-in-out;
+
+        &[type="submit"]{
+            background-color: var(--text-primary);
+            color: #fff;
+        }
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0 0 3px #EC8F5B;
+        }
+    }
 `;
 
 export const ModalTable = styled.table`

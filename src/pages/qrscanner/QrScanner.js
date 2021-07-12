@@ -27,7 +27,7 @@ function QrScanner() {
         healthDeclaration: user.healthDeclaration,
         visitDate: new Date().toLocaleDateString(),
         visitTime: new Date().toLocaleTimeString(),
-        date: new Date()
+        date: Date.now()
       })
     }
 
@@ -42,7 +42,7 @@ function QrScanner() {
         contactno: estab.contactno,
         visitDate: new Date().toLocaleDateString(),
         visitTime: new Date().toLocaleTimeString(),
-        date: new Date()
+        date: Date.now()
       })
     }
 

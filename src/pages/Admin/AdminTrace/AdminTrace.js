@@ -3,7 +3,7 @@ import { firestore } from '../../../firebase'
 import { useAuth } from '../../../contexts/AuthContext'
 
 import Nav from '../../../components/Nav'
-import { VisitedTable, VisitorsTable, TraceWrapper, Search, BtnGrp, BtnLink, Searchby, Modal, ModalTable } from './AdminTraceStyles'
+import { VisitedTable, VisitorsTable, TraceWrapper, Search, BtnGrp, BtnLink, Searchby, Modal, ModalTable, FilterInputGrp } from './AdminTraceStyles'
 import { RegisterBtn } from '../../../components/Button'
 import { ImOffice, ImSearch, ImUser, ImCross } from 'react-icons/im'
 
@@ -24,6 +24,8 @@ function AdminTrace() {
     const timeValue = useRef()
     const [toDisplay, setToDisplay] = useState()
     const [searchBy, setSearchBy] = useState('firstName')
+    const [filteredVisitors, setFilteredVisitors] = useState([])
+    const [estabUID, setEstabUID] = useState('')
    
 
     useEffect(() => {
@@ -49,25 +51,26 @@ function AdminTrace() {
         })
     }
 
-    const filterVisitorsByTime = (id) => {
-
+    const filterVisitorsByTime = (id, e) => {
+        e.preventDefault()
+        // set input date and time to unix format
         const timeValueVal = timeValue.current.value
         const dateValue = date.current.value
-        const [year, month, day] = dateValue.split("-")
-        const [hour, minutes] = timeValueVal.split(":")
-
-        const time = new Date(Date.UTC(year,month-1, day, hour, minutes))
-        const unix = time.getTime().toString()
+        const [year=0, month=0, day=0] = dateValue.split("-")
+        const [hour=0, minutes=0] = timeValueVal.split(":")
+        const time = new Date(year,month-1, day, hour, minutes)
+        const unix = time.getTime()
         console.log(unix)
+
+        setEstabUID(id)
 
         firestore.collection("visitors")
         .where("estabUid", "==", id)
-        .where("visitTS", ">=", "1625870880000")
-        .where("visitTS", "<=", "1626130080000")
+        .where("date", ">=", unix)
         .onSnapshot(snapshot => {
-            snapshot.docs.map(doc => (
-                console.log(doc.data())
-            ))
+            setFilteredVisitors(snapshot.docs.map(doc => (
+                doc.data()
+            )))
         })
     }
 
@@ -112,8 +115,6 @@ function AdminTrace() {
 
             <TraceWrapper>
                 <h2>Trace</h2>
-                <input type="date" ref={date}/>
-                <input type="time" ref={timeValue} />
                 <h3>What do you want to trace admin? 🕵️‍♂️</h3>
                 <BtnGrp>
                     <BtnLink 
@@ -138,6 +139,59 @@ function AdminTrace() {
                             <input type="text" placeholder="Enter Establishment Name" ref={searchValue}/>
                             <RegisterBtn onClick={handleSearchEstab}><ImSearch />  Search</RegisterBtn>
                         </Search>
+
+                        {/* ESTAB MODAL */}
+                        <Modal 
+                            ref={modal}
+                            style={{height:"60%"}}
+                        >
+                            <span onClick={closeModal}>
+                                <ImCross/>
+                            </span>
+                            <div>
+                                <h4>Visitors Summary of</h4>
+                                <h2>{selected}</h2>
+                            </div>
+                            <form>
+                                <FilterInputGrp>
+                                    <input
+                                    type="date" 
+                                    ref={date}/>
+                                    <input type="time" ref={timeValue} />
+                                    <input 
+                                        type="submit"    
+                                        value="Filter by Date & Time"
+                                        onClick={(e) => filterVisitorsByTime(estabUID, e)}
+                                    />
+                                </FilterInputGrp>
+                            </form>
+                            {
+                                filteredVisitors.length === 0 ? <p>No Data</p> : (
+                                <ModalTable>
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Visit Date</td>
+                                            <td>Visit Time</td>
+                                            <td>Contact no</td>
+                                            <td>Email</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredVisitors.map(({name, visitDate, visitTime, contactno, email, date}) => (
+                                            <tr key={date}>
+                                                <td>{name}</td>
+                                                <td>{visitDate}</td>
+                                                <td>{visitTime}</td>
+                                                <td>{contactno}</td>
+                                                <td>{email}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </ModalTable>
+                                )
+                            }  
+                        </Modal>
                         
                         <VisitedTable>                  
                             <thead>
@@ -166,7 +220,12 @@ function AdminTrace() {
                                     uid
                                 }) => (
                                     <tr key={uid}
-                                        onClick={() => filterVisitorsByTime(uid)}
+                                        onClick={(e) => {
+                                                handleModal()
+                                                setSelected(`${estabName}`)
+                                                filterVisitorsByTime(uid, e)
+                                            }
+                                        }
                                     >
                                         <td style={{width: "20%"}}>{estabName}</td>
                                         <td style={{
@@ -199,7 +258,8 @@ function AdminTrace() {
                             <input type="text" placeholder="Enter Individual" ref={indivValue}/>
                             <RegisterBtn onClick={handleSearchIndiv}><ImSearch />  Search</RegisterBtn>
                         </Search>
-
+                            
+                        {/* --- INDIVIDUAL MODAL --- */}
                         {traceVisited.length === 0 ?
                             <Modal ref={modal}>
                                  <span onClick={closeModal}><ImCross/></span>
