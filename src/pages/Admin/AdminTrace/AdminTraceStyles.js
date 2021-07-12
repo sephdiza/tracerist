@@ -44,31 +44,6 @@ export const TraceWrapper = styled.main`
     }
 `;
 
-export const Modal = styled.div`
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 50rem;
-    width: 40rem;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transform: translate(50%, 0);
-    background-color: black;
-    z-index: 99;
-
-    div {
-        margin-bottom: 1rem;
-    }
-
-    p {
-        display: block;
-        color: #fff;
-    }
-`;
-
 export const Search = styled.div`
     max-width: 40rem;
     display: flex;
@@ -273,6 +248,11 @@ export const VisitorsTable = styled.table`
         align-items: center;
         color: var(--text-primary);
         width: 100%;
+        cursor: pointer;
+
+        &:hover {
+            color: gray;
+        }
 
         &:nth-child(even):not(:first-child) {
             background: linear-gradient(to top right, rgba(236, 143, 91, 0.3), rgba(237, 240, 99, 0.2));
@@ -362,5 +342,111 @@ export const Searchby = styled.div`
         &:first-child {
             background-color: #EC8F5B;
         }
+    }
+`;
+
+export const Modal = styled.div`
+    position: fixed;
+    width: 80%;
+    height: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 99;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 0 0 80rem rgba(0,0,0,0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: 150ms ease-in-out;
+    border-radius: 1.5rem;
+    padding-bottom: 6rem;
+
+    span {
+        position: absolute;
+        height: 1.8rem;
+        top: 0;
+        right: 0;
+        left: 1;
+        bottom: 0;
+        margin: 2rem;
+        font-size: 1.8rem;
+
+        &:hover {
+            color: #EC8F5B;
+            cursor: pointer;
+        }
+    }
+
+    div {
+        position: absolute;
+        right: 1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        margin: 2rem;
+        margin-left: 10%;
+        font-weight: 500;
+        margin-top: 3rem;
+
+        h4 {
+            font-size: 1.4rem;
+            font-weight: 400;
+        }
+    }
+    
+`;
+
+export const ModalTable = styled.table`
+    /* reset table css */
+    all:unset;
+    width: 80%;
+    text-align: left;
+    border: 1px solid rgba(0,0,0,0.1);
+    tbody,
+        td,
+        tr,
+        th {
+        all: unset;
+    }
+    /* reset table css */
+    display: flex;
+    flex-direction: column;
+    margin-top: 9rem;
+    overflow-y: scroll;
+
+    thead {
+        display: flex;
+        width: 100%;
+
+        tr {
+            background-color: var(--text-primary);
+            color: #fff;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    tbody {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    tr {
+        display: flex;
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    td {
+        padding: 1rem;
+        border: 1px solid #ccc;
+        width: 100%;
     }
 `;

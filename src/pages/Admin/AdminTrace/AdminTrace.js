@@ -3,9 +3,9 @@ import { firestore } from '../../../firebase'
 import { useAuth } from '../../../contexts/AuthContext'
 
 import Nav from '../../../components/Nav'
-import { VisitedTable, VisitorsTable, TraceWrapper, Search, BtnGrp, BtnLink, Searchby, Modal } from './AdminTraceStyles'
+import { VisitedTable, VisitorsTable, TraceWrapper, Search, BtnGrp, BtnLink, Searchby, Modal, ModalTable } from './AdminTraceStyles'
 import { RegisterBtn } from '../../../components/Button'
-import { ImOffice, ImSearch, ImUser } from 'react-icons/im'
+import { ImOffice, ImSearch, ImUser, ImCross } from 'react-icons/im'
 
 function AdminTrace() {
     const userDB = firestore.collection("users")
@@ -14,10 +14,14 @@ function AdminTrace() {
     const [individual, setIndividual] = useState([])
     const searchByFirstName = useRef()
     const searchByLastName = useRef()
+    const [selected, setSelected] = useState()
+    const modal = useRef()
     const indivLink = useRef()
     const estabLink = useRef()
     const searchValue = useRef()
     const indivValue = useRef()
+    const date = useRef()
+    const timeValue = useRef()
     const [toDisplay, setToDisplay] = useState()
     const [searchBy, setSearchBy] = useState('firstName')
    
@@ -45,6 +49,27 @@ function AdminTrace() {
         })
     }
 
+    const filterVisitorsByTime = (id) => {
+
+        const timeValueVal = timeValue.current.value
+        const dateValue = date.current.value
+        const [year, month, day] = dateValue.split("-")
+        const [hour, minutes] = timeValueVal.split(":")
+
+        const time = new Date(Date.UTC(year,month-1, day, hour, minutes))
+        const unix = time.getTime().toString()
+        console.log(unix)
+
+        firestore.collection("visitors")
+        .where("estabUid", "==", id)
+        .where("visitTS", ">=", "1625870880000")
+        .where("visitTS", "<=", "1626130080000")
+        .onSnapshot(snapshot => {
+            snapshot.docs.map(doc => (
+                console.log(doc.data())
+            ))
+        })
+    }
 
     const displayIndiv = (e) => {
         setToDisplay('Inidividual')
@@ -68,13 +93,27 @@ function AdminTrace() {
         searchByFirstName.current.style.backgroundColor = "gray"
     }
 
+    const handleModal = () => {
+        modal.current.style.visibility = "visible";
+        modal.current.style.opacity = "1";
+        modal.current.style.transform = "translate(-50%, -50%)";
+        
+    }
+
+    const closeModal = () => {
+        modal.current.style.visibility = "hidden";
+        modal.current.style.opacity = "0";
+        modal.current.style.transform = "translate(-50%, 100%)";
+    }
+
     return (
         <>
             <Nav />
 
             <TraceWrapper>
                 <h2>Trace</h2>
-
+                <input type="date" ref={date}/>
+                <input type="time" ref={timeValue} />
                 <h3>What do you want to trace admin? 🕵️‍♂️</h3>
                 <BtnGrp>
                     <BtnLink 
@@ -126,7 +165,9 @@ function AdminTrace() {
                                     visitors,
                                     uid
                                 }) => (
-                                    <tr key={uid}>
+                                    <tr key={uid}
+                                        onClick={() => filterVisitorsByTime(uid)}
+                                    >
                                         <td style={{width: "20%"}}>{estabName}</td>
                                         <td style={{
                                             textAlign: "left",
@@ -160,15 +201,38 @@ function AdminTrace() {
                         </Search>
 
                         {traceVisited.length === 0 ?
-                            <p>No Record!</p> : 
-                            <Modal>
-                                {traceVisited.map(({date, estabname, visitDate, visitTime}) => (
-                                <div key={date}>
-                                    <p>{estabname}</p>
-                                    <p>{visitDate}</p>
-                                    <p>{visitTime}</p>
+                            <Modal ref={modal}>
+                                 <span onClick={closeModal}><ImCross/></span>
+                                <p style={{
+                                    margin: "auto 0",
+                                    fontSize: "2.4rem"
+                                }}>No Travel History 🤷‍♂️</p>
+                            </Modal> : 
+                            <Modal ref={modal}>
+                                <span onClick={closeModal}><ImCross/></span>
+                                <div>
+                                    <h4>Travel History of</h4>
+                                    <h2>{selected}</h2>
                                 </div>
-                                ))}
+                                <ModalTable>
+                                    <thead>
+                                        <tr>
+                                            <td>Establishment</td>
+                                            <td>Visit Date</td>
+                                            <td>Visit Time</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {traceVisited.map(({date, estabname, visitDate, visitTime}) => (
+                                            <tr key={date}>
+                                                <td>{estabname}</td>
+                                                <td>{visitDate}</td>
+                                                <td>{visitTime}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </ModalTable>
+                                
                             </Modal>  
                         }
 
@@ -199,7 +263,11 @@ function AdminTrace() {
                                 }) => (
                                 <tr key={email}
                                     onClick={
-                                        () => trackVisited(email)
+                                        () => {
+                                            trackVisited(email)
+                                            handleModal()
+                                            setSelected(`${firstName} ${lastName}`)
+                                        }
                                     }
                                 >
                                     <td>{firstName} {middleName} {lastName}</td>

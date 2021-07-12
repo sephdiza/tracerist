@@ -172,7 +172,7 @@ export function AuthProvider({ children }) {
         firestore
         .collection("visitors")
         .where("estabUid", "==", user.uid)
-        .orderBy("date", "desc")
+        .orderBy("visitTS", "desc")
         .onSnapshot(snapshot => {
             setVisitors(snapshot.docs.map(doc => doc.data()))
         })
@@ -181,7 +181,7 @@ export function AuthProvider({ children }) {
     const fetchVisited = async(user) => {
         firestore.collection("visited")
         .where("userEmail", "==", user.email)
-        .orderBy("date", "desc")
+        .orderBy("visitTS", "desc")
         .onSnapshot(snapshot => {
             setVisited(snapshot.docs.map(doc => doc.data()))
         })

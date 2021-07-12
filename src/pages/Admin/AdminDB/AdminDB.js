@@ -36,7 +36,7 @@ function AdminDB() {
             <Nav />
             <Wrapper>
                 <Heading>Hi Admin! 🤵</Heading>
-                <p>Here's the number of registrant as of now.</p>
+                <p>Here's the number of registrants as of the moment.</p>
 
                 <DbWrapper>
                     <TotalContainer>
