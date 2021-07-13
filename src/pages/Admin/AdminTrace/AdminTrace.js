@@ -143,7 +143,7 @@ function AdminTrace() {
                         {/* ESTAB MODAL */}
                         <Modal 
                             ref={modal}
-                            style={{height:"60%"}}
+                            style={{height:"55%"}}
                         >
                             <span onClick={closeModal}>
                                 <ImCross/>
@@ -167,7 +167,9 @@ function AdminTrace() {
                             </form>
                             {
                                 filteredVisitors.length === 0 ? <p>No Data</p> : (
-                                <ModalTable>
+                                <ModalTable
+                                    style={{marginTop:"3rem"}}
+                                >
                                     <thead>
                                         <tr>
                                             <td>Name</td>

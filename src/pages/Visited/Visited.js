@@ -20,7 +20,7 @@ function Visited() {
                 <h2>Travel History</h2>
                 {visited.length === 0 ? 
                 <Loading>loading <span>⏳</span></Loading> : (
-                    <VisitedTable>
+                <VisitedTable>
                     <thead>
                         <tr style={{
                             backgroundColor: "var(--text-primary)",

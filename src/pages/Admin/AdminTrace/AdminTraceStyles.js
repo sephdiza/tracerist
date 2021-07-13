@@ -418,7 +418,6 @@ export const Modal = styled.div`
 export const FilterInputGrp = styled.section`
     display: flex;
     gap: 1rem;
-    min-width: 60rem;
 
     input {
         transition: all 200ms ease-in-out;
@@ -453,6 +452,11 @@ export const ModalTable = styled.table`
     margin-top: 9rem;
     overflow-y: scroll;
 
+    @media screen and (max-width: 1450px) {
+            width: 80%;
+            overflow-x: scroll;
+        }
+
     thead {
         display: flex;
         width: 100%;
@@ -468,7 +472,6 @@ export const ModalTable = styled.table`
     tbody {
         display: flex;
         flex-direction: column;
-        width: 100%;
     }
     
     tr {
@@ -478,8 +481,10 @@ export const ModalTable = styled.table`
     }
 
     td {
+        display: block;
         padding: 1rem;
         border: 1px solid #ccc;
         width: 100%;
+        word-wrap: break-word;
     }
 `;
