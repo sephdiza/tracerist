@@ -18,7 +18,8 @@ html {
   --font-size-default: 1.8rem;
   --font-size-mobile: 1.6rem;
   --text-primary: #02353B;
-  --bg-gradient: linear-gradient(to top right, rgba(236, 143, 91, 0.8), rgba(237, 240, 99, 0.8));
+  --bg-gradient: linear-gradient(to top right, rgba(236, 143, 91, 1), rgba(237, 240, 99, 0.8));
+  --accent: rgba(233, 118, 52, 0.8);
   
   color: var(--text-primary);
 }

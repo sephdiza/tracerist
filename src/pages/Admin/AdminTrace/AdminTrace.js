@@ -6,6 +6,7 @@ import Nav from '../../../components/Nav'
 import { VisitedTable, VisitorsTable, TraceWrapper, Search, BtnGrp, BtnLink, Searchby, Modal, ModalTable, FilterInputGrp } from './AdminTraceStyles'
 import { Button, RegisterBtn } from '../../../components/Button'
 import { ImOffice, ImSearch, ImUser, ImCross } from 'react-icons/im'
+import { uid } from "uid"
 
 function AdminTrace() {
     const userDB = firestore.collection("users")
@@ -110,25 +111,71 @@ function AdminTrace() {
     }
 
     const handleNotify = () => {
-        filteredVisitors.map(visitor => (
-            userDB.where("type", "==", "Individual").where("email", "==", visitor.email).onSnapshot(snapshot => {
-                snapshot.docs.map(doc => 
-                    firestore.collection(`users`)
-                        .doc(doc.data().uid)
+        //ESTABLISHMENT//
+        const messID = uid()
+        firestore.collection("messages")
+                        .doc(messID)
                         .set({
-                            messageArr: {
-                                message: "hello",
+                                message: `
+                                Notice of Establishment Exposure to Covid-19 case.
+                                \n
+                                Hello! This is Tracerist.
+                                \n
+                                We would like to inform you that one of the people who visited your establishment has been tested positive for Covid-19. 
+                                \n
+                                As such, employees working at your establishment may have been exposed to this virus.
+                                We have already reached out to those people believed who have been in close or direct contact with the subject person
+                                so that they may take appropriate measures for themselves.
+                                \n
+                                We recommend to temporarily close your establishment and sanitize the whole vicinity as early as you received this message. 
+                                The employees and staff should also stay at home for a 14-day monitoring period.
+                                If anyone experience symptoms, please inform the local officials to provide them health care.
+                                We are hoping for your cooperation in ending the spread of Covid-19.
+                                \n
+                                Please confirm if you have received this message.
+                                Thank you!
+                                `,
                                 isConfirmed: false,
                                 dateSent: new Date().toLocaleDateString(),
                                 timeSent: new Date().toLocaleTimeString(),
-                                sender: estabUID
-                            }
+                                messageID: messID,
+                                uid: estabUID
                         }, {merge: true})
+        
+
+        //VISITORS//
+        filteredVisitors.map(visitor => (
+            userDB.where("type", "==", "Individual").where("email", "==", visitor.email).onSnapshot(snapshot => {
+                snapshot.docs.map(doc => {
+                    const messID = uid()
+                    return firestore.collection("messages")
+                        .doc(messID)
+                        .set({
+                                message: `
+                                    Hello ${doc.data().firstName} ${doc.data().lastName}! This is Tracerist.
+                                    \n
+                                    We messaged you for an important health matter. You have been exposed to someone who had no idea he/she is positive for Covid-19. We ask you to take appropriate measures for yourself as early as you received this message.
+                                    \n
+                                    It is strictly recommended for you to stay at home for a 14-day monitoring period.
+                                    If you experience symptoms, please inform the local officials to provide you immediate health care.
+                                    \n
+                                    We are hoping for your cooperation in ending the spread of Covid-19.
+                                    \n
+                                    Please confirm if you have received this message.
+                                    Thank you!
+                                `,
+                                isConfirmed: false,
+                                dateSent: new Date().toLocaleDateString(),
+                                timeSent: new Date().toLocaleTimeString(),
+                                fromEstab: selected,
+                                messageID: messID,
+                                uid: doc.data().uid
+                        }, {merge: true})
+                    }   
                 )
             })
         ))
-
-        
+        alert("Notication message sent! ✔")
     }
 
     return (
