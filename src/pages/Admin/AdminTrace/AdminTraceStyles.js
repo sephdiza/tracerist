@@ -353,7 +353,6 @@ export const Searchby = styled.div`
 export const Modal = styled.div`
     position: fixed;
     width: 80%;
-    height: auto;
     top: 0;
     bottom: 0;
     left: 0;
@@ -371,7 +370,8 @@ export const Modal = styled.div`
     opacity: 0;
     transition: 150ms ease-in-out;
     border-radius: 1.5rem;
-    padding-bottom: 6rem;
+    height: 60%;
+    padding-bottom: 3rem;
 
     span {
         position: absolute;
@@ -447,10 +447,12 @@ export const ModalTable = styled.table`
         all: unset;
     }
     /* reset table css */
+
     display: flex;
     flex-direction: column;
     margin-top: 9rem;
     overflow-y: scroll;
+    height: auto-fit;
 
     @media screen and (max-width: 1450px) {
             width: 80%;

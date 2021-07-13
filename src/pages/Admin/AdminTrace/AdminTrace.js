@@ -4,7 +4,7 @@ import { useAuth } from '../../../contexts/AuthContext'
 
 import Nav from '../../../components/Nav'
 import { VisitedTable, VisitorsTable, TraceWrapper, Search, BtnGrp, BtnLink, Searchby, Modal, ModalTable, FilterInputGrp } from './AdminTraceStyles'
-import { RegisterBtn } from '../../../components/Button'
+import { Button, RegisterBtn } from '../../../components/Button'
 import { ImOffice, ImSearch, ImUser, ImCross } from 'react-icons/im'
 
 function AdminTrace() {
@@ -109,6 +109,28 @@ function AdminTrace() {
         modal.current.style.transform = "translate(-50%, 100%)";
     }
 
+    const handleNotify = () => {
+        filteredVisitors.map(visitor => (
+            userDB.where("type", "==", "Individual").where("email", "==", visitor.email).onSnapshot(snapshot => {
+                snapshot.docs.map(doc => 
+                    firestore.collection(`users`)
+                        .doc(doc.data().uid)
+                        .set({
+                            messageArr: {
+                                message: "hello",
+                                isConfirmed: false,
+                                dateSent: new Date().toLocaleDateString(),
+                                timeSent: new Date().toLocaleTimeString(),
+                                sender: estabUID
+                            }
+                        }, {merge: true})
+                )
+            })
+        ))
+
+        
+    }
+
     return (
         <>
             <Nav />
@@ -143,7 +165,6 @@ function AdminTrace() {
                         {/* ESTAB MODAL */}
                         <Modal 
                             ref={modal}
-                            style={{height:"55%"}}
                         >
                             <span onClick={closeModal}>
                                 <ImCross/>
@@ -163,12 +184,20 @@ function AdminTrace() {
                                         value="Filter by Date & Time"
                                         onClick={(e) => filterVisitorsByTime(estabUID, e)}
                                     />
+                                    <section style={{width:"5rem"}}>
+                                    <input type="reset"/>
+                                    </section>
+                                    
                                 </FilterInputGrp>
                             </form>
                             {
                                 filteredVisitors.length === 0 ? <p>No Data</p> : (
+                            <>
                                 <ModalTable
-                                    style={{marginTop:"3rem"}}
+                                    style={{
+                                        marginTop:"3rem",
+                                        marginBottom:"3rem"
+                                    }}
                                 >
                                     <thead>
                                         <tr>
@@ -191,7 +220,16 @@ function AdminTrace() {
                                         ))}
                                     </tbody>
                                 </ModalTable>
-                                )
+                                <Button 
+                                    primary
+                                    style={{
+                                        padding: "1rem",
+                                    }}
+                                    onClick={handleNotify}
+                                >
+                                   <p>Notify Visitors</p>
+                                </Button>
+                            </>)
                             }  
                         </Modal>
                         
