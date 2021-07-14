@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
 import { useAuth } from '../../contexts/AuthContext'
+
+
 import { Link, useHistory } from 'react-router-dom';
 import QrCodeImg from "../../components/QrCodeImg"
 import Nav from '../../components/Nav'
@@ -17,7 +19,8 @@ import { Title,
         ProfileBtnGrp,
         EstabWrapper,
         EstabDetails,
-        EstabBtnGrp
+        EstabBtnGrp,
+        AddInfo
     } from './ProfileStyle'
 import avatar from "../../assets/images/profile-pic.png"
 import { ReactComponent as EstabImg } from '../../assets/images/building.svg'
@@ -27,14 +30,27 @@ import AdminDB from '../Admin/AdminDB/AdminDB';
 function Profile() {
     const { userData } = useAuth()
     const history = useHistory()
+    const [healthStatus, setHealthStatus] = useState()
 
     if(!userData) {
-
     } else {
         document.title = `Tracerist | ${userData.type}`
     }
-    
 
+    useEffect(() => {
+        if(userData && userData.type === "Individual") {
+            const filtered = Object.entries(userData.healthDeclaration).filter(([key, value]) => (value === "true"))
+           
+            if(filtered.length===0) {
+                setHealthStatus("GOOD CONDITION")
+            } else if (filtered.length === 1) {
+                setHealthStatus("MILD CONDITION")
+            } else {
+                setHealthStatus("SEVERE CONDITION")
+            }
+        }
+    }, [userData])
+    
     return (    
         <>  
             <Nav />
@@ -49,9 +65,16 @@ function Profile() {
                                 <ProfileImgBorder>
                                     <img src={avatar} alt="Avatar"/>
                                 </ProfileImgBorder>
+                                    {
+                                        healthStatus === "GOOD CONDITION" ? 
+                                        <span style={{backgroundColor:"green"}}>{healthStatus}</span> :
+                                        healthStatus === "MILD CONDITION" ? <span style={{backgroundColor:"orange"}}>{healthStatus}</span> :
+                                        <span style={{backgroundColor:"red"}}>{healthStatus}</span>
+                                    }
+                                    
                             </ProfilePicture>
                             <ProfileMainDetails>
-                                <p>{userData.firstName} {userData.lastName}</p>            
+                                <p style={{fontWeight:"500"}}>{userData.firstName} {userData.middleName} {userData.lastName}</p>            
                                 <p>{userData.housestreet}, {userData.bgy}, {userData.city}, {userData.province}, {userData.region}</p>
                                 <p>{userData.contactno}</p>
                                 <p>{userData.email}</p>
@@ -65,8 +88,11 @@ function Profile() {
                                 <Link to="/update-profile"
                                 >
                                         <Button>Edit Details</Button>
-                                </Link>   
+                                </Link>
+                                <AddInfo>Add additional information on Edit Details <span>(Optional)</span></AddInfo>   
                         </ProfileBtnGrp>
+                                    
+                        
                         <ProfileTable>
                             <tbody>
                                 <tr>
@@ -103,6 +129,7 @@ function Profile() {
                                 </tr>
                             </tbody>
                         </ProfileTable>
+                        
                     </RightContainer>
                     <LeftContainer>
                         <QrCodeImg value={JSON.stringify({
@@ -110,21 +137,7 @@ function Profile() {
                                 uid: userData.uid,
                                 email: userData.email,
                                 contact: userData.contactno,
-                                healthDeclaration:  {   
-                                    q1a: userData.healthDeclaration.question1a,
-                                    q1b: userData.healthDeclaration.question1b,
-                                    q1c: userData.healthDeclaration.question1c,
-                                    q1d: userData.healthDeclaration.question1d,
-                                    q1e: userData.healthDeclaration.question1e,
-                                    q1f: userData.healthDeclaration.question1f,
-                                    q1g: userData.healthDeclaration.question1g,
-                                    q2: userData.healthDeclaration.question2,
-                                    q3: userData.healthDeclaration.question3,
-                                    q4: userData.healthDeclaration.question4,
-                                    q5: userData.healthDeclaration.question5,
-                                    q6: userData.healthDeclaration.question6,
-                                    q7: userData.healthDeclaration.question7,
-                                }
+                                healthStatus: healthStatus
                         })}/>   
                     </LeftContainer>
                 </ProfileWrapper>

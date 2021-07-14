@@ -3,14 +3,26 @@ import { Link } from 'react-router-dom'
 
 import Nav from '../../components/Nav'
 
-import { Home, Section, Subtitle, Heading, Subheading, BtnGrp, About, CardWrapper, Card, Cta, HeadTitle } from './LandingStyles'
+import { Home, Section, Subtitle, Heading, Subheading, BtnGrp, About, CardWrapper, Card, Cta, HeadTitle, SocialWrapper } from './LandingStyles'
 import {Button, RegisterBtn} from '../../components/Button'
 import individual from '../../assets/images/individual.png'
 import lovedones from '../../assets/images/lovedones.png'
 import community from '../../assets/images/community.png'
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    RedditShareButton,
+    RedditIcon,
+    LinkedinShareButton,
+    LinkedinIcon,
+    TwitterShareButton,
+    TwitterIcon
+  } from "react-share";
 
 
 function Landing() {
+    const url = "https://tracerrrist.web.app"
+
     return (
         <>  
             <Nav />
@@ -81,10 +93,37 @@ function Landing() {
                 </Cta>
                 
             </About>
-s
-            {/* <footer>
-                <p>&copy 2021 Tracerist All Rights Reserved.</p>
-            </footer> */}
+
+            <SocialWrapper>
+                <div>
+                    <p>Helps us reach</p>
+                    <p>more Tracerists!</p>
+                </div>
+                <FacebookShareButton 
+                    url={url}
+                    quote="Share now and help us end this pandemic!"
+                >
+                    <FacebookIcon size={40} borderRadius={10}/>
+                </FacebookShareButton>
+
+                <TwitterShareButton
+                    url={url}
+                    title='Register now! Help us fight CoVid-19 📢'
+                >
+                    <TwitterIcon size={40} borderRadius={10} />
+                </TwitterShareButton>
+
+                <LinkedinShareButton url={url} >
+                    <LinkedinIcon size={40} borderRadius={10} />
+                </LinkedinShareButton>
+
+                <RedditShareButton
+                    url={url}
+                    title='Register now! Help us fight CoVid-19 📢'
+                >
+                    <RedditIcon size={40} borderRadius={10} />
+                </RedditShareButton>  
+            </SocialWrapper>          
         </>
     )
 }

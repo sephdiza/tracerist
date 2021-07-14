@@ -233,7 +233,8 @@ function AdminTrace() {
                                         onClick={(e) => filterVisitorsByTime(estabUID, e)}
                                     />
                                     <section style={{width:"5rem"}}>
-                                    <input type="reset"/>
+                                    <input type="reset"
+                                    />
                                     </section>
                                     
                                 </FilterInputGrp>
@@ -275,7 +276,7 @@ function AdminTrace() {
                                     }}
                                     onClick={handleNotify}
                                 >
-                                   <p>Notify Visitors</p>
+                                   <p>Send Notice</p>
                                 </Button>
                             </>)
                             }  

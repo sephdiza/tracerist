@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 export const Title = styled.h2`
     margin-left: 20vw;
+    margin-top: 15vh;
 
     @media only screen and (max-width: 1240px) {
         margin-left: 10vw;
@@ -14,7 +15,6 @@ export const Title = styled.h2`
 export const ProfileWrapper = styled.section`
     margin-left: 20vw;
     margin-right: 20vw;
-    margin-top: 10vh;
 
     display: flex;
     justify-content: space-between;
@@ -62,10 +62,15 @@ export const ProfilePicture = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* gap: 1rem; */
 
-    h3 {
-        font-weight: bolder;
+    span {
+        font-weight: 500;
+        margin-top: 1rem;
+        padding: 2px 3px;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        color: #fff;
+        display: inline-block;
     }
 `;
 
@@ -100,11 +105,36 @@ export const ProfileBtnGrp = styled.div`
     margin-top: 3rem;
     display: flex;
     justify-content: space-between;
+    position: relative;
 
     @media screen and (max-width: 600px) {
         flex-direction: column;
         align-items: center;
         gap: 1.5rem;
+    }
+`;
+
+export const AddInfo = styled.p`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    z-index: 99;
+    font-size: 1.6rem;
+    transform: translateY(7.5rem);
+
+    @media screen and (max-width: 600px) {
+        transform: translate(9rem, 13rem);
+        font-size: 1.2rem;
+    }
+
+    span {
+        margin-left: .5rem;
+        font-weight: 500;
     }
 `;
 
@@ -184,7 +214,7 @@ export const ProfileTable = styled.table`
 export const EstabWrapper = styled.section`
     margin-left: 20vw;
     margin-right: 20vw;
-    margin-top: 15rem;
+    margin-top: 5rem;
 
     display: flex;
     flex-direction: column;
@@ -225,3 +255,4 @@ export const EstabBtnGrp = styled.div`
         gap: 1.5rem;
     }
 `;
+

@@ -2,19 +2,23 @@ import styled from 'styled-components'
 
 export const Title = styled.h2`
     margin-left: 20vw;
+    margin-top: 20vh;
 
     @media only screen and (max-width: 1240px) {
         margin-left: 10vw;
+        margin-top: 15vh;
     }
-
-    margin-bottom: 3rem;
 `;
 
 export const Subtitle = styled.div`
   width: 30rem;
   text-align: center;
   font-weight: 500;
-  /* animation: bounce 1s infinite; */
+  margin-bottom: 3rem;
+
+  p {
+    font-size: 2.4rem;
+  }
 
   span {
     margin-left: 1rem;
@@ -41,28 +45,21 @@ export const Wrapper = styled.main`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20rem;
+    margin-top: 8rem;
 
     @media screen and (max-width: 1240px) {
-        margin-left: 10vw;
-        margin-right: 10vw;
+        margin: 10vw;
     }
 `;
 
 export const QrContainer = styled.div`
-  width: 30rem;
-  height: 30rem;
-  border-radius: 3rem;
-  /* overflow: hidden; */
+  width: 40rem;
+  height: 40rem;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 `;
-
-export const qrCodeStyle = {
-  width: '100%',
-}
 
 export const Result = styled.p`
   font-size: 1.8rem;
@@ -74,4 +71,28 @@ export const ResultContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+`;
+
+export const Rotate = styled.div`
+  width: 5rem;
+  height: 5rem;
+  padding: 1rem;
+  border-radius: 50%;
+  background-color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  transition: 200ms ease;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.85;
+    transform: rotate(180deg);
+  }
+
+  svg {
+    font-size: 2rem;
+    color: #fff;
+  }
 `;

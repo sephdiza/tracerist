@@ -4,10 +4,11 @@ import { firestore } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { uid } from 'uid'
 
-import QrReader from 'react-qr-scanner';
-import {Wrapper,Title,QrContainer, qrCodeStyle, ResultContainer,Result, Subtitle} from './QrScannerStyles'
+import QrReader from 'react-qr-reader';
+import {Wrapper,Title,QrContainer, ResultContainer,Result, Subtitle, Rotate} from './QrScannerStyles'
 import Nav from '../../components/Nav';
 import { Loading} from '../Visited/VisitedStyles'
+import { ImSpinner11 } from "react-icons/im"
 
 
 function QrScanner() {
@@ -16,6 +17,7 @@ function QrScanner() {
     const [loading, setLoading] = useState(false)
     const res = useRef()
     const { userData } = useAuth()
+    const [cam, setCam] = useState("user")
     
     const pushVisitor = (user, id) => {
       firestore.collection("visitors").doc(id).set({
@@ -23,7 +25,7 @@ function QrScanner() {
         name: user.name,
         email: user.email,
         contactno: user.contact,
-        healthDeclaration: user.healthDeclaration,
+        healthDeclaration: user.healthStatus,
         visitDate: new Date().toLocaleDateString(),
         visitTime: new Date().toLocaleTimeString(),
         date: Date.now(),
@@ -61,19 +63,29 @@ function QrScanner() {
       }, 2500)
     }
 
+    // const test = JSON.parse('{"name":"Juan Cruz","uid":"PaC8UNNrFVTq2J1R3X5JS4rhy2D3","email":"jdcruz@email.com","contact":"09111112322","healthStatus":"GOOD CONDITION"}')
+
+    // console.log(test)
+
     const handleScan = (data) => {
-        if(!loading && data){
-          const userObj = JSON.parse(data.text)
+        if(data){
+          const userObj = JSON.parse(data)
           
-          // filter health declaration with values === true
-          const filterTruthy = Object.fromEntries(
-            Object.entries(userObj.healthDeclaration).filter(([key, value]) => value === "true")
-          )
-          const ftLen = Object.keys(filterTruthy).length
+          // ----- MOVED TO PROFILE ----- //
+          // const filterTruthy = Object.fromEntries(
+          //   Object.entries(userObj.healthDeclaration).filter(([key, value]) => value === "true")
+          // )
+          // const ftLen = Object.keys(filterTruthy).length
           
-          if (ftLen > 0) {
-            setResult("Oops looks like you have a symptom base on your health declaration 😷")
+          if (userObj.healthStatus === "SEVERE CONDITION") {
+            setResult(`Hey! ${userObj.name} You have a severe condition😷`)
             res.current.style.backgroundColor = "red";
+            res.current.children[0].style.color = "#fff"
+            setLoading(true)
+            resetScan()
+          } else if (userObj.healthStatus === "MILD CONDITION") {
+            setResult(`Hmm.. ${userObj.name} You have a mild condition 😕`)
+            res.current.style.backgroundColor = "orange";
             res.current.children[0].style.color = "#fff"
             setLoading(true)
             resetScan()
@@ -85,6 +97,7 @@ function QrScanner() {
             pushVisited(userObj, userData)
             pushVisitor(userObj, uid())
             addVisitorSize()
+            console.log(userObj)
             resetScan()
           }
         }
@@ -92,6 +105,11 @@ function QrScanner() {
 
     const handleErr = (err) => {
       console.error(err)
+    }
+
+
+    const handleRotateCam = () => {
+      cam === "user" ? setCam("environment") : setCam("user")
     }
 
     return (
@@ -102,19 +120,23 @@ function QrScanner() {
             <Subtitle>
               {loading ? <p>Please wait</p> : <p>Scan here <span>👇</span></p>}
             </Subtitle>
-            <QrContainer>
-              {loading ? <Loading><span>⏳</span></Loading> : (
-                <QrReader 
-                delay = {delay}
-                style = {qrCodeStyle}
-                onError = {handleErr}
-                onScan = {handleScan}           
-                /> 
-              )}  
-            </QrContainer>
             <ResultContainer ref={res}>
               <Result>{result}</Result>
             </ResultContainer>
+            <QrContainer>
+              {loading ? <Loading><span>⏳</span></Loading> : (
+                <QrReader 
+                  delay = {delay}
+                  style = {{
+                    width:"100%"
+                  }}
+                  onError = {handleErr}
+                  onScan = {handleScan}
+                  facingMode = {cam}        
+                />
+              )}
+            </QrContainer>
+            <Rotate onClick={handleRotateCam}><ImSpinner11/></Rotate>
           </Wrapper>
       </>
     )

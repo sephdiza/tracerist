@@ -9,4 +9,5 @@ export const FooterWrapper = styled.footer`
     font-size: 1.6rem;
     position: absolute;
     padding: 5rem 0 2.5rem 0;
+    background-color: transparent;
 `;

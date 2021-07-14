@@ -192,10 +192,10 @@ export const About = styled.section`
     height: 100vh;
     text-align: center;  
     justify-content: center;
-    margin-bottom: 12rem;
 
     @media screen and (max-width: 1100px) {
         height: auto;
+        margin-bottom: 10rem;
     }
 `;
 
@@ -252,5 +252,14 @@ export const Cta = styled.div`
         font-size: 2.4rem;
         font-weight: 500;
     }
-    
+`;
+
+export const SocialWrapper = styled.section`
+    display: flex;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
 `;
