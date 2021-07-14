@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Formik } from 'formik'
 
 export const EditDetailsWrapper = styled.section`
     margin-left: 20vw;

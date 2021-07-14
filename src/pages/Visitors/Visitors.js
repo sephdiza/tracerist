@@ -18,7 +18,7 @@ function Visitors() {
             <Nav />
             <Wrapper>
                 <h2>Visitors</h2>
-                {visitors.length === 0 ? <Loading>loading <span>⏳</span></Loading> :
+                {visitors.length === 0 ? <Loading>No Data 🤷‍♂️</Loading> :
                 <VisitorsTable>
                     <thead>
                         <tr style={{

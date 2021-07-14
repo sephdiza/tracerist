@@ -15,14 +15,10 @@ import { StyledLink,
         LogoutBtn,
         HamLogoutBtn,
         StyledScroll,
-        Border
     } from './NavStyle'
 import { ReactComponent as Logo} from '../assets/images/logo.svg'
 
 function Nav() {
-    const [show, setShow] = useState({
-        opacity: 0,
-        transform: 'translateY(-100%)'})
     const [toggle, setToggle] = useState('false')
     const [hamBtnFirst, setHamBtnFirst] = useState('')
     const [hamBtnSecond, setHamBtnSecond] = useState('')
@@ -57,14 +53,13 @@ function Nav() {
         }
     }
 
-
     return (
         <>
         <Navbar>
             <NavLogo>
                 <Link to="/profile">
                     <Logo style={{ height:'28px', width:'auto'}}/>
-                    <h1>Tracerist</h1>
+                    <h1>Tracerist </h1>
                 </Link>  
             </NavLogo>
             <LinkWrapper>

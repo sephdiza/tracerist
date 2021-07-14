@@ -24,15 +24,16 @@ import Landing from './pages/Landing/Landing';
 import AdminTrace from './pages/Admin/AdminTrace/AdminTrace';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from './pages/ErrorBoundary/ErrorFallback';
+import Footer from './components/Footer/Footer';
 
 function App() {
 
   return (
     <>
-      <ErrorBoundary
-        FallbackComponent={ErrorFallback}
-      >
       <Router>
+        <ErrorBoundary
+          FallbackComponent={ErrorFallback}
+        >
         <GlobalStyle />         
           <Switch>
             <AuthProvider>
@@ -40,11 +41,7 @@ function App() {
               <PrivateRoute path="/profile" component={Profile} />
               <PrivateRoute path="/scan-qr" component={QrScanner}/>
               <PrivateRoute path="/notification" component={Notification}/>
-              <ErrorBoundary
-                FallbackComponent={ErrorFallback}
-              >
-                <PrivateRoute path="/update-profile" component={EditDetails}/>
-              </ErrorBoundary>
+              <PrivateRoute path="/update-profile" component={EditDetails}/>
               <PrivateRoute path="/update-health" component={UpdateHD} />
               <PrivateRoute path="/update-establishment" component={UpdateEstab} />
               <PrivateRoute path="/visitors" component={Visitors} />
@@ -57,9 +54,11 @@ function App() {
               <Route path="/login" component={Login}/>
               <Route path="/forgot-password" component={ForgotPassword} />
               </AuthProvider>       
-          </Switch>  
+          </Switch>
+          </ErrorBoundary>  
       </Router>
-      </ErrorBoundary>    
+      
+      <Footer />    
     </>
   );
 }

@@ -4,13 +4,13 @@ import { firestore } from '../../firebase'
 import { useAuth } from '../../contexts/AuthContext'
 
 import Nav from '../../components/Nav'
-import { NotifWrapper, MessageContainer } from './NotificationStyle'
+import { NotifWrapper, MessageContainer, StatusSection, StyledSpan, StatusHead } from './NotificationStyle'
 import { RegisterBtn } from '../../components/Button'
 
 function Notification() {
     const indivDB = firestore.collection("users")
     const messageDB = firestore.collection("messages")
-    const { currentUser, userData } = useAuth()
+    const { currentUser } = useAuth()
     const [individual, setIndividual] = useState([])
     const [messages, setMessages] = useState([])
     const [allMessages, setAllMessages] = useState([])
@@ -73,14 +73,24 @@ function Notification() {
             
          </NotifWrapper>) :
          <NotifWrapper>
-             <h1>Hello Admin!!</h1>
+             <h2>Notification Status</h2>
+             <StatusSection style={{
+                 fontWeight: "500",
+                 paddingBottom: "1rem",
+                 marginTop: "6rem"
+             }}>
+                 <StatusHead>NAME</StatusHead>
+                 <StatusHead>DATE NOTIFIED</StatusHead>
+                 <StatusHead>STATUS</StatusHead>
+             </StatusSection>
               { allMessages.length === 0 ? null :
-                allMessages.map(({uid, dateSent, timeSent, isConfirmed}) => (
-                    <div key={Math.random()}>
-                        <p>{uid}</p>
-                        <p>{dateSent}</p>
-                        <p>{timeSent}</p>
-                    </div>
+                allMessages.map(({uid, dateSent, timeSent, isConfirmed, to}) => (
+                    <StatusSection key={Math.random()}>
+                        <p>{to}</p>
+                        <p>{timeSent}, {dateSent}</p>
+                        <p>{ isConfirmed ? <StyledSpan green>CONFIRMED</StyledSpan> : <StyledSpan red>PENDING</StyledSpan>}</p>
+                        
+                    </StatusSection>
                 ))
               }
          </NotifWrapper>

@@ -147,7 +147,7 @@ export const InputGroup = styled.form`
         gap: 1.5rem;
     }
 
-    input:not(:last-child) {
+    input:not(:nth-child(4)) {
         box-sizing: border-box;
         width: 100%;
         height: 4rem;

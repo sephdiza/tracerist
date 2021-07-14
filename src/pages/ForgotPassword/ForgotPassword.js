@@ -26,8 +26,9 @@ export default function ForgotPassword() {
             setLoading(true)
             await resetPassword(emailRef.current.value)
             alert("Check your inbox for further instructions")
+            emailRef.current.value = ""
         } catch {
-            alert('Failed to reset password!')
+            alert('Email not found ⚠')
         }
        setLoading(false)
     }
@@ -47,9 +48,9 @@ export default function ForgotPassword() {
                         </Banner>
                         <Title>
                             <h1>Password Reset</h1>
-                            <p>We will send your password reset link.</p>
+                            <p>We will send your password reset link on your email.</p>
                         </Title>
-                        <InputGroup >
+                        <InputGroup>
                                 <input type="text" placeholder="email" ref={emailRef}/>   
                         </InputGroup>
                         <RegisterBtn style={{margin: '0 auto', marginTop: '2rem'}} onClick={handleResetPassword} disabled={loading}>Reset Password</RegisterBtn>
@@ -57,8 +58,10 @@ export default function ForgotPassword() {
                             <Link to="/login">Login</Link>
                         </LoginLinkText>
                         <LoginLinkText>
-                            Don't have an account? <Link to="/register">Register now.</Link>
+                            Don't have an account? 
+                            <Link to="/register">Register now.</Link>
                         </LoginLinkText>
+                        
                     </RightContent>        
                 </RightWrapper>
             </LoginWrapper>

@@ -58,10 +58,12 @@ function Profile() {
                             </ProfileMainDetails>
                         </ProfileMain>              
                         <ProfileBtnGrp>
-                                <Link to="/update-health">
+                                <Link to="/update-health"
+                                >
                                     <Button primary>Health Declaration</Button>
                                 </Link>
-                                <Link to="/update-profile">
+                                <Link to="/update-profile"
+                                >
                                         <Button>Edit Details</Button>
                                 </Link>   
                         </ProfileBtnGrp>

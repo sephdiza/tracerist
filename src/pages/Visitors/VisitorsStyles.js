@@ -30,13 +30,6 @@ export const VisitorsTable = styled.table`
     tbody {
         display: flex;
         flex-direction: column;
-        
-        /* width: 100%; */
-        /* @media screen and (max-width: 600px) {
-            margin-top: 1.5rem;
-            margin-left: 5rem;
-            margin-right: 5rem;
-        } */
     }
 
     tr {

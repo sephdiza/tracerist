@@ -155,6 +155,10 @@ export const HamburgerBtn = styled.div`
     cursor: pointer;
   }
 
+  @media screen and (max-width: 420px) {
+        transform: translateY(-1.3rem);
+    }
+
   @media screen and (max-width: 900px) {
       display: flex;
   }

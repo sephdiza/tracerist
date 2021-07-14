@@ -61,7 +61,6 @@ function AdminTrace() {
         const [hour=0, minutes=0] = timeValueVal.split(":")
         const time = new Date(year,month-1, day, hour, minutes)
         const unix = time.getTime()
-        console.log(unix)
 
         setEstabUID(id)
 
@@ -139,7 +138,8 @@ function AdminTrace() {
                                 dateSent: new Date().toLocaleDateString(),
                                 timeSent: new Date().toLocaleTimeString(),
                                 messageID: messID,
-                                uid: estabUID
+                                uid: estabUID,
+                                to: selected
                         }, {merge: true})
         
 
@@ -169,7 +169,8 @@ function AdminTrace() {
                                 timeSent: new Date().toLocaleTimeString(),
                                 fromEstab: selected,
                                 messageID: messID,
-                                uid: doc.data().uid
+                                uid: doc.data().uid,
+                                to: `${doc.data().firstName} ${doc.data().lastName}`
                         }, {merge: true})
                     }   
                 )

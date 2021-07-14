@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 import *  as Yup from 'yup'
 import { useHistory } from 'react-router-dom'
 
-import { Title, Form, StyledSelect, SelectLabel, Input, CheckboxLabel, BtnWrap, Error } from './RegIndividualStyle';
+import { Title, Form, StyledSelect, SelectLabel, Input, BtnWrap, Error } from './RegIndividualStyle';
 import { Button } from '../../components/Button'
 import HalfBg from '../../components/HalfBg'
 import { MainWrapper, RightWrapper } from '../../components/HalfBgStyle'
@@ -23,7 +23,7 @@ const RegIndividual = () => {
     const [city, setCity] = useState("")
     const [barangay, setBarangay] = useState("")
     const history = useHistory()
-    const { signup, currentUser } = useAuth()
+    const { signup } = useAuth()
 
     
 
@@ -282,7 +282,7 @@ const RegIndividual = () => {
                             <Error>{formik.errors.bgy}</Error>
                         ) : null}
                         
-                        <SelectLabel htmlFor="housestreet">Street No., Street</SelectLabel>
+                        <SelectLabel htmlFor="housestreet">House No., Street</SelectLabel>
                         <Input
                             id="housestreet"
                             type="text"

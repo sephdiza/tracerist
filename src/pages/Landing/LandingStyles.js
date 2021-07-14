@@ -12,6 +12,10 @@ export const Home = styled.section`
         justify-content: center;
     }
 
+    @media screen and (max-width: 420px) {
+        margin-top: 10vh;
+    }
+
     svg {
         width: 40rem;
 

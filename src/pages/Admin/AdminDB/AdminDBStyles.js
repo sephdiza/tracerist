@@ -14,9 +14,18 @@ export const DbWrapper = styled.section`
     }
 `;
 
-export const Heading = styled.h3`
-    font-size: 3rem;
-    margin-bottom: 1rem;
+export const Heading = styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    span {
+        font-size: 1.8rem;
+    }
 `;
 
 export const TotalContainer = styled.div`

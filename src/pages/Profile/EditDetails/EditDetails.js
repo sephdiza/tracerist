@@ -303,7 +303,7 @@ function EditDetails() {
                          <Error>{formik.errors.bgy}</Error>
                      ) : null}
  
-                     <Label htmlFor="housestreet">Street No., Street</Label>
+                     <Label htmlFor="housestreet">House No., Street</Label>
                      <EditInput
                          id="housestreet"
                          type="text"

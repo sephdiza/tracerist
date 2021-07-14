@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 
 import Nav from '../../components/Nav'
@@ -6,20 +6,15 @@ import { Wrapper } from '../../components/Wrapper/WrapperStyle'
 import { VisitedTable, Loading } from './VisitedStyles'
 
 function Visited() {
-    const { fetchVisited, visited, currentUser } = useAuth()
-    const [visitState, setVisitState] = useState([])
+    const { visited } = useAuth()
     
-    // useEffect(() => {
-    //     fetchVisited(currentUser)
-    //   }, [])
-
     return (
         <>
             <Nav />
             <Wrapper>
                 <h2>Travel History</h2>
                 {visited.length === 0 ? 
-                <Loading>loading <span>⏳</span></Loading> : (
+                <Loading>No Data 🤷‍♂️</Loading> : (
                 <VisitedTable>
                     <thead>
                         <tr style={{

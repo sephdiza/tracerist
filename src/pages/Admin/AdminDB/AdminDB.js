@@ -7,12 +7,20 @@ import { DbWrapper, Heading, TotalContainer, TotalSection, TopVisitors, TotalDet
 import Nav from '../../../components/Nav'
 import individual from '../../../assets/images/individual.png'
 import establishment from '../../../assets/images/establishment.png'
+import moment from "moment"
 
 function AdminDB() {
     const [userSize, setUserSize] = useState()
     const [estabSize, setEstabSize] = useState()
     const [estabs, setEstabs] = useState([])
+    const [clock, setClock] = useState()
 
+    const runClock = () => {
+        setInterval(() => {
+            setClock(moment().format('MMMM Do YYYY, h:mm:ss a'))
+        }, 1000)
+    }
+    
     
     useEffect(() => {
         try {
@@ -28,14 +36,21 @@ function AdminDB() {
         } catch(err) {
             console.log(err)
         }
-        
+
+        runClock()
+
     }, [])
 
     return (
         <>
             <Nav />
             <Wrapper>
-                <Heading>Hi Admin! 🤵</Heading>
+                <Heading>
+                    <h3>Hi Admin! 🤵</h3>
+                    <span>
+                       {clock}
+                    </span>
+                </Heading>
                 <p>Here's the number of registrants as of the moment.</p>
 
                 <DbWrapper>
@@ -74,8 +89,7 @@ function AdminDB() {
                         </Top5>
                     </TopVisitors>
                 </DbWrapper>            
-                
-            </Wrapper>  
+            </Wrapper>
         </>
     )
 }

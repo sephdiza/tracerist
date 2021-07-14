@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useRef} from 'react'
 
 import { firestore } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
@@ -8,7 +8,6 @@ import QrReader from 'react-qr-scanner';
 import {Wrapper,Title,QrContainer, qrCodeStyle, ResultContainer,Result, Subtitle} from './QrScannerStyles'
 import Nav from '../../components/Nav';
 import { Loading} from '../Visited/VisitedStyles'
-import { date } from 'yup';
 
 
 function QrScanner() {
@@ -27,7 +26,8 @@ function QrScanner() {
         healthDeclaration: user.healthDeclaration,
         visitDate: new Date().toLocaleDateString(),
         visitTime: new Date().toLocaleTimeString(),
-        date: Date.now()
+        date: Date.now(),
+        visitTS: new Date()
       })
     }
 
@@ -42,7 +42,8 @@ function QrScanner() {
         contactno: estab.contactno,
         visitDate: new Date().toLocaleDateString(),
         visitTime: new Date().toLocaleTimeString(),
-        date: Date.now()
+        date: Date.now(),
+        visitTS: new Date()
       })
     }
 
