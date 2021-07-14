@@ -155,7 +155,7 @@ export const HamburgerBtn = styled.div`
     cursor: pointer;
   }
 
-  @media screen and (max-width: 420px) {
+  @media screen and (max-width: 540px) {
         transform: translateY(-1.3rem);
     }
 
@@ -194,7 +194,7 @@ export const HamburgerLinks = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 9rem;
+  gap: 5rem;
   flex-direction: column;
   background: rgba(0,0,0, 0.85);
   width: 100%;
