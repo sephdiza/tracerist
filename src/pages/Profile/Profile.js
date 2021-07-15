@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react'
 
 import { useAuth } from '../../contexts/AuthContext'
 
-
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import QrCodeImg from "../../components/QrCodeImg"
 import Nav from '../../components/Nav'
 import { Button } from '../../components/Button'
@@ -29,13 +28,7 @@ import AdminDB from '../Admin/AdminDB/AdminDB';
 
 function Profile() {
     const { userData } = useAuth()
-    const history = useHistory()
     const [healthStatus, setHealthStatus] = useState()
-
-    if(!userData) {
-    } else {
-        document.title = `Tracerist | ${userData.type}`
-    }
 
     useEffect(() => {
         if(userData && userData.type === "Individual") {
